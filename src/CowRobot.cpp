@@ -11,21 +11,21 @@ CowRobot::CowRobot()
 		
 	m_Controller = NULL;
 	// Set up drive motors
-	m_LeftDriveA = new CANTalon(11);
-	m_LeftDriveB = new CANTalon(12);
-	m_LeftDriveC = new CANTalon(13);
+	m_LeftDriveA = new WPI_TalonSRX(11);
+	m_LeftDriveB = new WPI_TalonSRX(12);
+	m_LeftDriveC = new WPI_TalonSRX(13);
 
-	m_RightDriveA = new CANTalon(14);
-	m_RightDriveB = new CANTalon(15);
-	m_RightDriveC = new CANTalon(16);
-	m_Climber = new CANTalon(1);
+	m_RightDriveA = new WPI_TalonSRX(14);
+	m_RightDriveB = new WPI_TalonSRX(15);
+	m_RightDriveC = new WPI_TalonSRX(16);
+	m_Climber = new WPI_TalonSRX(1);
 
-	m_LeftDriveA->ConfigNeutralMode(CANTalon::NeutralMode::kNeutralMode_Brake);
-	m_LeftDriveB->ConfigNeutralMode(CANTalon::NeutralMode::kNeutralMode_Brake);
-	m_LeftDriveC->ConfigNeutralMode(CANTalon::NeutralMode::kNeutralMode_Brake);
-	m_RightDriveA->ConfigNeutralMode(CANTalon::NeutralMode::kNeutralMode_Brake);
-	m_RightDriveB->ConfigNeutralMode(CANTalon::NeutralMode::kNeutralMode_Brake);
-	m_RightDriveC->ConfigNeutralMode(CANTalon::NeutralMode::kNeutralMode_Brake);
+//	m_LeftDriveA->ConfigNeutralMode(CANTalon::NeutralMode::kNeutralMode_Brake);
+//	m_LeftDriveB->ConfigNeutralMode(CANTalon::NeutralMode::kNeutralMode_Brake);
+//	m_LeftDriveC->ConfigNeutralMode(CANTalon::NeutralMode::kNeutralMode_Brake);
+//	m_RightDriveA->ConfigNeutralMode(CANTalon::NeutralMode::kNeutralMode_Brake);
+//	m_RightDriveB->ConfigNeutralMode(CANTalon::NeutralMode::kNeutralMode_Brake);
+//	m_RightDriveC->ConfigNeutralMode(CANTalon::NeutralMode::kNeutralMode_Brake);
 
 	m_DriveEncoderRight = new Encoder(MXP_QEI_5_A, MXP_QEI_5_B, false, Encoder::k1X);
 	m_DriveEncoderRight->SetDistancePerPulse(0.03054323611111); // 6*pi/360
@@ -42,12 +42,12 @@ CowRobot::CowRobot()
 
 	m_Gyro = CowLib::CowGyro::GetInstance();
 
-	m_Shooter = new Shooter(7, 8, 9);
-	m_ConveyerLower = new Conveyer(3);
-	m_ConveyerUpper = new Conveyer(2);
-	m_BallIntakeConveyer = new Conveyer(4);
-	m_Turret = new Turret(6);
-	m_GearIntake = new GearIntake(5, 10);
+//	m_Shooter = new Shooter(7, 8, 9);
+//	m_ConveyerLower = new Conveyer(3);
+//	m_ConveyerUpper = new Conveyer(2);
+//	m_BallIntakeConveyer = new Conveyer(4);
+//	m_Turret = new Turret(6);
+//	m_GearIntake = new GearIntake(5, 10);
 
 	m_LightSolenoid = new Solenoid(0);
 	m_Light = new Light(m_LightSolenoid);
@@ -76,11 +76,11 @@ void CowRobot::Reset()
 	m_RightDriveValue = 0;
 	m_MatchTime = 0;
 
-	GetShooter()->SetPIDState(false);
-	GetShooter()->SetFeederSpeed(0);
-	GetConveyerUpper()->SetSpeed(0);
-	GetConveyerLower()->SetSpeed(0);
-	GetBallIntakeConveyer()->SetSpeed(0);
+//	GetShooter()->SetPIDState(false);
+//	GetShooter()->SetFeederSpeed(0);
+//	GetConveyerUpper()->SetSpeed(0);
+//	GetConveyerLower()->SetSpeed(0);
+//	GetBallIntakeConveyer()->SetSpeed(0);
 
 }
 
@@ -127,12 +127,12 @@ void CowRobot::handle()
 	SetLeftMotors(tmpLeftMotor);
 	SetRightMotors(tmpRightMotor);
 
-	m_Shooter->Handle();
-	m_ConveyerUpper->Handle();
-	m_ConveyerLower->Handle();
-	m_Turret->Handle();
-	m_GearIntake->Handle();
-	m_BallIntakeConveyer->Handle();
+//	m_Shooter->Handle();
+//	m_ConveyerUpper->Handle();
+//	m_ConveyerLower->Handle();
+//	m_Turret->Handle();
+//	m_GearIntake->Handle();
+//	m_BallIntakeConveyer->Handle();
 	m_Light->Handle();
 
 	if(m_DSUpdateCount % 10 == 0)

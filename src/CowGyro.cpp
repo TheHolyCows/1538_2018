@@ -9,6 +9,7 @@
 #include <CowLib/CowLogger.h>
 #include <WPILib.h>
 #include <cmath>
+#include <iostream>
 
 namespace CowLib
 {

@@ -6,6 +6,7 @@
  */
 
 #include "CowPixyBlock.h"
+#include <iostream>
 
 PixyBlock *PixyBlock::m_Instance = NULL;
 I2C *PixyBlock::m_I2C = NULL;

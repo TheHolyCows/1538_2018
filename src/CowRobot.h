@@ -7,9 +7,9 @@
 
 #include <CowLib/CowLogger.h>
 #include <WPILib.h>
-#include <CANTalon.h>
+#include "ctre/Phoenix.h"
 #include <CowLib/CowPixy.h>
-#include <Subsystems/Conveyer.h>
+//#include <Subsystems/Conveyer.h>
 #include <Subsystems/Light.h>
 #include "Controllers/GenericController.h"
 #include "CowLib/CowLib.h"
@@ -18,10 +18,10 @@
 #include "CowConstants.h"
 #include "CowLib/CowAlphaNum.h"
 #include "CowGyro.h"
-#include "Subsystems/Shooter.h"
-#include "Subsystems/Conveyer.h"
-#include "Subsystems/Turret.h"
-#include "Subsystems/GearIntake.h"
+//#include "Subsystems/Shooter.h"
+//#include "Subsystems/Conveyer.h"
+//#include "Subsystems/Turret.h"
+//#include "Subsystems/GearIntake.h"
 
 class CowRobot
 {
@@ -32,14 +32,14 @@ private:
 	GenericController *m_Controller;
 	
 	// Drive Motors
-	CANTalon *m_LeftDriveA;
-	CANTalon *m_LeftDriveB;
-	CANTalon *m_LeftDriveC;
+	WPI_TalonSRX *m_LeftDriveA;
+	WPI_TalonSRX *m_LeftDriveB;
+	WPI_TalonSRX *m_LeftDriveC;
 
-	CANTalon *m_RightDriveA;
-	CANTalon *m_RightDriveB;
-	CANTalon *m_RightDriveC;
-	CANTalon *m_Climber;
+	WPI_TalonSRX *m_RightDriveA;
+	WPI_TalonSRX *m_RightDriveB;
+	WPI_TalonSRX *m_RightDriveC;
+	WPI_TalonSRX *m_Climber;
 	
 	CowLib::CowGyro *m_Gyro;
 	Encoder *m_DriveEncoder;
@@ -48,16 +48,16 @@ private:
 
 	Encoder *m_ShooterEncoder;
 
-	Shooter *m_Shooter;
-	Conveyer *m_ConveyerUpper;
-	Conveyer *m_ConveyerLower;
-	Conveyer *m_BallIntakeConveyer;
-	Turret *m_Turret;
+//	Shooter *m_Shooter;
+//	Conveyer *m_ConveyerUpper;
+//	Conveyer *m_ConveyerLower;
+//	Conveyer *m_BallIntakeConveyer;
+//	Turret *m_Turret;
 
 	Solenoid *m_LightSolenoid;
 	Light *m_Light;
 
-	GearIntake *m_GearIntake;
+//	GearIntake *m_GearIntake;
 
 	PowerDistributionPanel *m_PowerDistributionPanel;
 
@@ -111,7 +111,7 @@ public:
 		return CowLib::CowGyro::GetInstance();
 	}
 
-	CANTalon *GetClimber()
+	WPI_TalonSRX *GetClimber()
 	{
 		return m_Climber;
 	}
@@ -121,35 +121,35 @@ public:
 		return m_DriveEncoder;
 	}
 
-	Shooter *GetShooter()
-	{
-		return m_Shooter;
-	}
-
-	Conveyer *GetConveyerUpper()
-	{
-		return m_ConveyerUpper;
-	}
-
-	Conveyer *GetConveyerLower()
-	{
-		return m_ConveyerLower;
-	}
-
-	Conveyer *GetBallIntakeConveyer()
-	{
-		return m_BallIntakeConveyer;
-	}
-
-	Turret *GetTurret()
-	{
-		return m_Turret;
-	}
-
-	GearIntake *GetGearIntake()
-	{
-		return m_GearIntake;
-	}
+//	Shooter *GetShooter()
+//	{
+//		return m_Shooter;
+//	}
+//
+//	Conveyer *GetConveyerUpper()
+//	{
+//		return m_ConveyerUpper;
+//	}
+//
+//	Conveyer *GetConveyerLower()
+//	{
+//		return m_ConveyerLower;
+//	}
+//
+//	Conveyer *GetBallIntakeConveyer()
+//	{
+//		return m_BallIntakeConveyer;
+//	}
+//
+//	Turret *GetTurret()
+//	{
+//		return m_Turret;
+//	}
+//
+//	GearIntake *GetGearIntake()
+//	{
+//		return m_GearIntake;
+//	}
 
 	Pixy *GetPixy()
 	{

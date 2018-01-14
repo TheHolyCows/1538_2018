@@ -81,9 +81,9 @@ void CowBase::DisabledPeriodic()
 	if(m_ControlBoard->GetAutoSelectButton())
 	{
 		m_Constants->RestoreData();
-		m_Bot->GetShooter()->ResetConstants();
-		m_Bot->GetTurret()->ResetConstants();
-		m_Bot->GetGearIntake()->ResetConstants();
+//		m_Bot->GetShooter()->ResetConstants();
+//		m_Bot->GetTurret()->ResetConstants();
+//		m_Bot->GetGearIntake()->ResetConstants();
 
 		if(m_ControlBoard->GetDriveButton(1))
 		{
@@ -113,7 +113,7 @@ void CowBase::DisabledPeriodic()
 		DriverStation::GetInstance().ReportError(temp);
 	}
 
-	m_Bot->GetGearIntake()->DisabledCalibration();
+	//m_Bot->GetGearIntake()->DisabledCalibration();
 
 //	m_Bot->PrintToDS();
 }

@@ -1,4 +1,5 @@
 #include "AutoModeController.h"
+#include <iostream>
 
 AutoModeController::AutoModeController()
 	:
@@ -35,11 +36,11 @@ void AutoModeController::handle(CowRobot *bot)
 			doNothing(bot);
 			if(m_CurrentCommand.m_Arm)
 			{
-				bot->GetGearIntake()->SetPosition(CONSTANT("ARM_UP"));
+				//bot->GetGearIntake()->SetPosition(CONSTANT("ARM_UP"));
 			}
 			else
 			{
-				bot->GetGearIntake()->SetPosition(bot->GetGearIntake()->GetGroundOffset());
+				//bot->GetGearIntake()->SetPosition(bot->GetGearIntake()->GetGroundOffset());
 			}
 			result = true;
 			break;
@@ -50,11 +51,11 @@ void AutoModeController::handle(CowRobot *bot)
 			doNothing(bot);
 			if(m_CurrentCommand.m_Arm)
 			{
-				bot->GetGearIntake()->SetPosition(CONSTANT("ARM_UP"));
+				//bot->GetGearIntake()->SetPosition(CONSTANT("ARM_UP"));
 			}
 			else
 			{
-				bot->GetGearIntake()->SetPosition(bot->GetGearIntake()->GetGroundOffset());
+				//bot->GetGearIntake()->SetPosition(bot->GetGearIntake()->GetGroundOffset());
 			}
 			break;
 		}
@@ -63,11 +64,11 @@ void AutoModeController::handle(CowRobot *bot)
 			result = bot->TurnToHeading(m_CurrentCommand.m_Heading);
 			if(m_CurrentCommand.m_Arm)
 			{
-				bot->GetGearIntake()->SetPosition(CONSTANT("ARM_UP"));
+				//bot->GetGearIntake()->SetPosition(CONSTANT("ARM_UP"));
 			}
 			else
 			{
-				bot->GetGearIntake()->SetPosition(bot->GetGearIntake()->GetGroundOffset());
+				//bot->GetGearIntake()->SetPosition(bot->GetGearIntake()->GetGroundOffset());
 			}
 
 			break;
@@ -77,11 +78,11 @@ void AutoModeController::handle(CowRobot *bot)
 			bot->DriveDistanceWithHeading(m_CurrentCommand.m_Heading, m_CurrentCommand.m_EncoderCount, m_CurrentCommand.m_Speed);
 			if(m_CurrentCommand.m_Arm)
 			{
-				bot->GetGearIntake()->SetPosition(CONSTANT("ARM_UP"));
+				//bot->GetGearIntake()->SetPosition(CONSTANT("ARM_UP"));
 			}
 			else
 			{
-				bot->GetGearIntake()->SetPosition(bot->GetGearIntake()->GetGroundOffset());
+				//bot->GetGearIntake()->SetPosition(bot->GetGearIntake()->GetGroundOffset());
 			}
 			result = false;
 			break;
@@ -91,11 +92,11 @@ void AutoModeController::handle(CowRobot *bot)
 			result = bot->DriveDistanceWithHeading(m_CurrentCommand.m_Heading, m_CurrentCommand.m_EncoderCount,  m_CurrentCommand.m_Speed );
 			if(m_CurrentCommand.m_Arm)
 			{
-				bot->GetGearIntake()->SetPosition(CONSTANT("ARM_UP"));
+				//bot->GetGearIntake()->SetPosition(CONSTANT("ARM_UP"));
 			}
 			else
 			{
-				bot->GetGearIntake()->SetPosition(bot->GetGearIntake()->GetGroundOffset());
+				//bot->GetGearIntake()->SetPosition(bot->GetGearIntake()->GetGroundOffset());
 			}
 			break;
 		}
@@ -103,10 +104,10 @@ void AutoModeController::handle(CowRobot *bot)
 		{
 			result = false;
 			bot->DriveDistanceWithHeading(m_CurrentCommand.m_Heading, m_CurrentCommand.m_EncoderCount, m_CurrentCommand.m_Speed);
-			bot->GetShooter()->SetFeederSpeed(-1);
-			bot->GetConveyerUpper()->SetSpeed(-1);
-			bot->GetConveyerLower()->SetSpeed(-0.75);
-			bot->GetBallIntakeConveyer()->SetSpeed(-1);
+//			bot->GetShooter()->SetFeederSpeed(-1);
+//			bot->GetConveyerUpper()->SetSpeed(-1);
+//			bot->GetConveyerLower()->SetSpeed(-0.75);
+//			bot->GetBallIntakeConveyer()->SetSpeed(-1);
 			break;
 		}
 		case CMD_LEFT_ENCODER:
@@ -129,24 +130,24 @@ void AutoModeController::handle(CowRobot *bot)
 		{
 			result = true;
 			std::cout << "Setting state to SPOOL_PID_CONTROL" << std::endl;
-			bot->GetShooter()->SetPIDState(true);
-			bot->GetShooter()->SetAutoSpeed(CONSTANT("AUTO_MIDDLE_SHOOTER_RPM"));
-			bot->GetTurret()->SetAutoTurret(true);
+//			bot->GetShooter()->SetPIDState(true);
+//			bot->GetShooter()->SetAutoSpeed(CONSTANT("AUTO_MIDDLE_SHOOTER_RPM"));
+//			bot->GetTurret()->SetAutoTurret(true);
 			break;
 		}
 		case CMD_SPOOL_SHOOTER_HOPPER:
 		{
 			result = true;
 			std::cout << "Setting state to SPOOL_PID_CONTROL" << std::endl;
-			bot->GetShooter()->SetPIDState(true);
-			bot->GetShooter()->SetAutoSpeed(CONSTANT("AUTO_HOPPER_SHOOTER_RPM"));
-			bot->GetTurret()->SetAutoTurret(true);
+//			bot->GetShooter()->SetPIDState(true);
+//			bot->GetShooter()->SetAutoSpeed(CONSTANT("AUTO_HOPPER_SHOOTER_RPM"));
+//			bot->GetTurret()->SetAutoTurret(true);
 			break;
 		}
 		default:
 		{
 			doNothing(bot);
-			bot->GetGearIntake()->SetPosition(CONSTANT("ARM_UP"));
+			//bot->GetGearIntake()->SetPosition(CONSTANT("ARM_UP"));
 
 			result = true;
 			break;
