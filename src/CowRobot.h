@@ -8,8 +8,6 @@
 #include <CowLib/CowLogger.h>
 #include <WPILib.h>
 #include "ctre/Phoenix.h"
-#include <CowLib/CowPixy.h>
-//#include <Subsystems/Conveyer.h>
 #include <Subsystems/Light.h>
 #include "Controllers/GenericController.h"
 #include "CowLib/CowLib.h"
@@ -18,10 +16,6 @@
 #include "CowConstants.h"
 #include "CowLib/CowAlphaNum.h"
 #include "CowGyro.h"
-//#include "Subsystems/Shooter.h"
-//#include "Subsystems/Conveyer.h"
-//#include "Subsystems/Turret.h"
-//#include "Subsystems/GearIntake.h"
 
 class CowRobot
 {
@@ -48,16 +42,8 @@ private:
 
 	Encoder *m_ShooterEncoder;
 
-//	Shooter *m_Shooter;
-//	Conveyer *m_ConveyerUpper;
-//	Conveyer *m_ConveyerLower;
-//	Conveyer *m_BallIntakeConveyer;
-//	Turret *m_Turret;
-
 	Solenoid *m_LightSolenoid;
 	Light *m_Light;
-
-//	GearIntake *m_GearIntake;
 
 	PowerDistributionPanel *m_PowerDistributionPanel;
 
@@ -119,41 +105,6 @@ public:
 	Encoder *GetEncoder()
 	{
 		return m_DriveEncoder;
-	}
-
-//	Shooter *GetShooter()
-//	{
-//		return m_Shooter;
-//	}
-//
-//	Conveyer *GetConveyerUpper()
-//	{
-//		return m_ConveyerUpper;
-//	}
-//
-//	Conveyer *GetConveyerLower()
-//	{
-//		return m_ConveyerLower;
-//	}
-//
-//	Conveyer *GetBallIntakeConveyer()
-//	{
-//		return m_BallIntakeConveyer;
-//	}
-//
-//	Turret *GetTurret()
-//	{
-//		return m_Turret;
-//	}
-//
-//	GearIntake *GetGearIntake()
-//	{
-//		return m_GearIntake;
-//	}
-
-	Pixy *GetPixy()
-	{
-		return Pixy::GetInstance();
 	}
 
 	Light *GetLight()

@@ -35,19 +35,11 @@ CowRobot::CowRobot()
 
 	m_DriveEncoder = m_DriveEncoderRight;
 
-
 	m_MatchTime = 0;
 
 	m_LEDDisplay = new CowLib::CowAlphaNum(0x70);
 
 	m_Gyro = CowLib::CowGyro::GetInstance();
-
-//	m_Shooter = new Shooter(7, 8, 9);
-//	m_ConveyerLower = new Conveyer(3);
-//	m_ConveyerUpper = new Conveyer(2);
-//	m_BallIntakeConveyer = new Conveyer(4);
-//	m_Turret = new Turret(6);
-//	m_GearIntake = new GearIntake(5, 10);
 
 	m_LightSolenoid = new Solenoid(0);
 	m_Light = new Light(m_LightSolenoid);
@@ -75,13 +67,6 @@ void CowRobot::Reset()
 	m_LeftDriveValue = 0;
 	m_RightDriveValue = 0;
 	m_MatchTime = 0;
-
-//	GetShooter()->SetPIDState(false);
-//	GetShooter()->SetFeederSpeed(0);
-//	GetConveyerUpper()->SetSpeed(0);
-//	GetConveyerLower()->SetSpeed(0);
-//	GetBallIntakeConveyer()->SetSpeed(0);
-
 }
 
 void CowRobot::SetController(GenericController *controller)
@@ -105,8 +90,8 @@ void CowRobot::PrintToDS()
 	}
 }
 
-/// Used to handle the recurring logic funtions inside the robot.
-/// Please call this once per update cycle.
+// Used to handle the recurring logic funtions inside the robot.
+// Please call this once per update cycle.
 void CowRobot::handle()
 {	
 	m_MatchTime = Timer::GetFPGATimestamp() - m_StartTime;
@@ -127,12 +112,6 @@ void CowRobot::handle()
 	SetLeftMotors(tmpLeftMotor);
 	SetRightMotors(tmpRightMotor);
 
-//	m_Shooter->Handle();
-//	m_ConveyerUpper->Handle();
-//	m_ConveyerLower->Handle();
-//	m_Turret->Handle();
-//	m_GearIntake->Handle();
-//	m_BallIntakeConveyer->Handle();
 	m_Light->Handle();
 
 	if(m_DSUpdateCount % 10 == 0)
@@ -172,7 +151,6 @@ void CowRobot::handle()
 	SmartDashboard::PutNumber("lEnc", (int)m_DriveEncoderLeft);
 	SmartDashboard::PutNumber("rEnc", (int)m_DriveEncoderRight);
 	SmartDashboard::PutNumber("enc", (int)m_DriveEncoder);
-
 
 	m_DSUpdateCount++;
 }

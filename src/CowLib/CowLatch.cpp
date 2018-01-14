@@ -18,25 +18,7 @@ CowLatch::CowLatch()
 
 }
 
-
-//if(!m_CB->GetOperatorButton(10))
-//{
-//	if(!setPinchOnce)
-//	{
-//		bot->GetPincher()->UpdateSetPoint(CONSTANT("PINCHER_OPEN"));
-//		bot->GetPincher()->EnablePositionPID();
-//		setPinchOnce = true;
-//	}
-//	bot->GetPincher()->PositionMode();
-//}
-//else
-//{
-//	bot->GetPincher()->GrabMode();
-//	setPinchOnce = false;
-//}
-
-
-//Returns true if state has changed
+// Returns true if state has changed
 bool CowLatch::Latch(bool value)
 {
 	bool stateChanged = false;
