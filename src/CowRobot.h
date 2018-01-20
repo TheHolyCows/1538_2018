@@ -8,7 +8,6 @@
 #include <CowLib/CowLogger.h>
 #include <WPILib.h>
 #include "ctre/Phoenix.h"
-#include <Subsystems/Light.h>
 #include "Controllers/GenericController.h"
 #include "CowLib/CowLib.h"
 #include "CowControlBoard.h"
@@ -33,17 +32,11 @@ private:
 	WPI_TalonSRX *m_RightDriveA;
 	WPI_TalonSRX *m_RightDriveB;
 	WPI_TalonSRX *m_RightDriveC;
-	WPI_TalonSRX *m_Climber;
 	
 	CowLib::CowGyro *m_Gyro;
 	Encoder *m_DriveEncoder;
 	Encoder *m_DriveEncoderLeft;
 	Encoder *m_DriveEncoderRight;
-
-	Encoder *m_ShooterEncoder;
-
-	Solenoid *m_LightSolenoid;
-	Light *m_Light;
 
 	PowerDistributionPanel *m_PowerDistributionPanel;
 
@@ -58,7 +51,6 @@ private:
 
 	double m_MatchTime;
 	double m_StartTime;
-	float m_AutoOffsetAngle;
 
 	void SetLeftMotors(float val);
 	void SetRightMotors(float val);
@@ -97,19 +89,9 @@ public:
 		return CowLib::CowGyro::GetInstance();
 	}
 
-	WPI_TalonSRX *GetClimber()
-	{
-		return m_Climber;
-	}
-
 	Encoder *GetEncoder()
 	{
 		return m_DriveEncoder;
-	}
-
-	Light *GetLight()
-	{
-		return m_Light;
 	}
 
 	void UseLeftEncoder()
@@ -126,27 +108,6 @@ public:
 	{
 		m_DriveEncoderLeft->Reset();
 		m_DriveEncoderRight->Reset();
-	}
-
-	void AddAutoOffsetAngle()
-	{
-		m_AutoOffsetAngle += 2.5;
-		std::stringstream tempSS;
-		tempSS << "Offset Angle: " << m_AutoOffsetAngle << std::endl;
-		DriverStation::GetInstance().ReportError(tempSS.str());
-	}
-
-	void DecAutoOffsetAngle()
-	{
-		m_AutoOffsetAngle -= 2.5;
-		std::stringstream tempSS;
-		tempSS << "Offset Angle: " << m_AutoOffsetAngle << std::endl;
-		DriverStation::GetInstance().ReportError(tempSS.str());
-	}
-
-	float GetAutoOffsetAngle()
-	{
-		return m_AutoOffsetAngle;
 	}
 
 	void handle();

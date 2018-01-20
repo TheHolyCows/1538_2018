@@ -1,9 +1,9 @@
 //==================================================
-// Copyright (C) 2015 Team 1538 / The Holy Cows
+// Copyright (C) 2018 Team 1538 / The Holy Cows
 //==================================================
 
-#ifndef __COW_ALPHA_NUM_H__
-#define __COW_ALPHA_NUM_H__
+#ifndef __COWLIB_COWALPHANUM_H__
+#define __COWLIB_COWALPHANUM_H__
 
 #include <stdint.h>
 #include <WPILib.h>
@@ -46,4 +46,4 @@ namespace CowLib
 	};
 }
 
-#endif /* __COW_ALPHA_NUM_H__ */
+#endif /* __COWLIB_COWALPHANUM_H__ */

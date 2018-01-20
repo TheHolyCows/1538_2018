@@ -1,4 +1,5 @@
 #include "CowDisplay.h"
+#include <RobotController.h>
 #include <string.h>
 
 CowDisplay::CowDisplay(CowRobot *bot)
@@ -130,7 +131,7 @@ void CowDisplay::DisplayState(bool user)
 
 void CowDisplay::DisplayPeriodic()
 {
-	bool userButtonPressed = GetUserButton();
+	bool userButtonPressed = RobotController::GetUserButton();
 	bool buttonValue = false;
 
 	if (userButtonPressed && !m_ButtonPressedOnce)

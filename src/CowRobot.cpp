@@ -1,9 +1,6 @@
 #include "CowRobot.h"
 #include "CowBase.h"
 
-// TODO: A lot of the older functions in this file are clunky. Clean them up.
-
-// TODO: Initializer list
 // Constructor for CowRobot
 CowRobot::CowRobot()
 {	
@@ -18,7 +15,6 @@ CowRobot::CowRobot()
 	m_RightDriveA = new WPI_TalonSRX(14);
 	m_RightDriveB = new WPI_TalonSRX(15);
 	m_RightDriveC = new WPI_TalonSRX(16);
-	m_Climber = new WPI_TalonSRX(1);
 
 //	m_LeftDriveA->ConfigNeutralMode(CANTalon::NeutralMode::kNeutralMode_Brake);
 //	m_LeftDriveB->ConfigNeutralMode(CANTalon::NeutralMode::kNeutralMode_Brake);
@@ -36,13 +32,11 @@ CowRobot::CowRobot()
 	m_DriveEncoder = m_DriveEncoderRight;
 
 	m_MatchTime = 0;
+	m_StartTime = 0;
 
 	m_LEDDisplay = new CowLib::CowAlphaNum(0x70);
 
 	m_Gyro = CowLib::CowGyro::GetInstance();
-
-	m_LightSolenoid = new Solenoid(0);
-	m_Light = new Light(m_LightSolenoid);
 
 	//m_Gyro->Reset();
 	m_PowerDistributionPanel = new PowerDistributionPanel();
@@ -53,8 +47,6 @@ CowRobot::CowRobot()
 	
 	m_PreviousGyroError = 0;
 	m_PreviousDriveError = 0;
-
-	m_AutoOffsetAngle = 0;
 }
 
 void CowRobot::Reset()
@@ -79,14 +71,6 @@ void CowRobot::PrintToDS()
 	if(m_DSUpdateCount % 10 == 0)
 	{
 		m_DSUpdateCount = 0;
-
-//		CowLib::PrintToLCD("K:%s\nA:%s\nP:%f\nG:%f\nE:%f\nI:F%f_R%f",
-//						   kinectArms,
-//						   AutoModes::GetInstance()->GetName(),
-//						   m_Winch->GetAverageVoltage(),
-//						   m_Gyro->GetAngle(),
-//						   m_DriveEncoder->GetDistance(),
-//						   m_FrontIR->GetVoltage(), m_RearIR->GetVoltage());
 	}
 }
 
@@ -112,8 +96,6 @@ void CowRobot::handle()
 	SetLeftMotors(tmpLeftMotor);
 	SetRightMotors(tmpRightMotor);
 
-	m_Light->Handle();
-
 	if(m_DSUpdateCount % 10 == 0)
 	{
 		//5 is drive
@@ -130,22 +112,6 @@ void CowRobot::handle()
 	}
 
 	//std::cout << "start time: " << m_StartTime << " match time: " << m_MatchTime << std::endl;
-
-	if ((m_MatchTime > 120) && (m_MatchTime < 135))
-	{
-		int timeLeft = 135 - m_MatchTime;
-		m_Light->SetLightStrobeOverride();
-		m_Light->SetStrobeRate(timeLeft + 1);
-	}
-	else if ((m_MatchTime > 105) && (m_MatchTime < 110))
-	{
-		m_Light->SetStrobeRate(10);
-		m_Light->SetLightStrobeOverride();
-	}
-	else
-	{
-		m_Light->SetLightOffOverride();
-	}
 
 	SmartDashboard::PutNumber("Drive distance", GetDriveDistance());
 	SmartDashboard::PutNumber("lEnc", (int)m_DriveEncoderLeft);
@@ -323,7 +289,6 @@ void CowRobot::SetLeftMotors(float val)
 	m_LeftDriveA->Set(val);
 	m_LeftDriveB->Set(val);
 	m_LeftDriveC->Set(val);
-
 }
 
 // sets the left side motors

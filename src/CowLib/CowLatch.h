@@ -5,8 +5,8 @@
  *      Author: kchau
  */
 
-#ifndef SRC_COWLIB_COWLATCH_H_
-#define SRC_COWLIB_COWLATCH_H_
+#ifndef __COWLIB_COWLATCH_H__
+#define __COWLIB_COWLATCH_H__
 
 namespace CowLib {
 
@@ -23,4 +23,4 @@ public:
 
 } /* namespace CowLib */
 
-#endif /* SRC_COWLIB_COWLATCH_H_ */
+#endif /* __COWLIB_COWLATCH_H__ */

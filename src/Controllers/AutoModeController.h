@@ -1,5 +1,5 @@
 //==================================================
-// Copyright (C) 2015 Team 1538 / The Holy Cows
+// Copyright (C) 2018 Team 1538 / The Holy Cows
 //==================================================
 
 #ifndef __AUTO_MODE_CONTROLLER_H__
@@ -7,6 +7,7 @@
 
 #include <deque>
 #include "../CowConstants.h"
+#include <Timer.h>
 
 using namespace std;
 
@@ -16,10 +17,6 @@ typedef enum
 	CMD_TURN,
 	CMD_DRIVE_DISTANCE,
 	CMD_HOLD_DISTANCE,
-	CMD_SPOOL_SHOOTER_HOPPER,
-	CMD_SPOOL_SHOOTER_MIDDLE,
-	CMD_ADD_ANGLE_OFFSET,
-	CMD_SHOOT,
 	CMD_LEFT_ENCODER,
 	CMD_RIGHT_ENCODER,
 	CMD_WAIT
@@ -33,7 +30,6 @@ public:
 	double m_EncoderCount;
 	double m_Heading;
 	double m_Speed;
-	bool m_Arm;
 	double m_Timeout;
 	
 	RobotCommand() :
@@ -41,7 +37,6 @@ public:
 		m_EncoderCount(0),
 		m_Heading(0),
 		m_Speed(0),
-		m_Arm(true),
 		m_Timeout(0)
 	{
 	}
@@ -51,7 +46,6 @@ public:
 		m_EncoderCount(encoder),
 		m_Heading(heading),
 		m_Speed(speed),
-		m_Arm(arm),
 		m_Timeout(timeout)
 	{
 	}

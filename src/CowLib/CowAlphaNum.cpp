@@ -1,4 +1,5 @@
 #include "CowAlphaNum.h"
+#include <I2C.h>
 
 namespace CowLib
 {

@@ -1,9 +1,9 @@
 //==================================================
-// Copyright (C) 2015 Team 1538 / The Holy Cows
+// Copyright (C) 2018 Team 1538 / The Holy Cows
 //==================================================
 
-#ifndef __COW_LEXER_H__
-#define __COW_LEXER_H__
+#ifndef __COWLIB_COWLEXER_H__
+#define __COWLIB_COWLEXER_H__
 
 #include <stdio.h>
 #include <string>
@@ -38,4 +38,4 @@ namespace CowLib
 	};
 }
 
-#endif
+#endif /* __COWLIB_COWLEXER_H__ */

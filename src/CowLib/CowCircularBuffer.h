@@ -1,8 +1,8 @@
 //==================================================
-// Copyright (C) 2015 Team 1538 / The Holy Cows
+// Copyright (C) 2018 Team 1538 / The Holy Cows
 //==================================================
-#ifndef __COW_CIRCULAR_BUFFER_H__
-#define __COW_CIRCULAR_BUFFER_H__
+#ifndef __COWLIB_COWCIRCULARBUFFER_H__
+#define __COWLIB_COWCIRCULARBUFFER_H__
 
 #include <stdint.h>
 
@@ -31,4 +31,4 @@ namespace CowLib
 	};
 }
 
-#endif // __COW_CIRCULAR_BUFFER_H__
+#endif // __COWLIB_COWCIRCULARBUFFER_H__

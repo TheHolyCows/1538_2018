@@ -1,5 +1,5 @@
 //==================================================
-// Copyright (C) 2015 Team 1538 / The Holy Cows
+// Copyright (C) 2018 Team 1538 / The Holy Cows
 //==================================================
 
 #ifndef __COW_CONTROL_BOARD_H__
@@ -8,7 +8,7 @@
 #include <WPILib.h>
 
 #define SHIFTER_BUTTON			4
-#define AUTON_BUTTON			1
+#define AUTON_BUTTON				1
 #define PID_BUTTON				3
 
 #define LEFT_GAMEPAD_X			1
@@ -29,8 +29,8 @@ private:
 	Joystick *m_OperatorGamepad;
 	
 	bool m_PreviousAuto;
-	bool m_PreviousAddAngle;
-	bool m_PreviousDecAngle;
+//	bool m_PreviousAddAngle;
+//	bool m_PreviousDecAngle;
 
 public:
 	CowControlBoard();

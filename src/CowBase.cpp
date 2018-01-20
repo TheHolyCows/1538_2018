@@ -38,7 +38,6 @@ void CowBase::DisabledInit()
 	CowConstants::GetInstance()->RestoreData();
 	m_Bot->GetGyro()->BeginCalibration();
 	m_Bot->Reset();
-
 }
 
 void CowBase::AutonomousInit()
@@ -74,16 +73,15 @@ void CowBase::TeleopContinuous()
 void CowBase::DisabledPeriodic()
 {
 	//m_Bot->GyroHandleCalibration();
+
 	if(m_Display)
 	{
 		m_Display->DisplayPeriodic();
 	}
+
 	if(m_ControlBoard->GetAutoSelectButton())
 	{
 		m_Constants->RestoreData();
-//		m_Bot->GetShooter()->ResetConstants();
-//		m_Bot->GetTurret()->ResetConstants();
-//		m_Bot->GetGearIntake()->ResetConstants();
 
 		if(m_ControlBoard->GetDriveButton(1))
 		{
@@ -91,30 +89,14 @@ void CowBase::DisabledPeriodic()
 			AutoModes::GetInstance()->NextMode();
 		}
 	}
-	
-	if(m_ControlBoard->GetAutoAddAngleOffsetButton())
-	{
-		if(m_ControlBoard->GetSteeringButton(9))
-		{
-			m_Bot->AddAutoOffsetAngle();
-		}
-	}
-	if(m_ControlBoard->GetAutoDecAngleOffsetButton())
-	{
-		if(m_ControlBoard->GetSteeringButton(11))
-		{
-			m_Bot->DecAutoOffsetAngle();
-		}
-	}
 
-	if(m_ControlBoard->GetSteeringButton(7))
-	{
-		std::string temp = "Using Offset Position";
-		DriverStation::GetInstance().ReportError(temp);
-	}
+//	if(m_ControlBoard->GetSteeringButton(7))
+//	{
+//		std::string temp = "Using Offset Position";
+//		DriverStation::GetInstance().ReportError(temp);
+//	}
 
-	//m_Bot->GetGearIntake()->DisabledCalibration();
-
+//	m_Bot->GetGearIntake()->DisabledCalibration();
 //	m_Bot->PrintToDS();
 }
 void CowBase::AutonomousPeriodic()

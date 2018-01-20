@@ -1,4 +1,5 @@
 #include "CowConstants.h"
+#include <string>
 
 // Singleton instance
 CowConstants *CowConstants::m_SingletonInstance = NULL;
@@ -203,7 +204,6 @@ void CowConstants::ParseINI(string data, const char *filename)
 			else
 			{
 				if(currentSection == NULL || strcmp(currentSection, robotName) == 0)
-				//if(currentSection == NULL )
 				{
 					if(currentSection != NULL)
 					{
