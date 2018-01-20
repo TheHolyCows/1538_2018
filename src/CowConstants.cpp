@@ -1,5 +1,5 @@
 #include "CowConstants.h"
-#include <string>
+#include <string.h>
 
 // Singleton instance
 CowConstants *CowConstants::m_SingletonInstance = NULL;
@@ -185,7 +185,7 @@ void CowConstants::ParseINI(string data, const char *filename)
 			}
 			else
 			{
-				currentSection = (char*)tokens[i-1].value.c_str();
+				currentSection = (char *)tokens[i-1].value.c_str();
 			}
 		}
 		else if(t.type == "Equals")

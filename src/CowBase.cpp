@@ -106,6 +106,7 @@ void CowBase::AutonomousPeriodic()
 void CowBase::TeleopPeriodic()
 {
 	m_Bot->handle();
+
 //	if(m_Display)
 //	{
 //		m_Display->DisplayPeriodic();

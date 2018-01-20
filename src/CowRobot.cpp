@@ -8,13 +8,13 @@ CowRobot::CowRobot()
 	m_Controller = NULL;
 
 	// Set up drive motors
-	m_LeftDriveA = new CowLib::CowMotorController(11);
-	m_LeftDriveB = new CowLib::CowMotorController(12);
-	m_LeftDriveC = new CowLib::CowMotorController(13);
+	m_LeftDriveA = new CowLib::CowMotorController(DRIVE_LEFT_A);
+	m_LeftDriveB = new CowLib::CowMotorController(DRIVE_LEFT_B);
+	m_LeftDriveC = new CowLib::CowMotorController(DRIVE_LEFT_C);
 
-	m_RightDriveA = new CowLib::CowMotorController(14);
-	m_RightDriveB = new CowLib::CowMotorController(15);
-	m_RightDriveC = new CowLib::CowMotorController(16);
+	m_RightDriveA = new CowLib::CowMotorController(DRIVE_RIGHT_A);
+	m_RightDriveB = new CowLib::CowMotorController(DRIVE_RIGHT_B);
+	m_RightDriveC = new CowLib::CowMotorController(DRIVE_RIGHT_C);
 
 	m_LeftDriveA->SetNeutralMode(CowLib::CowMotorController::BRAKE);
 	m_LeftDriveB->SetNeutralMode(CowLib::CowMotorController::BRAKE);
