@@ -7,7 +7,7 @@ namespace CowLib
 		m_DeviceNum(deviceNum)
 	{
 		m_CowControlMode = CowMotorController::PERCENTVBUS;
-		m_CowNeutralMode = CowMotorController::JUMPER;
+		m_CowNeutralMode = CowMotorController::COAST;
 		m_MotorController = new TalonSRX(deviceNum);
 	}
 
