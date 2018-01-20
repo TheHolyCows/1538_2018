@@ -7,7 +7,6 @@
 
 #include <CowLib/CowLogger.h>
 #include <WPILib.h>
-#include "ctre/Phoenix.h"
 #include "Controllers/GenericController.h"
 #include "CowLib/CowLib.h"
 #include "CowControlBoard.h"
@@ -15,6 +14,7 @@
 #include "CowConstants.h"
 #include "CowLib/CowAlphaNum.h"
 #include "CowGyro.h"
+#include "CowLib/CowMotorController.h"
 
 class CowRobot
 {
@@ -25,13 +25,13 @@ private:
 	GenericController *m_Controller;
 	
 	// Drive Motors
-	WPI_TalonSRX *m_LeftDriveA;
-	WPI_TalonSRX *m_LeftDriveB;
-	WPI_TalonSRX *m_LeftDriveC;
+	CowLib::CowMotorController *m_LeftDriveA;
+	CowLib::CowMotorController *m_LeftDriveB;
+	CowLib::CowMotorController *m_LeftDriveC;
 
-	WPI_TalonSRX *m_RightDriveA;
-	WPI_TalonSRX *m_RightDriveB;
-	WPI_TalonSRX *m_RightDriveC;
+	CowLib::CowMotorController *m_RightDriveA;
+	CowLib::CowMotorController *m_RightDriveB;
+	CowLib::CowMotorController *m_RightDriveC;
 	
 	CowLib::CowGyro *m_Gyro;
 	Encoder *m_DriveEncoder;

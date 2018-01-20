@@ -1,27 +1,28 @@
 #include "CowRobot.h"
 #include "CowBase.h"
 
-// Constructor for CowRobot
 CowRobot::CowRobot()
 {	
 	m_DSUpdateCount = 0;
 		
 	m_Controller = NULL;
+
 	// Set up drive motors
-	m_LeftDriveA = new WPI_TalonSRX(11);
-	m_LeftDriveB = new WPI_TalonSRX(12);
-	m_LeftDriveC = new WPI_TalonSRX(13);
+	m_LeftDriveA = new CowLib::CowMotorController(11);
+	m_LeftDriveB = new CowLib::CowMotorController(12);
+	m_LeftDriveC = new CowLib::CowMotorController(13);
 
-	m_RightDriveA = new WPI_TalonSRX(14);
-	m_RightDriveB = new WPI_TalonSRX(15);
-	m_RightDriveC = new WPI_TalonSRX(16);
+	m_RightDriveA = new CowLib::CowMotorController(14);
+	m_RightDriveB = new CowLib::CowMotorController(15);
+	m_RightDriveC = new CowLib::CowMotorController(16);
 
-//	m_LeftDriveA->ConfigNeutralMode(CANTalon::NeutralMode::kNeutralMode_Brake);
-//	m_LeftDriveB->ConfigNeutralMode(CANTalon::NeutralMode::kNeutralMode_Brake);
-//	m_LeftDriveC->ConfigNeutralMode(CANTalon::NeutralMode::kNeutralMode_Brake);
-//	m_RightDriveA->ConfigNeutralMode(CANTalon::NeutralMode::kNeutralMode_Brake);
-//	m_RightDriveB->ConfigNeutralMode(CANTalon::NeutralMode::kNeutralMode_Brake);
-//	m_RightDriveC->ConfigNeutralMode(CANTalon::NeutralMode::kNeutralMode_Brake);
+	m_LeftDriveA->SetNeutralMode(CowLib::CowMotorController::BRAKE);
+	m_LeftDriveB->SetNeutralMode(CowLib::CowMotorController::BRAKE);
+	m_LeftDriveC->SetNeutralMode(CowLib::CowMotorController::BRAKE);
+
+	m_RightDriveA->SetNeutralMode(CowLib::CowMotorController::BRAKE);
+	m_RightDriveB->SetNeutralMode(CowLib::CowMotorController::BRAKE);
+	m_RightDriveC->SetNeutralMode(CowLib::CowMotorController::BRAKE);
 
 	m_DriveEncoderRight = new Encoder(MXP_QEI_5_A, MXP_QEI_5_B, false, Encoder::k1X);
 	m_DriveEncoderRight->SetDistancePerPulse(0.03054323611111); // 6*pi/360
@@ -214,8 +215,6 @@ bool CowRobot::DriveWithHeading(double heading, double speed, double maxSpeed)
 
 
 // Allows skid steer robot to be driven using tank drive style inputs
-// @param leftDriveValue
-// @param rightDriveValue
 void CowRobot::DriveLeftRight(float leftDriveValue, float rightDriveValue)
 {
 	m_LeftDriveValue = leftDriveValue;
@@ -225,6 +224,7 @@ void CowRobot::DriveLeftRight(float leftDriveValue, float rightDriveValue)
 void CowRobot::DriveSpeedTurn(float speed, float turn, bool quickTurn)
 {
 	// Linear degredation of steeering based off of velocity
+
 	//velocity *= 0.003;
 	float temp_vel = speed;
 	float sensitivity = 0;
@@ -267,10 +267,9 @@ void CowRobot::DriveSpeedTurn(float speed, float turn, bool quickTurn)
 }
 
 // Allows robot to spin in place
-// @param turnRate
 void CowRobot::QuickTurn(float turnRate)
 {
-	// when provided with + turn, quick turn right
+	// When provided with + turn, quick turn right
 
 	float left = -1 * turnRate;
 	float right = turnRate;
@@ -278,7 +277,7 @@ void CowRobot::QuickTurn(float turnRate)
 	DriveLeftRight(left, right);
 }
 
-// sets the left side motors
+// Sets the left side motors
 void CowRobot::SetLeftMotors(float val)
 {
 	if (val > 1.0)
@@ -291,7 +290,7 @@ void CowRobot::SetLeftMotors(float val)
 	m_LeftDriveC->Set(val);
 }
 
-// sets the left side motors
+// Sets the left side motors
 void CowRobot::SetRightMotors(float val)
 {
 	if (val > 1.0)
