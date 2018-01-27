@@ -1,5 +1,4 @@
 #include "CowBase.h"
-#include <string.h>
 
 CowBase::CowBase()
 	:
@@ -89,12 +88,6 @@ void CowBase::DisabledPeriodic()
 			AutoModes::GetInstance()->NextMode();
 		}
 	}
-
-//	if(m_ControlBoard->GetSteeringButton(7))
-//	{
-//		std::string temp = "Using Offset Position";
-//		DriverStation::GetInstance().ReportError(temp);
-//	}
 
 //	m_Bot->GetGearIntake()->DisabledCalibration();
 //	m_Bot->PrintToDS();

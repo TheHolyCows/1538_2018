@@ -5,11 +5,9 @@
 #ifndef __AUTO_MODE_CONTROLLER_H__
 #define __AUTO_MODE_CONTROLLER_H__
 
-#include <deque>
 #include "../CowConstants.h"
 #include <Timer.h>
-
-using namespace std;
+#include <deque>
 
 typedef enum
 {
@@ -41,7 +39,9 @@ public:
 	{
 	}
 	
-	RobotCommand(e_RobotCommand cmd, double encoder, double heading, double speed, bool arm, double timeout) :
+	RobotCommand(e_RobotCommand cmd,
+			double encoder, double heading,
+				 double speed, bool arm, double timeout) :
 		m_Command(cmd),
 		m_EncoderCount(encoder),
 		m_Heading(heading),
@@ -58,18 +58,17 @@ class AutoModeController : public GenericController
 {
 private:
 	Timer *m_Timer; //TODO: standardize timing
-	deque<RobotCommand> m_CommandList;
+	std::deque<RobotCommand> m_CommandList;
 	RobotCommand m_CurrentCommand;
 	
 	void doNothing(CowRobot *bot);
 
 public:
 	AutoModeController();
-	void SetCommandList(deque<RobotCommand> list);
+	void SetCommandList(std::deque<RobotCommand> list);
 
 	void handle(CowRobot *bot);
 	void reset();
 };
 
-#endif
-
+#endif /* __AUTO_MODE_CONTROLLER_H__ */

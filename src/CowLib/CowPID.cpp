@@ -30,10 +30,10 @@ CowPID::CowPID(double Kp, double Ki, double Kd, double Kf)
 		m_last_input(NAN)
 {
 	// TODO Auto-generated constructor stub
-
 }
 
-CowPID::~CowPID() {
+CowPID::~CowPID()
+{
 	// TODO Auto-generated destructor stub
 }
 
@@ -41,12 +41,17 @@ double CowPID::Calculate(double input)
 {
     m_last_input = input;
     m_error = m_setpoint - input;
-    if (m_continuous) {
+    if (m_continuous)
+    {
         if (fabs(m_error) >
-                (m_maximumInput - m_minimumInput) / 2) {
-            if (m_error > 0) {
+                (m_maximumInput - m_minimumInput) / 2)
+        {
+            if (m_error > 0)
+            {
                 m_error = m_error - m_maximumInput + m_minimumInput;
-            } else {
+            }
+            else
+            {
                 m_error = m_error +
                         m_maximumInput - m_minimumInput;
             }
@@ -54,9 +59,12 @@ double CowPID::Calculate(double input)
     }
 
     if ((m_error * m_P < m_maximumOutput) &&
-            (m_error * m_P > m_minimumOutput)) {
+            (m_error * m_P > m_minimumOutput))
+    {
         m_totalError += m_error;
-    } else {
+    }
+    else
+    {
         m_totalError = 0;
     }
 
@@ -82,15 +90,23 @@ double CowPID::GetSetpoint()
 
 void CowPID::SetSetpoint(double setpoint)
 {
-    if (m_maximumInput > m_minimumInput) {
-        if (setpoint > m_maximumInput) {
+    if (m_maximumInput > m_minimumInput)
+    {
+        if (setpoint > m_maximumInput)
+        {
             m_setpoint = m_maximumInput;
-        } else if (setpoint < m_minimumInput) {
+        }
+        else if (setpoint < m_minimumInput)
+        {
             m_setpoint = m_minimumInput;
-        } else {
+        }
+        else
+        {
             m_setpoint = setpoint;
         }
-    } else {
+    }
+    else
+    {
         m_setpoint = setpoint;
     }
 }

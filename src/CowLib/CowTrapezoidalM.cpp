@@ -18,7 +18,6 @@ CowTrapezoidalM::CowTrapezoidalM(double accelSlope, double decelSlope)
 		m_AccelerationPhase(0)
 {
 	// TODO Auto-generated constructor stub
-
 }
 
 void CowTrapezoidalM::SetStartingPosition(double startPosition)
@@ -59,7 +58,8 @@ double CowTrapezoidalM::Calculate(double currentPosition)
 	return 0;
 }
 
-CowTrapezoidalM::~CowTrapezoidalM() {
+CowTrapezoidalM::~CowTrapezoidalM()
+{
 	// TODO Auto-generated destructor stub
 }
 

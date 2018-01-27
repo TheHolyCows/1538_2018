@@ -29,4 +29,4 @@ public:
 	void handle(CowRobot *bot);
 };
 
-#endif
+#endif /* __OPERATOR_CONTROLLER_H__ */

@@ -1,8 +1,21 @@
 #include "CowConstants.h"
-#include <string.h>
+#include "CowLib/CowLib.h"
+#include <string>
+#include <regex>
+#include <iterator>
 
-// Singleton instance
+#include <iostream>
+
 CowConstants *CowConstants::m_SingletonInstance = NULL;
+
+const std::string REGEX_COMMENT = "#[^\\n]*";
+const std::string REGEX_LEFT_BRACKET = "\\[";
+const std::string REGEX_RIGHT_BRACKET = "\\]";
+const std::string REGEX_EQUALS = "=";
+const std::string REGEX_SEMICOLON = ";";
+const std::string REGEX_VALUE = "-?[0-9]*\\.?[0-9]+";
+const std::string REGEX_KEY = "[A-Za-z0-9_-]+";
+const std::string REGEX_TOKENIZER = "(\\[|\\]|#[^\\n]*|=|;|-?[0-9]*\\.?[0-9]+|[A-Za-z0-9_-]+)";
 
 CowConstants *CowConstants::GetInstance()
 {
@@ -14,81 +27,40 @@ CowConstants *CowConstants::GetInstance()
 }
 
 CowConstants::CowConstants()
-	:
-	m_Lexer(new CowLib::CowLexer())
 {
-	m_Lexer->AddToken("", "#[^\\n]*"); // Ignore comments
-	m_Lexer->AddToken("LeftBracket", "\\[");
-	m_Lexer->AddToken("RightBracket", "\\]");
-	m_Lexer->AddToken("Equals", "=");
-	m_Lexer->AddToken("Semicolon", ";");
-	m_Lexer->AddToken("Number", "-?[0-9]*\\.?[0-9]+");
-	m_Lexer->AddToken("Name", "[A-Za-z0-9_-]+");
 	RestoreData();
 }
 
-/// Returns a bool indicating if the key/value pair exists 
-bool CowConstants::DoesKeyExist(string key)
+// Returns a bool indicating if the key/value pair exists
+bool CowConstants::DoesKeyExist(std::string key)
 {
 	return (bool)m_Data.count(key);
 }
 
 double CowConstants::GetValueForKey(const char *key)
 {
-	if(DoesKeyExist(string(key)))
+	if(DoesKeyExist(std::string(key)))
 	{
-		return m_Data[string(key)].numeric;
+		return m_Data[std::string(key)].numeric;
 	}
 	else
 	{
 		printf("Missing constant: %s!!\nKilling FRC_RobotTask\n", key);
 		CowLib::PrintToLCD("Missing constant!!\n%s\n\nKilling FRC_RobotTask", key);
-		exit(1); // kill the robot
+		exit(1); // Kill the robot
 		return 0;
 	}
 }
 
-template <typename T>
-T CowConstants::GetValueForKey(const char *key)
-{
-	if(DoesKeyExist(string(key)))
-	{
-		// use a stringstream to convert to T
-		T result;
-		std::istringstream iss(m_Data[string(key)].value);
-		if(!(iss > result).fail())
-		{
-			// successful conversion
-			return result;
-		}
-		else
-		{
-			printf("Bad conversion for constant: %s!!\nKilling FRC_RobotTask\n", key);
-			CowLib::PrintToLCD("Bad conversion!!\n%s\n\nKilling FRC_RobotTask", key);
-			//wpi_selfTrace();
-			exit(1); // kill the robot
-			return 0;	
-		}
-	}
-	else
-	{
-		printf("Missing constant: %s!!\nKilling FRC_RobotTask\n", key);
-		CowLib::PrintToLCD("Missing constant!!\n%s\n\nKilling FRC_RobotTask", key);
-		//wpi_selfTrace();
-		exit(1); // kill the robot
-		return 0;
-	}
-}
-
-void CowConstants::SetValueForKey(string key, string value)
+void CowConstants::SetValueForKey(std::string key, std::string value)
 {
 	m_Data[key].value = value;
 	m_Data[key].numeric = atof(value.c_str());
 }
 
 void CowConstants::GrammarError(const char *expectedTokenDescription,
-								string value,
-								string receivedToken)
+							   std::string value,
+							   std::string receivedToken)
 {
 	printf("Error: expected %s before \"%s\", instead got \"%s\"\nAborting parsing\n",
 			expectedTokenDescription, value.c_str(), receivedToken.c_str());
@@ -100,51 +72,123 @@ void CowConstants::RestoreData(const char *filename)
 	m_Data.clear();
 	
 	// Load in our file
-	string data;
+	std::string data;
 	std::ifstream file(filename, std::ios::in | std::ios::binary);
-
 	if(!file)
 	{
-		printf("Error: could not read %s\nNo constants were loaded.\n", filename);
+		printf("Error: could not read %s\nNo constants were loaded\n", filename);
 		return;
 	}
+
+	// Read all of the file into data
 	file.seekg(0, std::ios::end);
 	data.resize(file.tellg());
 	file.seekg(0, std::ios::beg);
 	file.read(&data[0], data.size());
 	file.close();
 	
-	ParseINI(data, filename);
+	// Regex parsing
+	ParseINI(data);
 }
 
-void CowConstants::ParseINI(string data, const char *filename)
+CowConstants::CowConstantType CowConstants::GetConstantType(std::string token)
+{
+    std::regex comment{REGEX_COMMENT};
+    std::regex leftBracket{REGEX_LEFT_BRACKET};
+    std::regex rightBracket{REGEX_RIGHT_BRACKET};
+    std::regex equals{REGEX_EQUALS};
+    std::regex semicolon{REGEX_SEMICOLON};
+    std::regex value{REGEX_VALUE};
+    std::regex key{REGEX_KEY};
+
+    if(std::regex_match(token, comment))
+    {
+        return CONSTANT_TYPE_COMMENT;
+    }
+    else if(std::regex_match(token, leftBracket))
+    {
+        return CONSTANT_TYPE_LEFT_BRACKET;
+    }
+    else if(std::regex_match(token, rightBracket))
+    {
+        return CONSTANT_TYPE_RIGHT_BRACKET;
+    }
+    else if(std::regex_match(token, equals))
+    {
+        return CONSTANT_TYPE_EQUALS;
+    }
+    else if(std::regex_match(token, semicolon))
+    {
+        return CONSTANT_TYPE_SEMICOLON;
+    }
+    else if(std::regex_match(token, value))
+    {
+        return CONSTANT_TYPE_NUMBER;
+    }
+    else if(std::regex_match(token, key))
+    {
+        return CONSTANT_TYPE_NAME;
+    }
+    else
+    {
+        // This should never happen but just in case
+        return CONSTANT_TYPE_INVALID;
+    }
+}
+
+void CowConstants::Tokenize(std::string data, std::vector<CowConstants::CowConstantToken> *tokens)
+{
+    std::regex r{REGEX_TOKENIZER};
+
+    // Tokenize the entire file
+    std::sregex_token_iterator it{std::begin(data), std::end(data), r};
+    std::sregex_token_iterator reg_end;
+
+    for(; it != reg_end; ++it)
+    {
+        CowConstants::CowConstantToken token;
+        token.type = GetConstantType(*it);
+
+        // Any comment matches get ignored and will not be added to tokenized list
+        if(token.type == CONSTANT_TYPE_COMMENT)
+        {
+            continue;
+        }
+
+        token.value = *it;
+        tokens->push_back(token);
+    }
+}
+
+void CowConstants::ParseINI(std::string data)
 {
 	char robotName[256] = {0};
 	gethostname(robotName, 256);
 	
 	printf("Hostname: %s\r\n", robotName);
 
-	// Tokenize
-	std::vector<CowLib::CowLexer::st_Token> tokens = m_Lexer->TokenizeString(data);
-	
+	// Token container
+	std::vector<CowConstants::CowConstantToken> tokens;
+    Tokenize(data, &tokens);
+
 	char *currentSection = NULL;
 	
 	// Start parsing INI grammar
 	if(tokens.size() == 0)
 	{
 		// This is a really bizzare case, not sure how to write a descriptive error
-		printf("Warning: %s does not appear to be a proper constants file.\nNo constants were loaded.\n", filename);
+		printf("Warning: Invalid constants file\nNo constants were loaded\n");
 		return;
 	}
 	
 	// Add an end of file token so that we don't miss dangling tokens
-	CowLib::CowLexer::st_Token eof;
-	eof.type = "<EOF>";
+	CowConstants::CowConstantToken eof;
+	eof.type = CONSTANT_TYPE_EOF;
 	eof.value = "<EOF>";
 	tokens.push_back(eof);
 	
 	// Make sure our first token is okay before we loop
-	if(tokens[0].type != "LeftBracket" && tokens[0].type != "Name")
+	if(tokens[0].type != CONSTANT_TYPE_LEFT_BRACKET && tokens[0].type != CONSTANT_TYPE_NAME)
 	{
 		return GrammarError("\"[\" or name", tokens[1].value, tokens[0].value);
 	}
@@ -153,23 +197,24 @@ void CowConstants::ParseINI(string data, const char *filename)
 	// For example, putting a semicolon after a left bracket wouldn't make since, and causes an error
 	for(unsigned int i = 1; i < tokens.size(); i++)
 	{
-		CowLib::CowLexer::st_Token t = tokens[i];
-		if(t.type == "LeftBracket" &&
-		   tokens[i-1].type != "RightBracket" &&
-		   tokens[i-1].type != "Semicolon")
+		//CowLib::CowLexer::st_Token t = tokens[i];
+		CowConstants::CowConstantToken t = tokens[i];
+		if(t.type == CONSTANT_TYPE_LEFT_BRACKET &&
+		   tokens[i-1].type != CONSTANT_TYPE_RIGHT_BRACKET &&
+		   tokens[i-1].type != CONSTANT_TYPE_SEMICOLON)
 		{
 			return GrammarError("\"]\" or \";\"", t.value, tokens[i-1].value);
 		}
-		else if(t.type == "Name" &&
-		   tokens[i-1].type != "LeftBracket" &&
-		   tokens[i-1].type != "RightBracket" &&
-		   tokens[i-1].type != "Semicolon")
+		else if(t.type == CONSTANT_TYPE_NAME &&
+		   tokens[i-1].type != CONSTANT_TYPE_LEFT_BRACKET &&
+		   tokens[i-1].type != CONSTANT_TYPE_RIGHT_BRACKET &&
+		   tokens[i-1].type != CONSTANT_TYPE_SEMICOLON)
 		{
 			return GrammarError("\"]\" or \";\"", t.value, tokens[i-1].value);
 		}
-		else if(t.type == "RightBracket")
+		else if(t.type == CONSTANT_TYPE_RIGHT_BRACKET)
 		{
-			if(tokens[i-1].type != "Name")
+			if(tokens[i-1].type != CONSTANT_TYPE_NAME)
 			{
 				return GrammarError("name", t.value, tokens[i-1].value);
 			}
@@ -178,7 +223,7 @@ void CowConstants::ParseINI(string data, const char *filename)
 				printf("Error: unmatched \"]\" after \"%s\"\nAborting parsing\n", tokens[i-1].value.c_str());
 				return;
 			}
-			else if(tokens[i-2].type != "LeftBracket")
+			else if(tokens[i-2].type != CONSTANT_TYPE_LEFT_BRACKET)
 			{
 				printf("Error: unmatched \"]\" after \"%s\"\nAborting parsing\n", tokens[i-1].value.c_str());
 				return;
@@ -188,16 +233,16 @@ void CowConstants::ParseINI(string data, const char *filename)
 				currentSection = (char *)tokens[i-1].value.c_str();
 			}
 		}
-		else if(t.type == "Equals")
+		else if(t.type == CONSTANT_TYPE_EQUALS)
 		{
-			if(tokens[i-1].type != "Name")
+			if(tokens[i-1].type != CONSTANT_TYPE_NAME)
 			{
 				return GrammarError("name", t.value, tokens[i-1].value);
 			}
 		}
-		else if(t.type == "Number")
+		else if(t.type == CONSTANT_TYPE_NUMBER)
 		{
-			if(tokens[i-1].type != "Equals")
+			if(tokens[i-1].type != CONSTANT_TYPE_EQUALS)
 			{
 				return GrammarError("\"=\"", t.value, tokens[i-1].value);
 			}
@@ -214,17 +259,17 @@ void CowConstants::ParseINI(string data, const char *filename)
 				}
 			}
 		}
-		else if(t.type == "Semicolon")
+		else if(t.type == CONSTANT_TYPE_SEMICOLON)
 		{
-			if(tokens[i-1].type != "Number")
+			if(tokens[i-1].type != CONSTANT_TYPE_NUMBER)
 			{
 				return GrammarError("number", t.value, tokens[i-1].value);
 			}
 		}
-		else if(t.type == "<EOF>")
+		else if(t.type == CONSTANT_TYPE_EOF)
 		{
-			if(tokens[i-1].type != "RightBracket" &&
-			   tokens[i-1].type != "Semicolon")
+			if(tokens[i-1].type != CONSTANT_TYPE_RIGHT_BRACKET &&
+			   tokens[i-1].type != CONSTANT_TYPE_SEMICOLON)
 			{
 				return GrammarError("\"]\" or \";\"", t.value, tokens[i-1].value);
 			}

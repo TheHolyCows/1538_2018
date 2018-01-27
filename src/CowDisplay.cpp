@@ -1,6 +1,5 @@
 #include "CowDisplay.h"
 #include <RobotController.h>
-#include <string.h>
 
 CowDisplay::CowDisplay(CowRobot *bot)
 	:
@@ -35,7 +34,7 @@ void CowDisplay::DisplayUpdateState()
 		alphaNumLED->DisplayBanner();
 		break;
 	case 1 :
-		m_UserScrollCount = 0; // not scrolling the voltage
+		m_UserScrollCount = 0; // Not scrolling the voltage
 		if (m_PrevUserState != m_UserState)
 		{
 			m_PrevUserState = m_UserState;

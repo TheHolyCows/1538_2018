@@ -15,7 +15,6 @@ CowLPF::CowLPF(double beta)
 		m_RawData(0),
 		m_SmoothData(0)
 {
-
 }
 
 double CowLPF::Calculate(double value)

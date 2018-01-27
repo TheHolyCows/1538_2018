@@ -1,5 +1,5 @@
 //==================================================
-// Copyright (C) 2015 Team 1538 / The Holy Cows
+// Copyright (C) 2018 Team 1538 / The Holy Cows
 //==================================================
 
 #ifndef __COW_DISPLAY_H__
@@ -26,7 +26,6 @@ private:
 public:
 	CowDisplay(CowRobot *);
 	void DisplayPeriodic();
-
 };
 
 #endif

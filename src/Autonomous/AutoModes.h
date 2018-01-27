@@ -24,4 +24,4 @@ public:
 	void NextMode();
 };
 
-#endif
+#endif /* __AUTO_MODES_H__ */

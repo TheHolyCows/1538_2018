@@ -5,52 +5,63 @@
 #ifndef __COW_CONSTANTS_H__
 #define __COW_CONSTANTS_H__
 
-#include <unistd.h>
+#include "Declarations.h"
 #include <WPILib.h>
+#include <unistd.h>
 #include <fstream>
 #include <string>
 #include <map>
-#include "Declarations.h"
-#include "CowLib/CowLib.h"
 
-// Short way to access a constant.  There's probably a better way to do this.
+// Short way to access a constant. There's probably a better way to do this.
 #define CONSTANT CowConstants::GetInstance()->GetValueForKey
-
-using namespace std;
 
 class CowConstants
 {	
 private:
-	// Converting from a std::string to a double is expensive,
-	// and almost every constant will be a double, so we cast
-	// at load time instead of continuously
+	// Converting from a std::string to a double is expensive, and almost
+	// every constant will be a double, so we cast at load time instead of
+	// continuously
 	typedef struct
 	{
-		string value;
+		std::string value;
 		double numeric;
-	} st_CowConstant;
-	
-	map<string, st_CowConstant> m_Data;
+	} CowConstant;
+
+	typedef enum
+	{
+	    CONSTANT_TYPE_COMMENT,
+	    CONSTANT_TYPE_LEFT_BRACKET,
+	    CONSTANT_TYPE_RIGHT_BRACKET,
+	    CONSTANT_TYPE_EQUALS,
+	    CONSTANT_TYPE_SEMICOLON,
+	    CONSTANT_TYPE_NUMBER,
+	    CONSTANT_TYPE_NAME,
+        CONSTANT_TYPE_EOF,
+	    CONSTANT_TYPE_INVALID,
+	} CowConstantType;
+
+    typedef struct
+    {
+        //std::string type;
+        CowConstantType type;
+        std::string value;
+    } CowConstantToken;
+
+	std::map<std::string, CowConstant> m_Data;
 	static CowConstants *m_SingletonInstance;
 	
-	CowLib::CowLexer *m_Lexer;
-	
-	void GrammarError(const char *expectedTokenDescription, string value, string receivedToken);
-	void ParseINI(string data, const char *filename);
+	void GrammarError(const char *expectedTokenDescription, std::string value, std::string receivedToken);
+	void ParseINI(std::string data);
+	CowConstants::CowConstantType GetConstantType(std::string token);
+    void Tokenize(std::string data, std::vector<CowConstants::CowConstantToken> *tokens);
 	
 	CowConstants();
 public:
 	void RestoreData(const char *filename = COWCONSTANTS_DEFAULT_FILE);
-
 	static CowConstants *GetInstance();
-	
 	double GetValueForKey(const char *key);
-	template <typename T>
-	T GetValueForKey(const char *key);
-	
-	void SetValueForKey(string key, string value);
-	
-	bool DoesKeyExist(string key);	
+	void SetValueForKey(std::string key, std::string value);
+	bool DoesKeyExist(std::string key);
 };
 
-#endif
+#endif /* __COW_CONSTANTS_H__ */

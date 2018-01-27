@@ -1,5 +1,4 @@
 #include "CowCircularBuffer.h"
-
 #include <string.h>
 #include <stdio.h>
 
@@ -105,10 +104,10 @@ namespace CowLib
 
 		if (m_OverwriteWhenFull)
 		{
-			// overwrite anything with the new buffer
+			// Overwrite anything with the new buffer
 			numToPut = size;
 
-			// update the start marker if necessary
+			// Update the start marker if necessary
 			if (numToPut > GetRemaining())
 			{
 				m_StartIndex = (m_StartIndex + numToPut) % m_Size;
@@ -116,13 +115,13 @@ namespace CowLib
 		}
 		else
 		{
-			// only fill up what's left
+			// Only fill up what's left
 			numToPut = (GetRemaining() > size) ? size : GetRemaining();
 		}
 
-		// determine if we have to wrap around
-		// top is the high end of the circular buffer
-		// bottom is the beginning of the circular buffer
+		// Determine if we have to wrap around
+		// Top is the high end of the circular buffer
+		// Nottom is the beginning of the circular buffer
 		if ((m_EndIndex + numToPut) > m_Size)
 		{
 			top = m_Size - m_EndIndex;

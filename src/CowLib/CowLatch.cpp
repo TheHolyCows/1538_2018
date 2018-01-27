@@ -15,7 +15,6 @@ CowLatch::CowLatch()
 		m_Latched(false)
 {
 	// TODO Auto-generated constructor stub
-
 }
 
 // Returns true if state has changed
@@ -38,9 +37,8 @@ void CowLatch::ResetLatch()
 	m_Latched = false;
 }
 
-
-
-CowLatch::~CowLatch() {
+CowLatch::~CowLatch()
+{
 	// TODO Auto-generated destructor stub
 }
 

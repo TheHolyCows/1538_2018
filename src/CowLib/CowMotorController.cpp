@@ -85,5 +85,4 @@ namespace CowLib
 	{
 		m_MotorController->Set(TranslateControlMode(GetControlMode()), value);
 	}
-
 }

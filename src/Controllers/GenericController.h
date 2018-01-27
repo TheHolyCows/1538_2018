@@ -16,4 +16,4 @@ public:
 	virtual void handle(CowRobot *bot) = 0;
 };
 
-#endif
+#endif /* __GENERIC_CONTROLLER_H__ */

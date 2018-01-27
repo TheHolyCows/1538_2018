@@ -11,7 +11,7 @@ AutoModeController::AutoModeController()
 	reset();
 }
 
-void AutoModeController::SetCommandList(deque<RobotCommand> list)
+void AutoModeController::SetCommandList(std::deque<RobotCommand> list)
 {
 	m_CommandList = list;
 }

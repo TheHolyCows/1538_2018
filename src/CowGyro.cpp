@@ -67,9 +67,7 @@ void CowGyro::Handle()
 
 	while(!initialized)
 	{
-
 		initialized = InitializeGyro();
-
 		if(!initialized)
 		{
 			std::this_thread::sleep_for(std::chrono::milliseconds(1000));
@@ -80,10 +78,7 @@ void CowGyro::Handle()
 
 	while(true)
 	{
-
-
 		std::this_thread::sleep_for(std::chrono::milliseconds((int) ((1.0 / K_READING_RATE) * 1000)));
-
 		int reading = GetReading();
 
 		e_StatusFlag status = CowGyro::ExtractStatus(reading);

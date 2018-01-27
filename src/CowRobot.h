@@ -1,5 +1,5 @@
 //==================================================
-// Copyright (C) 2017 Team 1538 / The Holy Cows
+// Copyright (C) 2018 Team 1538 / The Holy Cows
 //==================================================
 
 #ifndef __COW_ROBOT_H__
@@ -18,7 +18,6 @@
 
 class CowRobot
 {
-public:
 private:
 	int m_DSUpdateCount;
 	
