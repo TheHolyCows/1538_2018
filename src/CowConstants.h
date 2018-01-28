@@ -16,29 +16,29 @@
 #define CONSTANT CowConstants::GetInstance()->GetValueForKey
 
 class CowConstants
-{	
+{    
 private:
-	// Converting from a std::string to a double is expensive, and almost
-	// every constant will be a double, so we cast at load time instead of
-	// continuously
-	typedef struct
-	{
-		std::string value;
-		double numeric;
-	} CowConstant;
+    // Converting from a std::string to a double is expensive, and almost
+    // every constant will be a double, so we cast at load time instead of
+    // continuously
+    typedef struct
+    {
+        std::string value;
+        double numeric;
+    } CowConstant;
 
-	typedef enum
-	{
-	    CONSTANT_TYPE_COMMENT,
-	    CONSTANT_TYPE_LEFT_BRACKET,
-	    CONSTANT_TYPE_RIGHT_BRACKET,
-	    CONSTANT_TYPE_EQUALS,
-	    CONSTANT_TYPE_SEMICOLON,
-	    CONSTANT_TYPE_NUMBER,
-	    CONSTANT_TYPE_NAME,
+    typedef enum
+    {
+        CONSTANT_TYPE_COMMENT,
+        CONSTANT_TYPE_LEFT_BRACKET,
+        CONSTANT_TYPE_RIGHT_BRACKET,
+        CONSTANT_TYPE_EQUALS,
+        CONSTANT_TYPE_SEMICOLON,
+        CONSTANT_TYPE_NUMBER,
+        CONSTANT_TYPE_NAME,
         CONSTANT_TYPE_EOF,
-	    CONSTANT_TYPE_INVALID,
-	} CowConstantType;
+        CONSTANT_TYPE_INVALID,
+    } CowConstantType;
 
     typedef struct
     {
@@ -47,21 +47,21 @@ private:
         std::string value;
     } CowConstantToken;
 
-	std::map<std::string, CowConstant> m_Data;
-	static CowConstants *m_SingletonInstance;
-	
-	void GrammarError(const char *expectedTokenDescription, std::string value, std::string receivedToken);
-	void ParseINI(std::string data);
-	CowConstants::CowConstantType GetConstantType(std::string token);
+    std::map<std::string, CowConstant> m_Data;
+    static CowConstants *m_SingletonInstance;
+    
+    void GrammarError(const char *expectedTokenDescription, std::string value, std::string receivedToken);
+    void ParseINI(std::string data);
+    CowConstants::CowConstantType GetConstantType(std::string token);
     void Tokenize(std::string data, std::vector<CowConstants::CowConstantToken> *tokens);
-	
-	CowConstants();
+    
+    CowConstants();
 public:
-	void RestoreData(const char *filename = COWCONSTANTS_DEFAULT_FILE);
-	static CowConstants *GetInstance();
-	double GetValueForKey(const char *key);
-	void SetValueForKey(std::string key, std::string value);
-	bool DoesKeyExist(std::string key);
+    void RestoreData(const char *filename = COWCONSTANTS_DEFAULT_FILE);
+    static CowConstants *GetInstance();
+    double GetValueForKey(const char *key);
+    void SetValueForKey(std::string key, std::string value);
+    bool DoesKeyExist(std::string key);
 };
 
 #endif /* __COW_CONSTANTS_H__ */
