@@ -15,20 +15,20 @@ namespace CowLib {
 
 class CowTrapezoidalM {
 private:
-	double m_AccelSlope;
-	double m_DecelSlope;
-	double m_StartingPosition;
-	double m_Setpoint;
-	uint8_t m_AccelerationPhase;
+    double m_AccelSlope;
+    double m_DecelSlope;
+    double m_StartingPosition;
+    double m_Setpoint;
+    uint8_t m_AccelerationPhase;
 
 public:
-	CowTrapezoidalM(double accelSlope, double decelSlope);
-	void SetStartingPosition(double startPosition);
-	void SetSetpoint(double setPoint);
-	double Calculate(double currentPosition);
-	virtual ~CowTrapezoidalM();
+    CowTrapezoidalM(double accelSlope, double decelSlope);
+    void SetStartingPosition(double startPosition);
+    void SetSetpoint(double setPoint);
+    double Calculate(double currentPosition);
+    virtual ~CowTrapezoidalM();
 private:
-	CowTrapezoidalM();
+    CowTrapezoidalM();
 };
 
 } /* namespace CowLib */

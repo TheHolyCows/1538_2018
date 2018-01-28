@@ -12,16 +12,16 @@
 class AutoModes
 {
 private:
-	static AutoModes *m_SingletonInstance;
-	std::map<const char *, std::deque<RobotCommand> > m_Modes;
-	std::map<const char *, std::deque<RobotCommand> >::iterator m_Iterator;
-	
-	AutoModes();
+    static AutoModes *m_SingletonInstance;
+    std::map<const char *, std::deque<RobotCommand> > m_Modes;
+    std::map<const char *, std::deque<RobotCommand> >::iterator m_Iterator;
+    
+    AutoModes();
 public:
-	static AutoModes *GetInstance();
-	std::deque<RobotCommand> GetCommandList();
-	const char *GetName();
-	void NextMode();
+    static AutoModes *GetInstance();
+    std::deque<RobotCommand> GetCommandList();
+    const char *GetName();
+    void NextMode();
 };
 
 #endif /* __AUTO_MODES_H__ */

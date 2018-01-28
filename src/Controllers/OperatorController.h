@@ -15,18 +15,18 @@
 #include "../CowLib/CowLatch.h"
 
 class OperatorController : public GenericController
-{	
+{    
 private:
-	OperatorController();
-	CowControlBoard *m_CB;
+    OperatorController();
+    CowControlBoard *m_CB;
 
-//	float time;
-//	float previousTime;
-//	float speed;
+//    float time;
+//    float previousTime;
+//    float speed;
 
 public:
-	OperatorController(CowControlBoard *controlboard);
-	void handle(CowRobot *bot);
+    OperatorController(CowControlBoard *controlboard);
+    void handle(CowRobot *bot);
 };
 
 #endif /* __OPERATOR_CONTROLLER_H__ */

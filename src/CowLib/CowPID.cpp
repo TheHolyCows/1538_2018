@@ -12,29 +12,29 @@
 namespace CowLib {
 
 CowPID::CowPID(double Kp, double Ki, double Kd, double Kf)
-	:
-		m_P(Kp),
-		m_I(Ki),
-		m_D(Kd),
-		m_F(Kf),
-		m_maximumOutput(1.0),
-		m_minimumOutput(-1.0),
-		m_maximumInput(0),
-		m_minimumInput(0),
-		m_continuous(false),
-		m_prevError(0),
-		m_totalError(0),
-		m_setpoint(0),
-		m_error(0),
-		m_result(0),
-		m_last_input(NAN)
+    :
+        m_P(Kp),
+        m_I(Ki),
+        m_D(Kd),
+        m_F(Kf),
+        m_maximumOutput(1.0),
+        m_minimumOutput(-1.0),
+        m_maximumInput(0),
+        m_minimumInput(0),
+        m_continuous(false),
+        m_prevError(0),
+        m_totalError(0),
+        m_setpoint(0),
+        m_error(0),
+        m_result(0),
+        m_last_input(NAN)
 {
-	// TODO Auto-generated constructor stub
+    // TODO Auto-generated constructor stub
 }
 
 CowPID::~CowPID()
 {
-	// TODO Auto-generated destructor stub
+    // TODO Auto-generated destructor stub
 }
 
 double CowPID::Calculate(double input)
@@ -81,11 +81,11 @@ double CowPID::Calculate(double input)
 
 double CowPID::GetError()
 {
-	return m_error;
+    return m_error;
 }
 double CowPID::GetSetpoint()
 {
-	return m_setpoint;
+    return m_setpoint;
 }
 
 void CowPID::SetSetpoint(double setpoint)
@@ -122,23 +122,23 @@ void CowPID::Reset()
 
 bool CowPID::OnTarget(double tolerance)
 {
-	//double toleranceDelta = fabs(m_last_input - m_setpoint);
-	//std::cout << "Target: " << toleranceDelta << ", last in: " << m_last_input << " tolerance: " << tolerance << std::endl;
+    //double toleranceDelta = fabs(m_last_input - m_setpoint);
+    //std::cout << "Target: " << toleranceDelta << ", last in: " << m_last_input << " tolerance: " << tolerance << std::endl;
     return m_last_input != NAN && fabs(m_last_input - m_setpoint) < tolerance;
 }
 std::string CowPID::GetState()
 {
-	std::stringstream lStateStream;
+    std::stringstream lStateStream;
 
-	lStateStream << "Error: "
-				 << m_error
-				 << "\n";
-	return lStateStream.str();
+    lStateStream << "Error: "
+                 << m_error
+                 << "\n";
+    return lStateStream.str();
 }
 
 void CowPID::SetContinuous(bool continuous)
 {
-	m_continuous = continuous;
+    m_continuous = continuous;
 }
 
 void CowPID::SetInputRange(double min, double max)
@@ -160,17 +160,17 @@ void CowPID::ResetIntegrator() {
 
 void CowPID::UpdateConstants(double Kp, double Ki, double Kd, double Kf)
 {
-	m_P = Kp;
-	m_I = Ki;
-	m_D = Kd;
-	m_F = Kf;
+    m_P = Kp;
+    m_I = Ki;
+    m_D = Kd;
+    m_F = Kf;
 
-	ResetIntegrator();
+    ResetIntegrator();
 }
 
 void CowPID::UpdatePConstant(double Kp)
 {
-	m_P = Kp;
+    m_P = Kp;
 }
 
 } /* namespace CowLib */

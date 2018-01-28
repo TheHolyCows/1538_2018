@@ -17,18 +17,18 @@ namespace CowLib {
 
 class CowLogger {
 private:
-	std::thread *m_Thread;
-	static std::mutex m_Mutex;
-	static std::queue<std::pair<std::string, double>> m_BufferQueue;
-	static std::ofstream m_OutputFile;
-	static CowLogger* m_Instance;
+    std::thread *m_Thread;
+    static std::mutex m_Mutex;
+    static std::queue<std::pair<std::string, double>> m_BufferQueue;
+    static std::ofstream m_OutputFile;
+    static CowLogger* m_Instance;
 public:
-	CowLogger();
-	virtual ~CowLogger();
-	static void Log(std::string key, double value);
-	static CowLogger* GetInstance();
+    CowLogger();
+    virtual ~CowLogger();
+    static void Log(std::string key, double value);
+    static CowLogger* GetInstance();
 private:
-	static void Handle();
+    static void Handle();
 };
 
 } /* namespace CowLib */

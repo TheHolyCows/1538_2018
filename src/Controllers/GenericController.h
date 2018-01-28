@@ -10,10 +10,10 @@
 class CowRobot;
 
 class GenericController
-{	
+{    
 public:
-	virtual ~GenericController() {};
-	virtual void handle(CowRobot *bot) = 0;
+    virtual ~GenericController() {};
+    virtual void handle(CowRobot *bot) = 0;
 };
 
 #endif /* __GENERIC_CONTROLLER_H__ */

@@ -16,32 +16,32 @@ namespace CowLib {
 
 class CowPID {
 public:
-	CowPID(double Kp, double Ki, double Kd, double Kf);
-	virtual ~CowPID();
-	double Calculate(double input);
-	double GetError();
-	double GetSetpoint();
-	void SetSetpoint(double setpoint);
+    CowPID(double Kp, double Ki, double Kd, double Kf);
+    virtual ~CowPID();
+    double Calculate(double input);
+    double GetError();
+    double GetSetpoint();
+    void SetSetpoint(double setpoint);
 
-	void Reset();
-	bool OnTarget(double tolerance);
-	void ResetIntegrator();
-	std::string GetState();
+    void Reset();
+    bool OnTarget(double tolerance);
+    void ResetIntegrator();
+    std::string GetState();
 
-	void SetContinuous(bool continuous);
-	void SetInputRange(double min, double max);
-	void SetOutputRange(double min, double max);
+    void SetContinuous(bool continuous);
+    void SetInputRange(double min, double max);
+    void SetOutputRange(double min, double max);
 
-	void UpdateConstants(double Kp, double Ki, double Kd, double Kf);
-	void UpdatePConstant(double Kp);
+    void UpdateConstants(double Kp, double Ki, double Kd, double Kf);
+    void UpdatePConstant(double Kp);
 
 private:
-	CowPID();
+    CowPID();
 
     double m_P;            // factor for "proportional" control
     double m_I;            // factor for "integral" control
     double m_D;            // factor for "derivative" control
-	double m_F;			//factor for "feedforward"
+    double m_F;            //factor for "feedforward"
     double m_maximumOutput;    // |maximum output|
     double m_minimumOutput;    // |minimum output|
     double m_maximumInput;        // maximum input - limit setpoint to this

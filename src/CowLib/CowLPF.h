@@ -12,15 +12,15 @@ namespace CowLib {
 
 class CowLPF {
 private:
-	double m_LPFBeta;
-	double m_RawData;
-	double m_SmoothData;
-	CowLPF();
+    double m_LPFBeta;
+    double m_RawData;
+    double m_SmoothData;
+    CowLPF();
 public:
-	CowLPF(double beta);
-	double Calculate(double value);
-	void UpdateBeta(double beta);
-	virtual ~CowLPF();
+    CowLPF(double beta);
+    double Calculate(double value);
+    void UpdateBeta(double beta);
+    virtual ~CowLPF();
 };
 
 } /* namespace CowLib */

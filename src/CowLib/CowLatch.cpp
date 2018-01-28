@@ -11,35 +11,35 @@ namespace CowLib {
 
 CowLatch::CowLatch()
 :
-		m_State(false),
-		m_Latched(false)
+        m_State(false),
+        m_Latched(false)
 {
-	// TODO Auto-generated constructor stub
+    // TODO Auto-generated constructor stub
 }
 
 // Returns true if state has changed
 bool CowLatch::Latch(bool value)
 {
-	bool stateChanged = false;
-	if(!m_Latched && value)
-	{
-		m_State = value;
-		m_Latched = true;
-		stateChanged = true;
-	}
+    bool stateChanged = false;
+    if(!m_Latched && value)
+    {
+        m_State = value;
+        m_Latched = true;
+        stateChanged = true;
+    }
 
-	return stateChanged;
+    return stateChanged;
 }
 
 void CowLatch::ResetLatch()
 {
-	m_State = false;
-	m_Latched = false;
+    m_State = false;
+    m_Latched = false;
 }
 
 CowLatch::~CowLatch()
 {
-	// TODO Auto-generated destructor stub
+    // TODO Auto-generated destructor stub
 }
 
 } /* namespace CowLib */

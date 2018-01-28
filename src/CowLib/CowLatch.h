@@ -12,13 +12,13 @@ namespace CowLib {
 
 class CowLatch {
 private:
-	bool m_State;
-	bool m_Latched;
+    bool m_State;
+    bool m_Latched;
 public:
-	CowLatch();
-	bool Latch(bool value);
-	void ResetLatch();
-	virtual ~CowLatch();
+    CowLatch();
+    bool Latch(bool value);
+    void ResetLatch();
+    virtual ~CowLatch();
 };
 
 } /* namespace CowLib */

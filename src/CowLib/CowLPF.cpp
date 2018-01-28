@@ -11,9 +11,9 @@ namespace CowLib {
 
 CowLPF::CowLPF(double beta)
 :
-		m_LPFBeta(beta),
-		m_RawData(0),
-		m_SmoothData(0)
+        m_LPFBeta(beta),
+        m_RawData(0),
+        m_SmoothData(0)
 {
 }
 
@@ -27,13 +27,13 @@ double CowLPF::Calculate(double value)
 
 void CowLPF::UpdateBeta(double beta)
 {
-	m_RawData = 0;
-	m_SmoothData = 0;
-	m_LPFBeta = beta;
+    m_RawData = 0;
+    m_SmoothData = 0;
+    m_LPFBeta = beta;
 }
 
 CowLPF::~CowLPF() {
-	// TODO Auto-generated destructor stub
+    // TODO Auto-generated destructor stub
 }
 
 } /* namespace CowLib */
