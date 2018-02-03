@@ -8,14 +8,22 @@
 
 CowConstants *CowConstants::m_SingletonInstance = NULL;
 
-const std::string REGEX_COMMENT = "#[^\\n]*";
-const std::string REGEX_LEFT_BRACKET = "\\[";
-const std::string REGEX_RIGHT_BRACKET = "\\]";
-const std::string REGEX_EQUALS = "=";
-const std::string REGEX_SEMICOLON = ";";
-const std::string REGEX_VALUE = "-?[0-9]*\\.?[0-9]+";
-const std::string REGEX_KEY = "[A-Za-z0-9_-]+";
-const std::string REGEX_TOKENIZER = "(\\[|\\]|#[^\\n]*|=|;|-?[0-9]*\\.?[0-9]+|[A-Za-z0-9_-]+)";
+const static std::string REGEX_COMMENT = "#[^\\n]*";
+const static std::string REGEX_LEFT_BRACKET = "\\[";
+const static std::string REGEX_RIGHT_BRACKET = "\\]";
+const static std::string REGEX_EQUALS = "=";
+const static std::string REGEX_SEMICOLON = ";";
+const static std::string REGEX_VALUE = "-?[0-9]*\\.?[0-9]+";
+const static std::string REGEX_KEY = "[A-Za-z0-9_-]+";
+const static std::string REGEX_TOKENIZER = "(\\[|\\]|#[^\\n]*|=|;|-?[0-9]*\\.?[0-9]+|[A-Za-z0-9_-]+)";
+
+const static std::regex COMMENT{REGEX_COMMENT};
+const static std::regex LEFT_BRACKET{REGEX_LEFT_BRACKET};
+const static std::regex RIGHT_BRACKET{REGEX_RIGHT_BRACKET};
+const static std::regex EQUALS{REGEX_EQUALS};
+const static std::regex SEMICOLON{REGEX_SEMICOLON};
+const static std::regex VALUE{REGEX_VALUE};
+const static std::regex KEY{REGEX_KEY};
 
 CowConstants *CowConstants::GetInstance()
 {
@@ -91,43 +99,36 @@ void CowConstants::RestoreData(const char *filename)
     ParseINI(data);
 }
 
-CowConstants::CowConstantType CowConstants::GetConstantType(std::string token)
+CowConstants::CowConstantType CowConstants::GetConstantType(const std::string &token)
 {
-    std::regex comment{REGEX_COMMENT};
-    std::regex leftBracket{REGEX_LEFT_BRACKET};
-    std::regex rightBracket{REGEX_RIGHT_BRACKET};
-    std::regex equals{REGEX_EQUALS};
-    std::regex semicolon{REGEX_SEMICOLON};
-    std::regex value{REGEX_VALUE};
-    std::regex key{REGEX_KEY};
-
-    if(std::regex_match(token, comment))
-    {
-        return CONSTANT_TYPE_COMMENT;
-    }
-    else if(std::regex_match(token, leftBracket))
-    {
-        return CONSTANT_TYPE_LEFT_BRACKET;
-    }
-    else if(std::regex_match(token, rightBracket))
-    {
-        return CONSTANT_TYPE_RIGHT_BRACKET;
-    }
-    else if(std::regex_match(token, equals))
-    {
-        return CONSTANT_TYPE_EQUALS;
-    }
-    else if(std::regex_match(token, semicolon))
-    {
-        return CONSTANT_TYPE_SEMICOLON;
-    }
-    else if(std::regex_match(token, value))
+    // Sorted in order of most commonly seen pattern
+    if(std::regex_match(token, VALUE))
     {
         return CONSTANT_TYPE_NUMBER;
     }
-    else if(std::regex_match(token, key))
+    else if(std::regex_match(token, KEY))
     {
         return CONSTANT_TYPE_NAME;
+    }
+    else if(std::regex_match(token, EQUALS))
+    {
+        return CONSTANT_TYPE_EQUALS;
+    }
+    else if(std::regex_match(token, SEMICOLON))
+    {
+        return CONSTANT_TYPE_SEMICOLON;
+    }
+    else if(std::regex_match(token, LEFT_BRACKET))
+    {
+        return CONSTANT_TYPE_LEFT_BRACKET;
+    }
+    else if(std::regex_match(token, RIGHT_BRACKET))
+    {
+        return CONSTANT_TYPE_RIGHT_BRACKET;
+    }
+    if(std::regex_match(token, COMMENT))
+    {
+        return CONSTANT_TYPE_COMMENT;
     }
     else
     {
@@ -136,7 +137,7 @@ CowConstants::CowConstantType CowConstants::GetConstantType(std::string token)
     }
 }
 
-void CowConstants::Tokenize(std::string data, std::vector<CowConstants::CowConstantToken> *tokens)
+void CowConstants::Tokenize(const std::string &data, std::vector<CowConstants::CowConstantToken> &tokens)
 {
     std::regex r{REGEX_TOKENIZER};
 
@@ -156,11 +157,11 @@ void CowConstants::Tokenize(std::string data, std::vector<CowConstants::CowConst
         }
 
         token.value = *it;
-        tokens->push_back(token);
+        tokens.push_back(token);
     }
 }
 
-void CowConstants::ParseINI(std::string data)
+void CowConstants::ParseINI(const std::string &data)
 {
     char robotName[256] = {0};
     gethostname(robotName, 256);
@@ -169,7 +170,7 @@ void CowConstants::ParseINI(std::string data)
 
     // Token container
     std::vector<CowConstants::CowConstantToken> tokens;
-    Tokenize(data, &tokens);
+    Tokenize(data, tokens);
 
     char *currentSection = NULL;
     

@@ -51,9 +51,9 @@ private:
     static CowConstants *m_SingletonInstance;
     
     void GrammarError(const char *expectedTokenDescription, std::string value, std::string receivedToken);
-    void ParseINI(std::string data);
-    CowConstants::CowConstantType GetConstantType(std::string token);
-    void Tokenize(std::string data, std::vector<CowConstants::CowConstantToken> *tokens);
+    void ParseINI(const std::string &data);
+    CowConstants::CowConstantType GetConstantType(const std::string &token);
+    void Tokenize(const std::string &data, std::vector<CowConstants::CowConstantToken> &tokens);
     
     CowConstants();
 public:
