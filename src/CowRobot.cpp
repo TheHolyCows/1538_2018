@@ -24,6 +24,9 @@ CowRobot::CowRobot()
     m_RightDriveB->SetNeutralMode(CowLib::CowMotorController::BRAKE);
     m_RightDriveC->SetNeutralMode(CowLib::CowMotorController::BRAKE);
 
+    m_Arm = new Arm(3);
+    m_Intake = new Intake(5, 4);
+
     m_DriveEncoderRight = new Encoder(MXP_QEI_5_A, MXP_QEI_5_B, false, Encoder::k1X);
     m_DriveEncoderRight->SetDistancePerPulse(0.03054323611111); // 6*pi/360
 
@@ -53,6 +56,7 @@ CowRobot::CowRobot()
 void CowRobot::Reset()
 {
     ResetEncoders();
+    m_Arm->ResetConstants();
 
     m_PreviousGyroError = 0;
     m_PreviousDriveError = 0;
@@ -96,6 +100,16 @@ void CowRobot::handle()
 
     SetLeftMotors(tmpLeftMotor);
     SetRightMotors(tmpRightMotor);
+
+    if(m_Arm)
+    {
+    	m_Arm->handle();
+    }
+
+    if(m_Intake)
+    {
+    	m_Intake->handle();
+    }
 
     if(m_DSUpdateCount % 10 == 0)
     {
@@ -260,8 +274,8 @@ void CowRobot::DriveSpeedTurn(float speed, float turn, bool quickTurn)
     turn = -turn;
     
 
-    float left_power = CowLib::LimitMix(speed + turn);
-    float right_power = CowLib::LimitMix(speed - turn);
+    float left_power = CowLib::LimitMix(-speed - turn);
+    float right_power = CowLib::LimitMix(-speed + turn);
 
     DriveLeftRight(left_power, right_power);
 }

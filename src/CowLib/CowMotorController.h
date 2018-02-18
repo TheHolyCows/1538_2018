@@ -36,6 +36,8 @@ namespace CowLib
         enum CowNeutralMode GetNeutralMode();
         void SetControlMode(CowControlMode);
         enum CowControlMode GetControlMode();
+        float GetPosition();
+        void SetPIDGains(float pGain, float iGain, float dGain, float fGain);
         void Set(float);
     private:
         TalonSRX *m_MotorController;

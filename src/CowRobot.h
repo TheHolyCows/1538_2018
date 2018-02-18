@@ -15,6 +15,8 @@
 #include "CowLib/CowAlphaNum.h"
 #include "CowGyro.h"
 #include "CowLib/CowMotorController.h"
+#include "Subsystems/Arm.h"
+#include "Subsystems/Intake.h"
 
 class CowRobot
 {
@@ -32,6 +34,9 @@ private:
     CowLib::CowMotorController *m_RightDriveB;
     CowLib::CowMotorController *m_RightDriveC;
     
+    Arm *m_Arm;
+    Intake *m_Intake;
+
     CowLib::CowGyro *m_Gyro;
     Encoder *m_DriveEncoder;
     Encoder *m_DriveEncoderLeft;
@@ -107,6 +112,16 @@ public:
     {
         m_DriveEncoderLeft->Reset();
         m_DriveEncoderRight->Reset();
+    }
+
+    Arm* GetArm()
+    {
+    	return m_Arm;
+    }
+
+    Intake* GetIntake()
+    {
+    	return m_Intake;
     }
 
     void handle();

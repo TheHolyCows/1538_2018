@@ -87,8 +87,7 @@ void CowBase::DisabledPeriodic()
             AutoModes::GetInstance()->NextMode();
         }
     }
-
-//    m_Bot->GetGearIntake()->DisabledCalibration();
+    m_Bot->GetArm()->DisabledCalibration();
 //    m_Bot->PrintToDS();
 }
 void CowBase::AutonomousPeriodic()

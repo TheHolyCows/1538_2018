@@ -81,6 +81,18 @@ namespace CowLib
         return m_CowControlMode;
     }
 
+    float CowMotorController::GetPosition()
+    {
+    	return m_MotorController->GetSelectedSensorPosition(0);
+    }
+    void CowMotorController::SetPIDGains(float pGain, float iGain, float dGain, float fGain)
+    {
+    	m_MotorController->Config_kP(0, pGain, 100);
+    	m_MotorController->Config_kI(0, iGain, 100);
+    	m_MotorController->Config_kD(0, dGain, 100);
+    	m_MotorController->Config_kF(0, fGain, 100);
+    }
+
     void CowMotorController::Set(float value)
     {
         m_MotorController->Set(TranslateControlMode(GetControlMode()), value);

@@ -20,5 +20,29 @@ void OperatorController::handle(CowRobot *bot)
                             m_CB->GetSteeringX(),
                             m_CB->GetSteeringButton(FAST_TURN));
     }
+
+    if(m_CB->GetOperatorButton(8))
+    {
+    	bot->GetArm()->SetPosition(CONSTANT("ARM_DOWN"));
+    }
+    else
+    {
+    	bot->GetArm()->SetPosition(CONSTANT("ARM_UP"));
+    }
+
+    if(m_CB->GetOperatorButton(7))
+    {
+    	bot->GetIntake()->SetSpeed(1);
+    }
+    else if(m_CB->GetOperatorButton(4))
+    {
+    	bot->GetIntake()->SetSpeed(-1);
+    }
+    else
+    {
+    	bot->GetIntake()->SetSpeed(0);
+    }
+
+
 }
 
