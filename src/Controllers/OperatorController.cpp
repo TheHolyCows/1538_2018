@@ -37,16 +37,16 @@ void OperatorController::handle(CowRobot *bot)
     if(m_CB->GetOperatorButton(4))
     {
     		//Exhaust
-    		bot->GetArm()->SetIntakeSpeed(1);
+    		bot->GetArm()->SetIntakeSpeed(CONSTANT("INTAKE_EXHAUST"));
     }
     else if(m_CB->GetOperatorButton(7))
     {
     		//Intake
-    		bot->GetArm()->SetIntakeSpeed(-1);
+    		bot->GetArm()->SetModulatedSpeed(CONSTANT("INTAKE_SPEED"));
     }
     else
     {
-    		bot->GetArm()->SetIntakeSpeed(-0.05);
+    		bot->GetArm()->SetIntakeSpeed(CONSTANT("STATIC_INTAKE_SPEED"));
     }
 
     //bot->GetElevator()->SetSpeed(m_CB->GetOperatorGamepadAxis(1));

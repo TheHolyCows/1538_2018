@@ -16,11 +16,13 @@ public:
 	virtual ~Intake();
 	void handle();
 	void SetSpeed(float speed);
+	void SetSpeed(float speedLeft, float speedRight);
 
 private:
 	CowLib::CowMotorController *m_MotorRight;
 	CowLib::CowMotorController *m_MotorLeft;
-	float m_Speed;
+	float m_SpeedLeft;
+	float m_SpeedRight;
 
 };
 

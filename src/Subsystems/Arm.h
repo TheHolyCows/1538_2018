@@ -12,6 +12,7 @@
 #include "../CowConstants.h"
 #include "Intake.h"
 #include <WPILib.h>
+#include <Timer.h>
 
 
 
@@ -22,6 +23,7 @@ public:
 	void DisabledCalibration();
 	void ResetConstants();
 	void handle();
+	void SetModulatedSpeed(float speed);
 	void SetIntakeSpeed(float speed);
 
 
@@ -41,6 +43,8 @@ private:
 	float m_PlanetaryHardstop;
 	bool m_AutoScore;
 	float m_AutoScoreTime;
+
+	int m_IntakeModulation;
 };
 
 #endif /* SRC_SUBSYSTEMS_ARM_H_ */

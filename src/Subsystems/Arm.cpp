@@ -20,6 +20,8 @@ Arm::Arm(int motorController)
     m_Intake = new Intake(5, 4);
     m_AutoScore = false;
     m_AutoScoreTime = 0;
+
+    m_IntakeModulation = 0;
 }
 
 void Arm::SetPosition(float position)
@@ -74,6 +76,24 @@ void Arm::handle()
     }
     SmartDashboard::PutNumber("Arm", (m_Motor->GetPosition()-m_PlanetaryHardstop));
 	//std::cout << "Current arm_w/hardstop: " << m_Motor->GetPosition()-m_PlanetaryHardstop << std::endl;
+}
+
+void Arm::SetModulatedSpeed(float speed)
+{
+	if(!m_AutoScore)
+	{
+		m_IntakeModulation ++;
+
+		if(m_IntakeModulation % (int)CONSTANT("INTAKE_MODULATION") == 0)
+		{
+			m_IntakeModulation = 0;
+			m_Intake->SetSpeed(-speed*CONSTANT("INTAKE_MODULATION_LEFT") , -speed*CONSTANT("INTAKE_MODULATION_RIGHT"));
+		}
+		else
+		{
+			m_Intake->SetSpeed(speed);
+		}
+	}
 }
 
 void Arm::SetIntakeSpeed(float speed)
