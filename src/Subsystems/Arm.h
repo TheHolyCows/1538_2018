@@ -10,6 +10,8 @@
 
 #include "../CowLib/CowMotorController.h"
 #include "../CowConstants.h"
+#include "Intake.h"
+#include <WPILib.h>
 
 
 
@@ -20,12 +22,25 @@ public:
 	void DisabledCalibration();
 	void ResetConstants();
 	void handle();
+	void SetIntakeSpeed(float speed);
+
+
+	Intake* GetIntake()
+	{
+		return m_Intake;
+	}
+
+	void ScoreForward();
+//	void ScoreReverse();
 	virtual ~Arm();
 
 private:
 	CowLib::CowMotorController *m_Motor;
+	Intake* m_Intake;
 	float m_Position;
 	float m_PlanetaryHardstop;
+	bool m_AutoScore;
+	float m_AutoScoreTime;
 };
 
 #endif /* SRC_SUBSYSTEMS_ARM_H_ */

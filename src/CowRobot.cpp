@@ -25,9 +25,9 @@ CowRobot::CowRobot()
     m_RightDriveC->SetNeutralMode(CowLib::CowMotorController::BRAKE);
 
     m_Arm = new Arm(3);
-    m_Intake = new Intake(5, 4);
+    m_Elevator = new Elevator (6, 7, MXP_QEI_5_A, MXP_QEI_5_B);
 
-    m_DriveEncoderRight = new Encoder(MXP_QEI_5_A, MXP_QEI_5_B, false, Encoder::k1X);
+    m_DriveEncoderRight = new Encoder(MXP_QEI_3_A, MXP_QEI_3_B, false, Encoder::k1X);
     m_DriveEncoderRight->SetDistancePerPulse(0.03054323611111); // 6*pi/360
 
     m_DriveEncoderLeft = new Encoder(MXP_QEI_4_A, MXP_QEI_4_B, true, Encoder::k1X);
@@ -57,6 +57,7 @@ void CowRobot::Reset()
 {
     ResetEncoders();
     m_Arm->ResetConstants();
+    m_Elevator->ResetConstants();
 
     m_PreviousGyroError = 0;
     m_PreviousDriveError = 0;
@@ -103,12 +104,12 @@ void CowRobot::handle()
 
     if(m_Arm)
     {
-    	m_Arm->handle();
+    		m_Arm->handle();
     }
 
-    if(m_Intake)
+    if(m_Elevator)
     {
-    	m_Intake->handle();
+    		m_Elevator->handle();
     }
 
     if(m_DSUpdateCount % 10 == 0)
@@ -261,13 +262,13 @@ void CowRobot::DriveSpeedTurn(float speed, float turn, bool quickTurn)
         }
         else
         {
-            sensitivity = 0.75;
+            sensitivity = 0.9;
         }
 
     }
     else
     {
-        sensitivity = 0.22;
+        sensitivity = 0.35;
     }
 
     turn *= sensitivity;

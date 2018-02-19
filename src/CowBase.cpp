@@ -84,7 +84,7 @@ void CowBase::DisabledPeriodic()
         if(m_ControlBoard->GetDriveButton(1))
         {
             m_Bot->Reset();
-            AutoModes::GetInstance()->NextMode();
+            //AutoModes::GetInstance()->NextMode();
         }
     }
     m_Bot->GetArm()->DisabledCalibration();

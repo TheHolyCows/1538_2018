@@ -21,27 +21,51 @@ void OperatorController::handle(CowRobot *bot)
                             m_CB->GetSteeringButton(FAST_TURN));
     }
 
-    if(m_CB->GetOperatorButton(8))
+    if(m_CB->GetOperatorButton(6))
     {
-    	bot->GetArm()->SetPosition(CONSTANT("ARM_DOWN"));
+    		bot->GetArm()->SetPosition(CONSTANT("ARM_DOWN"));
+    }
+    if(m_CB->GetOperatorButton(9))
+    {
+    		bot->GetArm()->SetPosition(CONSTANT("ARM_UP"));
+    }
+    if(m_CB->GetOperatorButton(5))
+    	{
+    		bot->GetArm()->ScoreForward();
+    	}
+
+    if(m_CB->GetOperatorButton(4))
+    {
+    		//Exhaust
+    		bot->GetArm()->SetIntakeSpeed(1);
+    }
+    else if(m_CB->GetOperatorButton(7))
+    {
+    		//Intake
+    		bot->GetArm()->SetIntakeSpeed(-1);
     }
     else
     {
-    	bot->GetArm()->SetPosition(CONSTANT("ARM_UP"));
+    		bot->GetArm()->SetIntakeSpeed(-0.05);
     }
 
-    if(m_CB->GetOperatorButton(7))
+    //bot->GetElevator()->SetSpeed(m_CB->GetOperatorGamepadAxis(1));
+
+    if(m_CB->GetSteeringButton(4))
     {
-    	bot->GetIntake()->SetSpeed(1);
+    		//do something to go to the scale
+    		bot->GetElevator()->SetPosition(CONSTANT("ELEVATOR_SCALE"));
     }
-    else if(m_CB->GetOperatorButton(4))
+    else if(m_CB->GetSteeringButton(1))
     {
-    	bot->GetIntake()->SetSpeed(-1);
+    		//go to switch
+    		bot->GetElevator()->SetPosition(CONSTANT("ELEVATOR_SWITCH"));
     }
-    else
-    {
-    	bot->GetIntake()->SetSpeed(0);
-    }
+    else if(m_CB->GetSteeringButton(2))
+    	{
+    		//go to ground
+    		bot->GetElevator()->SetPosition(CONSTANT("ELEVATOR_GROUND"));
+    	}
 
 
 }

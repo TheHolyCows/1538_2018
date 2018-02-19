@@ -17,6 +17,7 @@
 #include "CowLib/CowMotorController.h"
 #include "Subsystems/Arm.h"
 #include "Subsystems/Intake.h"
+#include "Subsystems/Elevator.h"
 
 class CowRobot
 {
@@ -36,6 +37,7 @@ private:
     
     Arm *m_Arm;
     Intake *m_Intake;
+    Elevator *m_Elevator;
 
     CowLib::CowGyro *m_Gyro;
     Encoder *m_DriveEncoder;
@@ -116,12 +118,17 @@ public:
 
     Arm* GetArm()
     {
-    	return m_Arm;
+    		return m_Arm;
     }
 
     Intake* GetIntake()
     {
-    	return m_Intake;
+    		return GetArm()->GetIntake();
+    }
+
+    Elevator* GetElevator()
+    {
+    		return m_Elevator;
     }
 
     void handle();
