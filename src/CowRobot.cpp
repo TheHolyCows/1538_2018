@@ -29,10 +29,10 @@ CowRobot::CowRobot()
 
     m_Arm->SetElevatorInstance(m_Elevator);
 
-    m_DriveEncoderRight = new Encoder(MXP_QEI_3_A, MXP_QEI_3_B, false, Encoder::k1X);
+    m_DriveEncoderRight = new Encoder(MXP_QEI_3_A, MXP_QEI_3_B, true, Encoder::k1X);
     m_DriveEncoderRight->SetDistancePerPulse(0.03054323611111); // 6*pi/360
 
-    m_DriveEncoderLeft = new Encoder(MXP_QEI_4_A, MXP_QEI_4_B, true, Encoder::k1X);
+    m_DriveEncoderLeft = new Encoder(MXP_QEI_4_A, MXP_QEI_4_B, false, Encoder::k1X);
     m_DriveEncoderLeft->SetDistancePerPulse(0.03054323611111); // 6*pi/360
 
     m_DriveEncoder = m_DriveEncoderRight;
@@ -103,6 +103,27 @@ void CowRobot::handle()
 
     SetLeftMotors(tmpLeftMotor);
     SetRightMotors(tmpRightMotor);
+
+    if(m_Elevator->GetDistance()>40)
+    {
+        m_LeftDriveA->SetNeutralMode(CowLib::CowMotorController::COAST);
+        m_LeftDriveB->SetNeutralMode(CowLib::CowMotorController::COAST);
+        m_LeftDriveC->SetNeutralMode(CowLib::CowMotorController::COAST);
+
+        m_RightDriveA->SetNeutralMode(CowLib::CowMotorController::COAST);
+        m_RightDriveB->SetNeutralMode(CowLib::CowMotorController::COAST);
+        m_RightDriveC->SetNeutralMode(CowLib::CowMotorController::COAST);
+    }
+    else
+    {
+        m_LeftDriveA->SetNeutralMode(CowLib::CowMotorController::BRAKE);
+        m_LeftDriveB->SetNeutralMode(CowLib::CowMotorController::BRAKE);
+        m_LeftDriveC->SetNeutralMode(CowLib::CowMotorController::BRAKE);
+
+        m_RightDriveA->SetNeutralMode(CowLib::CowMotorController::BRAKE);
+        m_RightDriveB->SetNeutralMode(CowLib::CowMotorController::BRAKE);
+        m_RightDriveC->SetNeutralMode(CowLib::CowMotorController::BRAKE);
+    }
 
     if(m_Arm)
     {
@@ -201,7 +222,7 @@ bool CowRobot::DriveWithHeading(double heading, double speed)
 {
     double PID_P = CONSTANT("TURN_P");
     double PID_D = CONSTANT("TURN_D");
-    double error = heading - m_Gyro->GetAngle();
+    double error = m_Gyro->GetAngle() - heading;
     double dError = error - m_PreviousGyroError;
     double output = PID_P*error + PID_D*dError;
 
