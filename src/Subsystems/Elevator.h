@@ -19,6 +19,7 @@ public:
 	void handle();
 	void SetSpeed(float speed);
 	void SetPosition(float position);
+	float GetDistance();
 	void ResetConstants();
 private:
 	CowLib::CowMotorController *m_MotorRight;

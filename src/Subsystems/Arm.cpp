@@ -18,10 +18,16 @@ Arm::Arm(int motorController)
 	m_PlanetaryHardstop = 0;
 
     m_Intake = new Intake(5, 4);
-    m_AutoScore = false;
-    m_AutoScoreTime = 0;
+    m_AutoScoreForward = false;
+    m_AutoScoreForwardTime = 0;
 
     m_IntakeModulation = 0;
+
+	m_Elevator = NULL;
+
+	m_AutoScoreReverse = false;
+	m_AutoScoreReverseTime = 0;
+
 }
 
 void Arm::SetPosition(float position)
@@ -49,7 +55,7 @@ void Arm::handle()
 {
 	float tempCalibratedPosition = m_Position+m_PlanetaryHardstop;
 	float normalizedPosition = m_Motor->GetPosition()-m_PlanetaryHardstop;
-	float autoScoreError = fabs(-normalizedPosition + m_Position);
+
 	if(m_Motor)
 	{
 		m_Motor->Set(tempCalibratedPosition);
@@ -60,19 +66,41 @@ void Arm::handle()
     		m_Intake->handle();
     }
 
-    if(m_AutoScore)
+    if(m_AutoScoreForward)
     {
     		if(fabs(-normalizedPosition + m_Position) < CONSTANT("ARM_AUTO_ERROR"))
     		{
-    			float autoTime = Timer::GetFPGATimestamp() - m_AutoScoreTime;
+    			float autoTime = Timer::GetFPGATimestamp() - m_AutoScoreForwardTime;
     			m_Intake->SetSpeed(CONSTANT("AUTO_SCORE_EXHAUST"));
 
-    			if(autoTime > 0.5)
+    			if(autoTime > 0.6)
     			{
-    				m_AutoScore = false;
+    				m_AutoScoreForward = false;
+    				m_Elevator->SetPosition(CONSTANT("ELEVATOR_GROUND"));
+    			}
+    			else if(autoTime > 0.5)
+    			{
     				SetPosition(CONSTANT("ARM_UP"));
     			}
     		}
+    }
+    if(m_AutoScoreReverse)
+    {
+		if(fabs(-normalizedPosition + m_Position) < CONSTANT("ARM_AUTO_ERROR"))
+		{
+			float autoTime = Timer::GetFPGATimestamp() - m_AutoScoreReverseTime;
+			m_Intake->SetSpeed(CONSTANT("AUTO_SCORE_EXHAUST"));
+
+			if(autoTime > 0.6)
+			{
+				m_AutoScoreReverse = false;
+				m_Elevator->SetPosition(CONSTANT("ELEVATOR_GROUND"));
+			}
+			else if(autoTime > 0.5)
+			{
+				SetPosition(CONSTANT("ARM_UP"));
+			}
+		}
     }
     SmartDashboard::PutNumber("Arm", (m_Motor->GetPosition()-m_PlanetaryHardstop));
 	//std::cout << "Current arm_w/hardstop: " << m_Motor->GetPosition()-m_PlanetaryHardstop << std::endl;
@@ -80,7 +108,7 @@ void Arm::handle()
 
 void Arm::SetModulatedSpeed(float speed)
 {
-	if(!m_AutoScore)
+	if(!m_AutoScoreForward && !m_AutoScoreReverse)
 	{
 		m_IntakeModulation ++;
 
@@ -98,17 +126,28 @@ void Arm::SetModulatedSpeed(float speed)
 
 void Arm::SetIntakeSpeed(float speed)
 {
-	if(!m_AutoScore)
+	if(!m_AutoScoreForward && !m_AutoScoreReverse)
 	{
 		m_Intake->SetSpeed(speed);
 	}
 }
 
+
 void Arm::ScoreForward()
 {
 	SetPosition(CONSTANT("ARM_POS_SCORE_FWD"));
-	m_AutoScoreTime = Timer::GetFPGATimestamp();
-	m_AutoScore = true;
+	m_AutoScoreForwardTime = Timer::GetFPGATimestamp();
+	m_AutoScoreForward = true;
+}
+
+void Arm::ScoreReverse()
+{
+	if(m_Elevator->GetDistance() > CONSTANT("ELV_POS_SCORE_REV"))
+	{
+		SetPosition(CONSTANT("ARM_POS_SCORE_REV"));
+		m_AutoScoreReverseTime = Timer::GetFPGATimestamp();
+		m_AutoScoreReverse = true;
+	}
 }
 
 

@@ -13,6 +13,7 @@
 #include "Intake.h"
 #include <WPILib.h>
 #include <Timer.h>
+#include "Elevator.h"
 
 
 
@@ -27,13 +28,19 @@ public:
 	void SetIntakeSpeed(float speed);
 
 
+
 	Intake* GetIntake()
 	{
 		return m_Intake;
 	}
 
+	void SetElevatorInstance(Elevator* elevator)
+	{
+		m_Elevator = elevator;
+	}
+
 	void ScoreForward();
-//	void ScoreReverse();
+	void ScoreReverse();
 	virtual ~Arm();
 
 private:
@@ -41,10 +48,14 @@ private:
 	Intake* m_Intake;
 	float m_Position;
 	float m_PlanetaryHardstop;
-	bool m_AutoScore;
-	float m_AutoScoreTime;
+	bool m_AutoScoreForward;
+	float m_AutoScoreForwardTime;
+	bool m_AutoScoreReverse;
+	float m_AutoScoreReverseTime;
 
 	int m_IntakeModulation;
+
+	Elevator *m_Elevator;
 };
 
 #endif /* SRC_SUBSYSTEMS_ARM_H_ */

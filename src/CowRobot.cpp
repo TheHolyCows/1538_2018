@@ -27,6 +27,8 @@ CowRobot::CowRobot()
     m_Arm = new Arm(3);
     m_Elevator = new Elevator (6, 7, MXP_QEI_5_A, MXP_QEI_5_B);
 
+    m_Arm->SetElevatorInstance(m_Elevator);
+
     m_DriveEncoderRight = new Encoder(MXP_QEI_3_A, MXP_QEI_3_B, false, Encoder::k1X);
     m_DriveEncoderRight->SetDistancePerPulse(0.03054323611111); // 6*pi/360
 

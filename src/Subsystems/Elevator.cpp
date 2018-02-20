@@ -35,6 +35,11 @@ void Elevator::SetPosition(float position)
 	m_PID->SetSetpoint(m_Position);
 }
 
+float Elevator::GetDistance()
+{
+	return m_Encoder->GetDistance();
+}
+
 void Elevator::ResetConstants()
 {
 	m_PID->UpdateConstants(CONSTANT("ELEVATOR_P"), CONSTANT("ELEVATOR_I"), CONSTANT("ELEVATOR_D"), 0);

@@ -24,6 +24,7 @@ void OperatorController::handle(CowRobot *bot)
     if(m_CB->GetOperatorButton(6))
     {
     		bot->GetArm()->SetPosition(CONSTANT("ARM_DOWN"));
+
     }
     if(m_CB->GetOperatorButton(9))
     {
@@ -31,7 +32,15 @@ void OperatorController::handle(CowRobot *bot)
     }
     if(m_CB->GetOperatorButton(5))
     	{
-    		bot->GetArm()->ScoreForward();
+    		if(m_CB->GetOperatorButton(8))
+    		{
+    			bot->GetArm()->ScoreReverse();
+    		}
+    		else
+    		{
+        		bot->GetArm()->ScoreForward();
+    		}
+
     	}
 
     if(m_CB->GetOperatorButton(4))
