@@ -29,6 +29,8 @@ void Intake::SetSpeed(float speedLeft, float speedRight)
 
 void Intake::handle()
 {
+	SmartDashboard::PutNumber("Intake Motor Voltage Left", m_MotorLeft->GetInternalMotor()->GetMotorOutputVoltage());
+	SmartDashboard::PutNumber("Intake Motor Voltage Right", m_MotorRight->GetInternalMotor()->GetMotorOutputVoltage());
 	m_MotorRight->Set(-m_SpeedRight);
 	m_MotorLeft->Set(m_SpeedLeft);
 }

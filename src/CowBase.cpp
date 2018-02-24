@@ -34,6 +34,7 @@ void CowBase::RobotInit()
 void CowBase::DisabledInit()
 {
     CowConstants::GetInstance()->RestoreData();
+    m_Bot->GetGyro()->ResetAngle();
     m_Bot->GetGyro()->BeginCalibration();
     m_Bot->Reset();
 }
@@ -42,7 +43,7 @@ void CowBase::AutonomousInit()
 {
     m_Bot->GetGyro()->FinalizeCalibration();
     m_Bot->GetGyro()->ResetAngle();
-    //m_AutoController->SetCommandList(AutoModes::GetInstance()->GetCommandList());
+    m_AutoController->SetCommandList(AutoModes::GetInstance()->GetCommandList());
     m_Bot->SetController(m_AutoController);
     m_Bot->Reset();
 }
@@ -84,7 +85,7 @@ void CowBase::DisabledPeriodic()
         if(m_ControlBoard->GetDriveButton(1))
         {
             m_Bot->Reset();
-            //AutoModes::GetInstance()->NextMode();
+            AutoModes::GetInstance()->NextMode();
         }
     }
     m_Bot->GetArm()->DisabledCalibration();

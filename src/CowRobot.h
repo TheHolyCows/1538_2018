@@ -18,6 +18,8 @@
 #include "Subsystems/Arm.h"
 #include "Subsystems/Intake.h"
 #include "Subsystems/Elevator.h"
+#include "CowLib/CowLPF.h"
+
 
 class CowRobot
 {
@@ -61,6 +63,13 @@ private:
     void SetLeftMotors(float val);
     void SetRightMotors(float val);
 
+    Accelerometer *m_Accelerometer;
+
+    CowLib::CowLPF *m_AccelY_LPF;
+
+    float m_TipTime;
+    bool m_Tipping;
+
 public:
     CowRobot();
     void Reset();
@@ -79,6 +88,8 @@ public:
     void QuickTurn(float turn);
     
     void StartTime();
+
+
 
     CowLib::CowAlphaNum *GetDisplay()
     {

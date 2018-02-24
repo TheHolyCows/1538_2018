@@ -1,5 +1,6 @@
 #include "CowRobot.h"
 #include "CowBase.h"
+#include <iostream>
 
 CowRobot::CowRobot()
 {    
@@ -29,11 +30,11 @@ CowRobot::CowRobot()
 
     m_Arm->SetElevatorInstance(m_Elevator);
 
-    m_DriveEncoderRight = new Encoder(MXP_QEI_3_A, MXP_QEI_3_B, true, Encoder::k1X);
-    m_DriveEncoderRight->SetDistancePerPulse(0.03054323611111); // 6*pi/360
+    m_DriveEncoderRight = new Encoder(MXP_QEI_3_A, MXP_QEI_3_B, false, Encoder::k1X);
+    m_DriveEncoderRight->SetDistancePerPulse(0.052359916666667); // 6*pi/360
 
-    m_DriveEncoderLeft = new Encoder(MXP_QEI_4_A, MXP_QEI_4_B, false, Encoder::k1X);
-    m_DriveEncoderLeft->SetDistancePerPulse(0.03054323611111); // 6*pi/360
+    m_DriveEncoderLeft = new Encoder(MXP_QEI_4_A, MXP_QEI_4_B, true, Encoder::k1X);
+    m_DriveEncoderLeft->SetDistancePerPulse(0.052359916666667); // 6*pi/360
 
     m_DriveEncoder = m_DriveEncoderRight;
 
@@ -53,6 +54,11 @@ CowRobot::CowRobot()
     
     m_PreviousGyroError = 0;
     m_PreviousDriveError = 0;
+
+    m_Accelerometer = new BuiltInAccelerometer(Accelerometer::kRange_4G);
+    m_AccelY_LPF = new CowLib::CowLPF(CONSTANT("TIP_LPF"));
+    m_TipTime = 0;
+    m_Tipping = false;
 }
 
 void CowRobot::Reset()
@@ -67,6 +73,7 @@ void CowRobot::Reset()
     m_LeftDriveValue = 0;
     m_RightDriveValue = 0;
     m_MatchTime = 0;
+    m_AccelY_LPF->UpdateBeta(CONSTANT("TIP_LPF"));
 }
 
 void CowRobot::SetController(GenericController *controller)
@@ -103,6 +110,34 @@ void CowRobot::handle()
 
     SetLeftMotors(tmpLeftMotor);
     SetRightMotors(tmpRightMotor);
+
+    float elevatorLpf = m_AccelY_LPF->Calculate(m_Accelerometer->GetY());
+
+
+    if((fabs (elevatorLpf) > CONSTANT("ELEVATOR_TIP" )))
+    {
+    		if (!m_Tipping)
+    		{
+    			m_Tipping = true;
+    			m_TipTime = Timer::GetFPGATimestamp();
+    		}
+
+    		float tipTime = Timer::GetFPGATimestamp() - m_TipTime;
+
+    		if(tipTime > CONSTANT("TIP_TIME"))
+    		{
+    	        SmartDashboard::PutNumber("Put Elevator Down", 1);
+    	        m_Elevator->SetPosition(CONSTANT("ELEVATOR_GROUND"));
+    	        m_Tipping = false;
+    	        m_TipTime = 0;
+    		}
+    }
+    else
+    {
+    		SmartDashboard::PutNumber("Put Elevator Down", 0);
+	    m_Tipping = false;
+	    m_TipTime = 0;
+    }
 
     if(m_Elevator->GetDistance()>40)
     {
@@ -152,10 +187,11 @@ void CowRobot::handle()
 
     //std::cout << "start time: " << m_StartTime << " match time: " << m_MatchTime << std::endl;
 
+
     SmartDashboard::PutNumber("Drive distance", GetDriveDistance());
-    SmartDashboard::PutNumber("lEnc", (int)m_DriveEncoderLeft);
-    SmartDashboard::PutNumber("rEnc", (int)m_DriveEncoderRight);
-    SmartDashboard::PutNumber("enc", (int)m_DriveEncoder);
+    SmartDashboard::PutNumber("lEnc", m_DriveEncoderLeft->GetDistance());
+    SmartDashboard::PutNumber("rEnc", m_DriveEncoderRight->GetDistance());
+    SmartDashboard::PutNumber("yAxis", elevatorLpf);
 
     m_DSUpdateCount++;
 }
@@ -191,7 +227,7 @@ bool CowRobot::DriveDistanceWithHeading(double heading, double distance, double 
     double output = PID_P*error + PID_D*dError;
     
     double throttle = CowLib::LimitMix(output, speed);
-    throttle *= -1;
+    //throttle *= -1;
     //std::cout << "Drive request speed: " << throttle << std::endl;
 
     bool headingResult = DriveWithHeading(heading, throttle);
@@ -205,7 +241,7 @@ bool CowRobot::TurnToHeading(double heading)
 {
     double PID_P = CONSTANT("TURN_P");
     double PID_D = CONSTANT("TURN_D");
-    double error = heading - m_Gyro->GetAngle();
+    double error = m_Gyro->GetAngle() - heading;
     double dError = error - m_PreviousGyroError;
     double output = PID_P*error + PID_D*dError;
 

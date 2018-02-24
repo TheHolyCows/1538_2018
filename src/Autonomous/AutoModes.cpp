@@ -15,9 +15,18 @@ AutoModes *AutoModes::GetInstance()
 AutoModes::AutoModes()
 {    
     // Set up our selection order
-//    m_Modes["Nothing"];
-//    m_Modes["Nothing"].push_back(RobotCommand(CMD_WAIT, 0, 0, 0, true, 0));
-//
+    m_Modes["Nothing"];
+    m_Modes["Nothing"].push_back(RobotCommand(CMD_WAIT, 0, 0, 0, 0));
+
+    m_Modes["Curve Right"];
+    m_Modes["Curve Right"].push_back(RobotCommand(CMD_RIGHT_ENCODER, 0, 0, 0, 0.01));
+    m_Modes["Curve Right"].push_back(RobotCommand(CMD_DRIVE_DISTANCE, -30, 0, -0.375, 2));
+    m_Modes["Curve Right"].push_back(RobotCommand(CMD_DRIVE_DISTANCE, -80, 70, -0.375, 2));
+    m_Modes["Curve Right"].push_back(RobotCommand(CMD_DRIVE_DISTANCE, -130, 70, -0.375, 2));
+    m_Modes["Curve Right"].push_back(RobotCommand(CMD_DRIVE_DISTANCE, -180, 0, -0.375, 2));
+
+
+
 //    m_Modes["Gear Straight - Left"];
 //    m_Modes["Gear Straight - Left"].push_back(RobotCommand(CMD_RIGHT_ENCODER, 0, 0, 0, true, 0.01));
 //    m_Modes["Gear Straight - Left"].push_back(RobotCommand(CMD_HOLD_DISTANCE, 80, 0, 0.375, true, 2));

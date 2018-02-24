@@ -39,6 +39,7 @@ namespace CowLib
         float GetPosition();
         void SetPIDGains(float pGain, float iGain, float dGain, float fGain);
         void Set(float);
+        TalonSRX *GetInternalMotor();
     private:
         TalonSRX *m_MotorController;
         int m_DeviceNum;

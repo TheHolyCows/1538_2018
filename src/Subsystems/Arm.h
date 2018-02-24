@@ -56,6 +56,7 @@ private:
 	int m_IntakeModulation;
 
 	Elevator *m_Elevator;
+	bool m_StartingConfigSet;
 };
 
 #endif /* SRC_SUBSYSTEMS_ARM_H_ */

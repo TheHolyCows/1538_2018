@@ -28,6 +28,7 @@ Arm::Arm(int motorController)
 	m_AutoScoreReverse = false;
 	m_AutoScoreReverseTime = 0;
 
+	m_StartingConfigSet = false;
 }
 
 void Arm::SetPosition(float position)
@@ -55,6 +56,36 @@ void Arm::handle()
 {
 	float tempCalibratedPosition = m_Position+m_PlanetaryHardstop;
 	float normalizedPosition = m_Motor->GetPosition()-m_PlanetaryHardstop;
+
+	//TODO: Make sure we move this -600 number into a constant
+
+	//Only let this happen if the arm is pointing below the ground position
+	//And we haven't ever done this before
+	if(normalizedPosition < -600 && !m_StartingConfigSet)
+	{
+		if(m_Elevator->GetDistance() > 20)
+		{
+			//Enable Arm PID
+			m_Motor->SetControlMode(CowLib::CowMotorController::POSITION);
+		}
+		else
+		{
+			//Ensure the Arm PID is disabled and we're outputting 0 volts
+			m_Motor->SetControlMode(CowLib::CowMotorController::VOLTAGE);
+			m_Motor->Set(0);
+		}
+	}
+	else if(!m_StartingConfigSet)
+	{
+		if(normalizedPosition > -530)
+		{
+			//Make sure we never make it into here ever again
+			m_StartingConfigSet = true;
+
+			//Move the elevator carriage to the ground
+			m_Elevator->SetPosition(CONSTANT("ELEVATOR_GROUND"));
+		}
+	}
 
 	if(m_Motor)
 	{

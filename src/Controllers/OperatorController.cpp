@@ -11,8 +11,8 @@ void OperatorController::handle(CowRobot *bot)
 {
     if(m_CB->GetDriveButton(1))
     {
-        //bot->TurnToHeading(90);
-        bot->DriveDistanceWithHeading(0, 12, 0.5);
+        bot->TurnToHeading(90);
+        //bot->DriveDistanceWithHeading(0, 12, 0.5);
     }
     else
     {

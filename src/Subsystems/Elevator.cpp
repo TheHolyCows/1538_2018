@@ -17,7 +17,8 @@ Elevator::Elevator(int motorRight, int motorLeft, int encoderA, int encoderB)
 	m_Encoder = new Encoder(encoderA, encoderB, false, Encoder::k1X);
 	m_Encoder->SetDistancePerPulse(0.019);
 	m_PID = new CowLib::CowPID(CONSTANT("ELEVATOR_P"), CONSTANT("ELEVATOR_I"), CONSTANT("ELEVATOR_D"), 0);
-	m_Position = 0;
+	m_Position = 25;
+	m_PID->SetSetpoint(m_Position);
 }
 
 void Elevator::SetSpeed(float speed)

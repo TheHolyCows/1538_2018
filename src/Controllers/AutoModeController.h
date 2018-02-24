@@ -41,7 +41,7 @@ public:
     
     RobotCommand(e_RobotCommand cmd,
             double encoder, double heading,
-                 double speed, bool arm, double timeout) :
+                 double speed, double timeout) :
         m_Command(cmd),
         m_EncoderCount(encoder),
         m_Heading(heading),
