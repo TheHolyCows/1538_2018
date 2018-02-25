@@ -48,21 +48,75 @@ void AutoModeController::handle(CowRobot *bot)
             result = bot->TurnToHeading(m_CurrentCommand.m_Heading);
             break;
         }
+        case CMD_TURN_INTAKE:
+        {
+            result = bot->TurnToHeading(m_CurrentCommand.m_Heading);
+            bot->GetArm()->SetModulatedSpeed(CONSTANT("INTAKE_SPEED"));
+
+            break;
+        }
         case CMD_HOLD_DISTANCE:
         {
             bot->DriveDistanceWithHeading(m_CurrentCommand.m_Heading, m_CurrentCommand.m_EncoderCount, m_CurrentCommand.m_Speed);
+            bot->GetElevator()->SetPosition(m_CurrentCommand.m_ElevatorPos);
+            bot->GetArm()->SetIntakeSpeed(-0.2);
+
             result = false;
             break;
         }
+        case CMD_HOLD_DISTANCE_INTAKE:
+        {
+            bot->DriveDistanceWithHeading(m_CurrentCommand.m_Heading, m_CurrentCommand.m_EncoderCount, m_CurrentCommand.m_Speed);
+            bot->GetElevator()->SetPosition(m_CurrentCommand.m_ElevatorPos);
+            bot->GetArm()->SetPosition(CONSTANT("ARM_DOWN"));
+            bot->GetArm()->SetModulatedSpeed(CONSTANT("INTAKE_SPEED"));
+
+            result = false;
+            break;
+        }
+        case CMD_ARM_UP:
+        {
+            bot->GetArm()->SetPosition(CONSTANT("ARM_UP"));
+            bot->GetArm()->SetIntakeSpeed(-0.6);
+
+            result = false;
+            break;
+        }
+        case CMD_ARM_DOWN:
+        {
+            bot->GetArm()->SetPosition(CONSTANT("ARM_DOWN"));
+            bot->GetArm()->SetIntakeSpeed(-0.2);
+
+            result = false;
+            break;
+        }
+
         case CMD_DRIVE_DISTANCE:
         {
             bot->DriveWithHeading(m_CurrentCommand.m_Heading, m_CurrentCommand.m_Speed);
+            bot->GetElevator()->SetPosition(m_CurrentCommand.m_ElevatorPos);
+            bot->GetArm()->SetIntakeSpeed(-0.2);
+
             if(bot->GetDriveDistance()  > fabs(m_CurrentCommand.m_EncoderCount))
             {
             		result = true;
             }
             break;
         }
+        case CMD_AUTO_FWD:
+		{
+            bot->DriveWithHeading(m_CurrentCommand.m_Heading, m_CurrentCommand.m_Speed);
+            bot->GetElevator()->SetPosition(m_CurrentCommand.m_ElevatorPos);
+            bot->GetArm()->ScoreForward();
+            break;
+		}
+        case CMD_AUTO_REV:
+		{
+            bot->DriveWithHeading(m_CurrentCommand.m_Heading, m_CurrentCommand.m_Speed);
+            bot->GetElevator()->SetPosition(m_CurrentCommand.m_ElevatorPos);
+            bot->GetArm()->ScoreReverse();
+            break;
+		}
 
         case CMD_LEFT_ENCODER:
         {

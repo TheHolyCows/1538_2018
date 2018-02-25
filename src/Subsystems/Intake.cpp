@@ -13,6 +13,8 @@ Intake::Intake(int motorRight, int motorLeft)
 {
 	m_MotorRight = new CowLib::CowMotorController(motorRight);
 	m_MotorLeft = new CowLib::CowMotorController(motorLeft);
+	m_SpeedRight = -0.2;
+	m_SpeedLeft = -0.2;
 }
 
 void Intake::SetSpeed(float speed)
