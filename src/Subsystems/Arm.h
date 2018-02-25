@@ -21,6 +21,7 @@ class Arm {
 public:
 	Arm(int motorController);
 	void SetPosition(float position);
+	float GetSetpoint();
 	void DisabledCalibration();
 	void ResetConstants();
 	void handle();

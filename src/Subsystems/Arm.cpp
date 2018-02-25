@@ -33,7 +33,26 @@ Arm::Arm(int motorController)
 
 void Arm::SetPosition(float position)
 {
+	if(position < CONSTANT("ARM_DOWN"))
+	{
+		position = CONSTANT("ARM_DOWN");
+	}
+
+	if(position > CONSTANT("ARM_POS_SCORE_REV") && (m_Elevator->GetDistance() > CONSTANT("ELV_POS_SCORE_REV")))
+	{
+		position = CONSTANT("ARM_POS_SCORE_REV");
+	}
+
+	if(position > CONSTANT("ARM_POS_SCORE_REV") && !(m_Elevator->GetDistance() > CONSTANT("ELV_POS_SCORE_REV")))
+	{
+		position = CONSTANT("ARM_UP");
+	}
 	m_Position = position;
+}
+
+float Arm::GetSetpoint()
+{
+	return m_Position;
 }
 
 void Arm::ResetConstants()

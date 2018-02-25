@@ -30,6 +30,11 @@ void OperatorController::handle(CowRobot *bot)
     {
     		bot->GetArm()->SetPosition(CONSTANT("ARM_UP"));
     }
+
+    float armJoystickDeadband = CowLib::Deadband(m_CB->GetOperatorGamepadAxis(1), 0.2);
+    float manualArmPosition = bot->GetArm()->GetSetpoint() + (armJoystickDeadband * 20);
+    bot->GetArm()->SetPosition(manualArmPosition);
+
     if(m_CB->GetOperatorButton(5))
     	{
     		if(m_CB->GetOperatorButton(8))
@@ -46,7 +51,14 @@ void OperatorController::handle(CowRobot *bot)
     if(m_CB->GetOperatorButton(4))
     {
     		//Exhaust
-    		bot->GetArm()->SetIntakeSpeed(CONSTANT("INTAKE_EXHAUST"));
+    		if(m_CB->GetOperatorButton(10))
+    		{
+    			bot->GetArm()->SetIntakeSpeed(CONSTANT("INTAKE_EXHAUST_LOW"));
+    		}
+    		else
+    		{
+    			bot->GetArm()->SetIntakeSpeed(CONSTANT("INTAKE_EXHAUST"));
+    		}
     }
     else if(m_CB->GetOperatorButton(7))
     {
