@@ -18,33 +18,71 @@ AutoModes::AutoModes()
     m_Modes["Nothing"];
     m_Modes["Nothing"].push_back(RobotCommand(CMD_WAIT, 0, 0, 0, CONSTANT("ELEVATOR_SCALE"), 0));
 
-    m_Modes["Curve Right"];
-    m_Modes["Curve Right"].push_back(RobotCommand(CMD_RIGHT_ENCODER, 0, 0, 0, 25, 0.01));
-    m_Modes["Curve Right"].push_back(RobotCommand(CMD_DRIVE_DISTANCE, 15, 0, 0.875, 25, 2));
-    m_Modes["Curve Right"].push_back(RobotCommand(CMD_DRIVE_DISTANCE, 142, 55, 0.875, 0, 2));
+    m_Modes["Double Scale Right"];
+    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_RIGHT_ENCODER, 0, 0, 0, 25, 0.01));
+    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_DRIVE_DISTANCE, 15, 0, 0.875, 25, 2));
+    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_DRIVE_DISTANCE, 142, 55, 0.875, 0, 2));
     //We should be next to the switch?
 
-    m_Modes["Curve Right"].push_back(RobotCommand(CMD_DRIVE_DISTANCE, 209, 0, 0.875, 0, 2));
-    m_Modes["Curve Right"].push_back(RobotCommand(CMD_DRIVE_DISTANCE, 250, -20, 0.5, 0, 2));
-    m_Modes["Curve Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, 338, -20, 0.3, CONSTANT("ELEVATOR_SCALE"), 2));
-    m_Modes["Curve Right"].push_back(RobotCommand(CMD_AUTO_FWD, 338, -20, 0.3, CONSTANT("ELEVATOR_SCALE"), 0.25));
-    m_Modes["Curve Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, 342, -20, 0.2, CONSTANT("ELEVATOR_SCALE"), 0.5));
-    m_Modes["Curve Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, 325, -20, 0.4, 0, 0.6));
-    m_Modes["Curve Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, 325, -20, 0.4, 0, 0.3));
-    m_Modes["Curve Right"].push_back(RobotCommand(CMD_TURN, 0, -90, -0.4, 0, 0.5));
-    m_Modes["Curve Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, 16, -90, 0.4, 0, 0.5));
-    m_Modes["Curve Right"].push_back(RobotCommand(CMD_TURN, 0, -180, -0.4, 0, 0.8));
-    m_Modes["Curve Right"].push_back(RobotCommand(CMD_ARM_DOWN, 0, -180, -0.4, 0, 0.3));
-    m_Modes["Curve Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE_INTAKE, 20, -180, 0.6, 0, 0.7));
-    m_Modes["Curve Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE_INTAKE, 10, -180, 0.6, 0, 0.5));
-    m_Modes["Curve Right"].push_back(RobotCommand(CMD_ARM_UP, 0, -180, -0.4, 0, 0.01));
-    m_Modes["Curve Right"].push_back(RobotCommand(CMD_TURN, 0, -165, -0.4, 0, 0.8));
-    m_Modes["Curve Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, -60, -165, 0.4, CONSTANT("ELEVATOR_SCALE"), 0.8));
-    m_Modes["Curve Right"].push_back(RobotCommand(CMD_TURN, 0, -200, -0.4, CONSTANT("ELEVATOR_SCALE"), 0.375));
-    m_Modes["Curve Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, -35, -200, 0.4, CONSTANT("ELEVATOR_SCALE"), 1));
-    m_Modes["Curve Right"].push_back(RobotCommand(CMD_AUTO_REV, 0, -200, 0.3, CONSTANT("ELEVATOR_SCALE"), 0.25));
-    m_Modes["Curve Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, -35, -200, 0.4, CONSTANT("ELEVATOR_SCALE"), 1));
-    m_Modes["Curve Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, -35, -200, 0.4, 0, 0.5));
+    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_DRIVE_DISTANCE, 209, 0, 0.875, 0, 2));
+    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_DRIVE_DISTANCE, 250, -20, 0.5, 0, 2));
+    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, 338, -20, 0.3, CONSTANT("ELEVATOR_SCALE"), 2));
+    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_AUTO_FWD, 338, -20, 0.3, CONSTANT("ELEVATOR_SCALE"), 0.25));
+    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, 342, -20, 0.2, CONSTANT("ELEVATOR_SCALE"), 0.5));
+    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, 325, -20, 0.4, 0, 0.6));
+    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, 325, -20, 0.4, 0, 0.3));
+    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_TURN, 0, -90, -0.4, 0, 0.5));
+    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, 16, -90, 0.4, 0, 0.5));
+    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_TURN, 0, -180, -0.4, 0, 0.8));
+    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_ARM_DOWN, 0, -180, -0.4, 0, 0.3));
+    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE_INTAKE, 20, -180, 0.6, 0, 0.7));
+    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE_INTAKE, 10, -180, 0.6, 0, 0.5));
+    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_ARM_UP, 0, -180, -0.4, 0, 0.01));
+    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_TURN, 0, -165, -0.4, 0, 0.375));
+    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, -60, -165, 0.4, CONSTANT("ELEVATOR_SCALE"), 0.5));
+    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_TURN, 0, -200, -0.4, CONSTANT("ELEVATOR_SCALE"), 0.375));
+    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, -35, -200, 0.4, CONSTANT("ELEVATOR_SCALE"), 1));
+    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_AUTO_REV, 0, -200, 0.3, CONSTANT("ELEVATOR_SCALE"), 0.25));
+    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, -35, -200, 0.4, CONSTANT("ELEVATOR_SCALE"), 1));
+    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, -35, -200, 0.4, 0, 0.5));
+
+    m_Modes["Double Scale Left"];
+      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_LEFT_ENCODER, 0, 0, 0, 25, 0.05));
+      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_DRIVE_DISTANCE, 15, 0, 0.875, 25, 2));
+      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_DRIVE_DISTANCE, 142, -65, 0.875, 0, 2));
+      //We should be next to the switch?
+
+      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_DRIVE_DISTANCE, 209, 0, 0.875, 0, 2));
+      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_DRIVE_DISTANCE, 250, 20, 0.5, 0, 2));
+      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_HOLD_DISTANCE, 357, 20, 0.3, CONSTANT("ELEVATOR_SCALE"), 2));
+      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_AUTO_FWD, 357, 20, 0.3, CONSTANT("ELEVATOR_SCALE"), 0.25));
+      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_HOLD_DISTANCE, 342, 20, 0.2, CONSTANT("ELEVATOR_SCALE"), 0.5));
+      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_HOLD_DISTANCE, 318, 20, 0.4, 0, 0.6));
+      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_TURN, 0, 130, 0.4, 0, 0.75));
+      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_ARM_DOWN, 0, 130, 0.4, 0, 0.3));
+      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_HOLD_DISTANCE_INTAKE, 24, 130, 0.6, 0, 1));
+
+
+      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_HOLD_DISTANCE, -30, 160, 0.4, 0, 1));
+      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_HOLD_DISTANCE, -35, 180, 0.4, 0, 1));
+      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_HOLD_DISTANCE, -35, 200, 0.4, CONSTANT("ELEVATOR_SCALE"), 1));
+      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_AUTO_REV, -35, 200,0.3, CONSTANT("ELEVATOR_SCALE"), 0.25));
+      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_HOLD_DISTANCE, -35, 200, 0.4, CONSTANT("ELEVATOR_SCALE"), 0.5));
+      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_HOLD_DISTANCE, -35, 200, 0.4, 0, 0.5));
+
+
+//      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_TURN, 0, -180, -0.4, 0, 0.8));
+//      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_ARM_DOWN, 0, -180, -0.4, 0, 0.3));
+//      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_HOLD_DISTANCE_INTAKE, 20, -180, 0.6, 0, 0.7));
+//      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_HOLD_DISTANCE_INTAKE, 10, -180, 0.6, 0, 0.5));
+//      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_ARM_UP, 0, -180, -0.4, 0, 0.01));
+//      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_TURN, 0, -165, -0.4, 0, 0.8));
+//      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_HOLD_DISTANCE, -60, -165, 0.4, CONSTANT("ELEVATOR_SCALE"), 0.8));
+//      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_TURN, 0, -200, -0.4, CONSTANT("ELEVATOR_SCALE"), 0.375));
+//      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_HOLD_DISTANCE, -35, -200, 0.4, CONSTANT("ELEVATOR_SCALE"), 1));
+//      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_AUTO_REV, 0, -200, 0.3, CONSTANT("ELEVATOR_SCALE"), 0.25));
+//      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_HOLD_DISTANCE, -35, -200, 0.4, CONSTANT("ELEVATOR_SCALE"), 1));
+//      m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_HOLD_DISTANCE, -35, -200, 0.4, 0, 0.5));
 
 
 
@@ -53,21 +91,21 @@ AutoModes::AutoModes()
 
 
 
-//    m_Modes["Curve Right"].push_back(RobotCommand(CMD_DRIVE_DISTANCE, 25, -100, 0.4, 0, 1.5));
-//    m_Modes["Curve Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, 40, -180, 0.4, 0, 1.5));
-//    m_Modes["Curve Right"].push_back(RobotCommand(CMD_ARM_DOWN, 0, -100, -0.4, 0, 0.01));
-//    m_Modes["Curve Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE_INTAKE, 62, -180, 0.4, 0, 1.5));
+//    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_DRIVE_DISTANCE, 25, -100, 0.4, 0, 1.5));
+//    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, 40, -180, 0.4, 0, 1.5));
+//    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_ARM_DOWN, 0, -100, -0.4, 0, 0.01));
+//    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE_INTAKE, 62, -180, 0.4, 0, 1.5));
 
 
 
 //put this after the turn to -130
-//    m_Modes["Curve Right"].push_back(RobotCommand(CMD_ARM_DOWN, 0, -130, -0.4, 0, 0.01));
-//    m_Modes["Curve Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE_INTAKE, 25, -130, 0.4, 0, 1.5));
-//    m_Modes["Curve Right"].push_back(RobotCommand(CMD_TURN_INTAKE, 25, -170, 0.4, 0, 0.5));
-//    m_Modes["Curve Right"].push_back(RobotCommand(CMD_TURN_INTAKE, 25, -130, 0.4, 0, 0.5));
-//    m_Modes["Curve Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, -10, -130, 0.4, 0, 2));
-//    m_Modes["Curve Right"].push_back(RobotCommand(CMD_ARM_UP, 0, -130, -0.4, 0, 0.01));
-//    m_Modes["Curve Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, -25, -190, 0.4, 0, 2));
+//    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_ARM_DOWN, 0, -130, -0.4, 0, 0.01));
+//    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE_INTAKE, 25, -130, 0.4, 0, 1.5));
+//    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_TURN_INTAKE, 25, -170, 0.4, 0, 0.5));
+//    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_TURN_INTAKE, 25, -130, 0.4, 0, 0.5));
+//    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, -10, -130, 0.4, 0, 2));
+//    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_ARM_UP, 0, -130, -0.4, 0, 0.01));
+//    m_Modes["Double Scale Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, -25, -190, 0.4, 0, 2));
 
 
 

@@ -59,7 +59,7 @@ void Elevator::handle()
 	m_MotorRight->Set(-pidOutput);
 	m_MotorLeft->Set(pidOutput);
 
-	std::cout << "Current elevator: " << currentPosition << " PID: " << pidOutput << std::endl;
+	//std::cout << "Current elevator: " << currentPosition << " PID: " << pidOutput << std::endl;
 }
 
 

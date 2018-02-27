@@ -124,6 +124,7 @@ void AutoModeController::handle(CowRobot *bot)
 
             bot->UseLeftEncoder();
             bot->ResetEncoders();
+            result = true;
             break;
         }
         case CMD_RIGHT_ENCODER:
@@ -132,6 +133,8 @@ void AutoModeController::handle(CowRobot *bot)
 
             bot->UseRightEncoder();
             bot->ResetEncoders();
+            result = true;
+
             break;
         }
         default:

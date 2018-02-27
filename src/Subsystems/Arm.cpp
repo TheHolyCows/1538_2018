@@ -121,7 +121,7 @@ void Arm::handle()
     		if(fabs(-normalizedPosition + m_Position) < CONSTANT("ARM_AUTO_ERROR"))
     		{
     			float autoTime = Timer::GetFPGATimestamp() - m_AutoScoreForwardTime;
-    			m_Intake->SetSpeed(CONSTANT("AUTO_SCORE_EXHAUST"));
+    			m_Intake->SetSpeed(CONSTANT("AUTO_SCORE_FWD_EXHAUST"));
 
     			if(autoTime > 0.6)
     			{
@@ -139,7 +139,7 @@ void Arm::handle()
 		if(fabs(-normalizedPosition + m_Position) < CONSTANT("ARM_AUTO_ERROR"))
 		{
 			float autoTime = Timer::GetFPGATimestamp() - m_AutoScoreReverseTime;
-			m_Intake->SetSpeed(CONSTANT("AUTO_SCORE_EXHAUST"));
+			m_Intake->SetSpeed(CONSTANT("AUTO_SCORE_REV_EXHAUST"));
 
 			if(autoTime > 0.6)
 			{
@@ -181,7 +181,6 @@ void Arm::SetIntakeSpeed(float speed)
 		m_Intake->SetSpeed(speed);
 	}
 }
-
 
 void Arm::ScoreForward()
 {
