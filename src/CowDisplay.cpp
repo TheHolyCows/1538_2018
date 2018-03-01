@@ -66,7 +66,7 @@ void CowDisplay::DisplayUpdateState()
             if (m_UserStatePeriodicCount == 50)
             {
                 char volt[64];
-                sprintf(volt, "%.2f ", m_Bot->GetGyro()->GetAngle());
+                sprintf(volt, "%.2f ", m_Bot->GetGyro()->GetRate());
                 std::string msg(volt);
                 msg = msg + " ";
                 alphaNumLED->SetBanner(msg);

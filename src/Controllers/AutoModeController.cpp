@@ -76,6 +76,7 @@ void AutoModeController::handle(CowRobot *bot)
         }
         case CMD_ARM_UP:
         {
+            bot->DriveLeftRight(0, 0);
             bot->GetArm()->SetPosition(CONSTANT("ARM_UP"));
             bot->GetArm()->SetIntakeSpeed(-0.6);
 
@@ -84,6 +85,7 @@ void AutoModeController::handle(CowRobot *bot)
         }
         case CMD_ARM_DOWN:
         {
+            bot->DriveLeftRight(0, 0);
             bot->GetArm()->SetPosition(CONSTANT("ARM_DOWN"));
             bot->GetArm()->SetIntakeSpeed(-0.2);
 

@@ -38,7 +38,7 @@ void OperatorController::handle(CowRobot *bot)
     }
 
     float armJoystickDeadband = CowLib::Deadband(m_CB->GetOperatorGamepadAxis(1), 0.2);
-    float manualArmPosition = bot->GetArm()->GetSetpoint() + (armJoystickDeadband * 20);
+    float manualArmPosition = bot->GetArm()->GetSetpoint() + (armJoystickDeadband * 28);
     bot->GetArm()->SetPosition(manualArmPosition);
 
     if(m_CB->GetOperatorButton(5))
