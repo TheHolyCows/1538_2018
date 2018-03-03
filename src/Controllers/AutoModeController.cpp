@@ -123,19 +123,17 @@ void AutoModeController::handle(CowRobot *bot)
         case CMD_LEFT_ENCODER:
         {
             std::cout << "Using the left encoder" << std::endl;
-
+            doNothing(bot);
             bot->UseLeftEncoder();
             bot->ResetEncoders();
-            result = true;
             break;
         }
         case CMD_RIGHT_ENCODER:
         {
             std::cout << "Using the right encoder" << std::endl;
-
+            doNothing(bot);
             bot->UseRightEncoder();
             bot->ResetEncoders();
-            result = true;
 
             break;
         }
