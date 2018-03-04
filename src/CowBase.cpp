@@ -1,4 +1,7 @@
 #include "CowBase.h"
+#include "CowGameData.h"
+
+#include <iostream>
 
 CowBase::CowBase()
     :
@@ -41,12 +44,43 @@ void CowBase::DisabledInit()
 
 void CowBase::AutonomousInit()
 {
+    CowGameData::GetInstance()->DetermineOwnership();
     m_Bot->GetGyro()->FinalizeCalibration();
     m_Bot->GetGyro()->ResetAngle();
-    m_AutoController->SetCommandList(AutoModes::GetInstance()->GetCommandList());
+
+    if(CowGameData::GetInstance()->GetScaleOwnership() == CowGameData::SCALE_LEFT)
+    {
+        std::cout << "scale:left" << std::endl;
+    }
+    else if(CowGameData::GetInstance()->GetScaleOwnership() == CowGameData::SCALE_RIGHT)
+    {
+        std::cout << "scale:right" << std::endl;
+    }
+    else
+    {
+        std::cout << "scale:invalid" << std::endl;
+    }
+
+    if(CowGameData::GetInstance()->GetSwitchOwnership() == CowGameData::SWITCH_LEFT)
+    {
+        std::cout << "switch:left" << std::endl;
+    }
+    else if(CowGameData::GetInstance()->GetSwitchOwnership() == CowGameData::SWITCH_RIGHT)
+    {
+        std::cout << "switch:right" << std::endl;
+    }
+    else
+    {
+        std::cout << "switch:invalid" << std::endl;
+    }
+
+    m_AutoController->SetCommandList(AutoModes::GetInstance()->GetCommandList(
+                                        CowGameData::GetInstance()->GetScaleOwnership(),
+                                        CowGameData::GetInstance()->GetSwitchOwnership()));
     m_Bot->SetController(m_AutoController);
     m_Bot->Reset();
 }
+
 void CowBase::TeleopInit()
 {
     m_Bot->StartTime();
@@ -85,16 +119,22 @@ void CowBase::DisabledPeriodic()
         if(m_ControlBoard->GetDriveButton(1))
         {
             m_Bot->Reset();
+
+            /*
+             * POSITION FIRST_OWNERSHIP SECOND_OWNERSHIP DRIVE
+             */
             AutoModes::GetInstance()->NextMode();
         }
     }
     m_Bot->GetArm()->DisabledCalibration();
 //    m_Bot->PrintToDS();
 }
+
 void CowBase::AutonomousPeriodic()
 {
     m_Bot->handle();
 }
+
 void CowBase::TeleopPeriodic()
 {
     m_Bot->handle();
