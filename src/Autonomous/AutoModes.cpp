@@ -51,7 +51,7 @@ AutoModes::AutoModes()
 	m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_DRIVE_DISTANCE, 209, 0, 0.875, 0, 2));
 	m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_DRIVE_DISTANCE, 250, 20, 0.5, 0, 2));
 	m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_HOLD_DISTANCE, 365, 20, 0.3, CONSTANT("ELEVATOR_SCALE"), 2.3));
-	m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_AUTO_FWD, 365, 20, 0.3, CONSTANT("ELEVATOR_SCALE"), 0.25));
+	m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_AUTO_FWD_LOW, 365, 20, 0.3, CONSTANT("ELEVATOR_SCALE"), 0.25));
 	m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_HOLD_DISTANCE, 365, 20, 0.2, CONSTANT("ELEVATOR_SCALE"), 0.5));
 	m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_HOLD_DISTANCE, 318, 20, 0.4, 0, 0.6));
 	m_Modes["Double Scale Left"].push_back(RobotCommand(CMD_HOLD_DISTANCE, 300, -90, 0.4, 0, 0.6));
@@ -97,7 +97,7 @@ AutoModes::AutoModes()
 	m_Modes["Scale Switch Left Right"].push_back(RobotCommand(CMD_DRIVE_DISTANCE, 250, 20, 0.5, 0, 2));
 	// We edited the Hold Distance command below us to aim better for the AUTOSCORE, change all others if good
 	m_Modes["Scale Switch Left Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, 365, 20, 0.4, CONSTANT("ELEVATOR_SCALE"), 1.875));
-	m_Modes["Scale Switch Left Right"].push_back(RobotCommand(CMD_AUTO_FWD, 365, 20, 0.4, CONSTANT("ELEVATOR_SCALE"), 0.2));
+	m_Modes["Scale Switch Left Right"].push_back(RobotCommand(CMD_AUTO_FWD_LOW, 365, 20, 0.4, CONSTANT("ELEVATOR_SCALE"), 0.2));
 	m_Modes["Scale Switch Left Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, 365, 20, 0.2, CONSTANT("ELEVATOR_SCALE"), 0.5));
 	m_Modes["Scale Switch Left Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, 318, 20, 0.4, 0, 0.6));
 	m_Modes["Scale Switch Left Right"].push_back(RobotCommand(CMD_HOLD_DISTANCE, 300, -90, 0.4, 0, 0.6));

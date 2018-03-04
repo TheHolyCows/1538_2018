@@ -105,18 +105,25 @@ void AutoModeController::handle(CowRobot *bot)
             }
             break;
         }
+        case CMD_AUTO_FWD_LOW:
+		{
+            bot->DriveWithHeading(m_CurrentCommand.m_Heading, m_CurrentCommand.m_Speed);
+            bot->GetElevator()->SetPosition(m_CurrentCommand.m_ElevatorPos);
+            bot->GetArm()->ScoreForward(CONSTANT("AUTO_SCORE_FWD_EXHAUST_LOW"));
+            break;
+		}
         case CMD_AUTO_FWD:
 		{
             bot->DriveWithHeading(m_CurrentCommand.m_Heading, m_CurrentCommand.m_Speed);
             bot->GetElevator()->SetPosition(m_CurrentCommand.m_ElevatorPos);
-            bot->GetArm()->ScoreForward();
+            bot->GetArm()->ScoreForward(CONSTANT("AUTO_SCORE_FWD_EXHAUST"));
             break;
 		}
         case CMD_AUTO_REV:
 		{
             bot->DriveWithHeading(m_CurrentCommand.m_Heading, m_CurrentCommand.m_Speed);
             bot->GetElevator()->SetPosition(m_CurrentCommand.m_ElevatorPos);
-            bot->GetArm()->ScoreReverse();
+            bot->GetArm()->ScoreReverse(CONSTANT("AUTO_SCORE_REV_EXHAUST"));
             break;
 		}
 

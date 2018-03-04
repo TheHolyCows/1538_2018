@@ -29,6 +29,8 @@ Arm::Arm(int motorController)
 	m_AutoScoreReverseTime = 0;
 
 	m_StartingConfigSet = false;
+
+	m_AutoScoreSpeed = 0;
 }
 
 void Arm::SetPosition(float position)
@@ -121,7 +123,7 @@ void Arm::handle()
     		if(fabs(-normalizedPosition + m_Position) < CONSTANT("ARM_AUTO_ERROR"))
     		{
     			float autoTime = Timer::GetFPGATimestamp() - m_AutoScoreForwardTime;
-    			m_Intake->SetSpeed(CONSTANT("AUTO_SCORE_FWD_EXHAUST"));
+    			m_Intake->SetSpeed(m_AutoScoreSpeed);
 
     			if(autoTime > 0.6)
     			{
@@ -139,7 +141,7 @@ void Arm::handle()
 		if(fabs(-normalizedPosition + m_Position) < CONSTANT("ARM_AUTO_ERROR"))
 		{
 			float autoTime = Timer::GetFPGATimestamp() - m_AutoScoreReverseTime;
-			m_Intake->SetSpeed(CONSTANT("AUTO_SCORE_REV_EXHAUST"));
+			m_Intake->SetSpeed(m_AutoScoreSpeed);
 
 			if(autoTime > 0.6)
 			{
@@ -182,20 +184,23 @@ void Arm::SetIntakeSpeed(float speed)
 	}
 }
 
-void Arm::ScoreForward()
+void Arm::ScoreForward(double autoSpeed)
 {
 	SetPosition(CONSTANT("ARM_POS_SCORE_FWD"));
 	m_AutoScoreForwardTime = Timer::GetFPGATimestamp();
 	m_AutoScoreForward = true;
+	m_AutoScoreSpeed = autoSpeed;
 }
 
-void Arm::ScoreReverse()
+void Arm::ScoreReverse(double autoSpeed)
 {
 	if(m_Elevator->GetDistance() > CONSTANT("ELV_POS_SCORE_REV"))
 	{
 		SetPosition(CONSTANT("ARM_POS_SCORE_REV"));
 		m_AutoScoreReverseTime = Timer::GetFPGATimestamp();
 		m_AutoScoreReverse = true;
+		m_AutoScoreSpeed = autoSpeed;
+
 	}
 }
 

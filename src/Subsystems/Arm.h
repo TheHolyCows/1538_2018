@@ -40,8 +40,8 @@ public:
 		m_Elevator = elevator;
 	}
 
-	void ScoreForward();
-	void ScoreReverse();
+	void ScoreForward(double autoSpeed);
+	void ScoreReverse(double autoSpeed);
 	virtual ~Arm();
 
 private:
@@ -53,6 +53,7 @@ private:
 	float m_AutoScoreForwardTime;
 	bool m_AutoScoreReverse;
 	float m_AutoScoreReverseTime;
+	float m_AutoScoreSpeed;
 
 	int m_IntakeModulation;
 

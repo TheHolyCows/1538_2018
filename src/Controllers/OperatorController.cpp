@@ -45,11 +45,11 @@ void OperatorController::handle(CowRobot *bot)
     	{
     		if(m_CB->GetOperatorButton(8))
     		{
-    			bot->GetArm()->ScoreReverse();
+    			bot->GetArm()->ScoreReverse(CONSTANT("AUTO_SCORE_REV_EXHAUST"));
     		}
     		else
     		{
-        		bot->GetArm()->ScoreForward();
+        		bot->GetArm()->ScoreForward(CONSTANT("AUTO_SCORE_FWD_EXHAUST"));
     		}
 
     	}
