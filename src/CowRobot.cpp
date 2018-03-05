@@ -30,6 +30,9 @@ CowRobot::CowRobot()
 
     m_Arm->SetElevatorInstance(m_Elevator);
 
+    m_Ramps = new Ramps (11, 12, 0);
+
+
     m_DriveEncoderRight = new Encoder(MXP_QEI_3_A, MXP_QEI_3_B, false, Encoder::k1X);
     m_DriveEncoderRight->SetDistancePerPulse(0.052359916666667); // 6*pi/360
 
@@ -168,6 +171,11 @@ void CowRobot::handle()
     if(m_Elevator)
     {
     		m_Elevator->handle();
+    }
+
+    if(m_Ramps)
+    {
+    		m_Ramps->handle();
     }
 
     if(m_DSUpdateCount % 10 == 0)

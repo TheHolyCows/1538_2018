@@ -18,6 +18,7 @@
 #include "Subsystems/Arm.h"
 #include "Subsystems/Intake.h"
 #include "Subsystems/Elevator.h"
+#include "Subsystems/Ramps.h"
 #include "CowLib/CowLPF.h"
 
 
@@ -40,6 +41,7 @@ private:
     Arm *m_Arm;
     Intake *m_Intake;
     Elevator *m_Elevator;
+    Ramps *m_Ramps;
 
     CowLib::CowGyro *m_Gyro;
     Encoder *m_DriveEncoder;
@@ -140,6 +142,11 @@ public:
     Elevator* GetElevator()
     {
     		return m_Elevator;
+    }
+
+    Ramps* GetRamps()
+    {
+    		return m_Ramps;
     }
 
     void handle();

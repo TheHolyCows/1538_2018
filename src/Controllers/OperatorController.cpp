@@ -101,6 +101,29 @@ void OperatorController::handle(CowRobot *bot)
     		bot->GetElevator()->SetPosition(CONSTANT("ELEVATOR_GROUND"));
     	}
 
+    if(m_CB->GetSteeringButton(7)) //Deploy ramps
+    {
+    		bot->GetRamps()->DeployRamps();
+    }
+
+    if(m_CB->GetSteeringButton(9)) //Pull the left ramp
+    {
+    		bot->GetRamps()->SetLeftRampSpeed(1);
+    }
+    else
+    {
+		bot->GetRamps()->SetLeftRampSpeed(0);
+    }
+
+    //TODO: Kiet used 3 since there's only one button at the moment, pull both ramps at same time
+    if(m_CB->GetSteeringButton(10)) //Pull the right ramp
+    {
+    		bot->GetRamps()->SetRightRampSpeed(1);
+    }
+    else
+    {
+		bot->GetRamps()->SetRightRampSpeed(0);
+    }
 
 }
 
