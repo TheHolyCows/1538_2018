@@ -242,6 +242,18 @@ AutoModes::AutoModes()
 
     m_Modes["center scale switch"] = centerScaleSwitches;
 
+    AutoModePermutation switchScaleScaleRRR;
+    switchScaleScaleRRR.commands.push_back(RobotCommand(CMD_RIGHT_ENCODER, 0, 0, 0, 25, 0.01));
+    switchScaleScaleRRR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 15, 0, .75, 0, 0.5));
+    switchScaleScaleRRR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 50, 55, .625, 0, 0.9));
+    switchScaleScaleRRR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 80, 0, .375, CONSTANT("ELEVATOR_SWITCH"), 0.75));
+    switchScaleScaleRRR.commands.push_back(RobotCommand(CMD_AUTO_FWD, 80, 0, .2, CONSTANT("ELEVATOR_SWITCH"), 0.5));
+    switchScaleScaleRRR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 45, -90, .2, CONSTANT("ELEVATOR_SWITCH"), 1));
+    switchScaleScaleRRR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, -12, -180, .2, 0, 1.25));
+    switchScaleScaleRRR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 5, -90, .2, 0, 0.5));
+    switchScaleScaleRRR.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE_INTAKE, 15, -180, .2, 0, 1.25));
+
+
     /*
      * RR*
      * right scale switch
@@ -377,6 +389,7 @@ AutoModes::AutoModes()
 
     m_Modes["right scale scale"] = rightScaleScales;
 
+
 	/*
      * ***
      * center * * right
@@ -395,61 +408,61 @@ AutoModes::AutoModes()
     centerNothingNothingRights.push_back(crossLineRightDelay);
     m_Modes["center nothing nothing right"] = centerNothingNothingRights;
 
-//    AutoModePermutation centerSwitchRight_R;
-//    centerSwitchRight_R.commands.push_back(RobotCommand(CMD_RIGHT_ENCODER, 0, 0, 0, 25, 0.01));
-//    centerSwitchRight_R.commands.push_back(RobotCommand(CMD_WAIT, 0, 0, 0.875, 25, 2));
-//    centerSwitchRight_R.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 15, 0, 0.875, 25, 2));
-//    centerSwitchRight_R.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 62, 55, 0.5, 0, 2));
-//    centerSwitchRight_R.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 120, 0, 0.375, CONSTANT("ELEVATOR_SWITCH"), 2));
-//    centerSwitchRight_R.commands.push_back(RobotCommand(CMD_AUTO_FWD, 120, 0, 0.2, CONSTANT("ELEVATOR_SWITCH"), .5));
-//    centerSwitchRight_R.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 120, 0, 0.375, CONSTANT("ELEVATOR_SWITCH"), 2));
-//
-//    centerSwitchRight_R.ourScale = CowGameData::SCALE_RIGHT;
-//    centerSwitchRight_R.ourSwitch = CowGameData::SWITCH_RIGHT;
-//    centerSwitchRight_R.isDefaultMode = false;
-//
-//    AutoModePermutation centerSwitchRight_L;
-//    centerSwitchRight_L.commands.push_back(RobotCommand(CMD_RIGHT_ENCODER, 0, 0, 0, 25, 0.01));
-//    centerSwitchRight_L.commands.push_back(RobotCommand(CMD_WAIT, 0, 0, 0.875, 25, 2));
-//    centerSwitchRight_L.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 15, 0, 0.875, 25, 2));
-//    centerSwitchRight_L.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 62, 55, 0.5, 0, 2));
-//    centerSwitchRight_L.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 120, 0, 0.375, CONSTANT("ELEVATOR_SWITCH"), 2));
-//    centerSwitchRight_L.commands.push_back(RobotCommand(CMD_AUTO_FWD, 120, 0, 0.2, CONSTANT("ELEVATOR_SWITCH"), .5));
-//    centerSwitchRight_L.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 120, 0, 0.375, CONSTANT("ELEVATOR_SWITCH"), 2));
-//
-//    centerSwitchRight_L.ourScale = CowGameData::SCALE_LEFT;
-//    centerSwitchRight_L.ourSwitch = CowGameData::SWITCH_RIGHT;
-//    centerSwitchRight_L.isDefaultMode = false;
-//
-//    AutoModePermutation centerSwitchLeft_R;
-//    centerSwitchLeft_R.commands.push_back(RobotCommand(CMD_LEFT_ENCODER, 0, 0, 0, 25, 0.05));
-//    centerSwitchLeft_R.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 15, 0, 0.875, 25, 2));
-//    centerSwitchLeft_R.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 65, -65, 0.875, 0, 2));
-//    centerSwitchLeft_R.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 120, 0, 0.5, 0, 2));
-//    centerSwitchLeft_R.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 120, 0, 0.375, CONSTANT("ELEVATOR_SWITCH"), 2));
-//    centerSwitchLeft_R.commands.push_back(RobotCommand(CMD_AUTO_FWD, 120, 0, 0.2, CONSTANT("ELEVATOR_SWITCH"), .5));
-//    centerSwitchLeft_R.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 120, 0, 0.375, CONSTANT("ELEVATOR_SWITCH"), 2));
-//
-//    centerSwitchLeft_R.ourScale = CowGameData::SCALE_RIGHT;
-//    centerSwitchLeft_R.ourSwitch = CowGameData::SWITCH_LEFT;
-//    centerSwitchLeft_R.isDefaultMode = false;
-//
-//    AutoModePermutation centerSwitchLeft_L;
-//    centerSwitchLeft_L.commands.push_back(RobotCommand(CMD_RIGHT_ENCODER, 0, 0, 0, 25, 0.01));
-//    centerSwitchLeft_L.commands.push_back(RobotCommand(CMD_WAIT, 0, 0, .002, 25, 5));
-//    centerSwitchLeft_L.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 15, 0, 0.875, 25, 2));
-//    centerSwitchLeft_L.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 138, 55, 0.875, 0, 2));
-//    centerSwitchLeft_L.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 209, 0, 0.875, 0, 2));
-//    centerSwitchLeft_L.ourScale = CowGameData::SCALE_LEFT;
-//    centerSwitchLeft_L.ourSwitch = CowGameData::SWITCH_LEFT;
-//    centerSwitchLeft_L.isDefaultMode = true;
-//
-//    std::vector<AutoModePermutation> centerSwitches;
-//    centerSwitches.push_back(centerSwitchRight_R);
-//    centerSwitches.push_back(centerSwitchRight_L);
-//    centerSwitches.push_back(centerSwitchLeft_R);
-//    centerSwitches.push_back(centerSwitchLeft_L);
-//    m_Modes["center switches"] = centerSwitches;
+    AutoModePermutation centerSwitchRight_R;
+    centerSwitchRight_R.commands.push_back(RobotCommand(CMD_RIGHT_ENCODER, 0, 0, 0, 25, 0.01));
+    centerSwitchRight_R.commands.push_back(RobotCommand(CMD_WAIT, 0, 0, 0.875, 25, 2));
+    centerSwitchRight_R.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 15, 0, 0.875, 25, 2));
+    centerSwitchRight_R.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 62, 55, 0.5, 0, 2));
+    centerSwitchRight_R.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 120, 0, 0.375, CONSTANT("ELEVATOR_SWITCH"), 2));
+    centerSwitchRight_R.commands.push_back(RobotCommand(CMD_AUTO_FWD, 120, 0, 0.2, CONSTANT("ELEVATOR_SWITCH"), .5));
+    centerSwitchRight_R.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 120, 0, 0.375, CONSTANT("ELEVATOR_SWITCH"), 2));
+
+    centerSwitchRight_R.ourScale = CowGameData::SCALE_RIGHT;
+    centerSwitchRight_R.ourSwitch = CowGameData::SWITCH_RIGHT;
+    centerSwitchRight_R.isDefaultMode = false;
+
+    AutoModePermutation centerSwitchRight_L;
+    centerSwitchRight_L.commands.push_back(RobotCommand(CMD_RIGHT_ENCODER, 0, 0, 0, 25, 0.01));
+    centerSwitchRight_L.commands.push_back(RobotCommand(CMD_WAIT, 0, 0, 0.875, 25, 2));
+    centerSwitchRight_L.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 15, 0, 0.875, 25, 2));
+    centerSwitchRight_L.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 62, 55, 0.5, 0, 2));
+    centerSwitchRight_L.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 120, 0, 0.375, CONSTANT("ELEVATOR_SWITCH"), 2));
+    centerSwitchRight_L.commands.push_back(RobotCommand(CMD_AUTO_FWD, 120, 0, 0.2, CONSTANT("ELEVATOR_SWITCH"), .5));
+    centerSwitchRight_L.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 120, 0, 0.375, CONSTANT("ELEVATOR_SWITCH"), 2));
+
+    centerSwitchRight_L.ourScale = CowGameData::SCALE_LEFT;
+    centerSwitchRight_L.ourSwitch = CowGameData::SWITCH_RIGHT;
+    centerSwitchRight_L.isDefaultMode = false;
+
+    AutoModePermutation centerSwitchLeft_R;
+    centerSwitchLeft_R.commands.push_back(RobotCommand(CMD_LEFT_ENCODER, 0, 0, 0, 25, 0.05));
+    centerSwitchLeft_R.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 15, 0, 0.875, 25, 2));
+    centerSwitchLeft_R.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 65, -65, 0.875, 0, 2));
+    centerSwitchLeft_R.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 120, 0, 0.5, 0, 2));
+    centerSwitchLeft_R.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 120, 0, 0.375, CONSTANT("ELEVATOR_SWITCH"), 2));
+    centerSwitchLeft_R.commands.push_back(RobotCommand(CMD_AUTO_FWD, 120, 0, 0.2, CONSTANT("ELEVATOR_SWITCH"), .5));
+    centerSwitchLeft_R.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 120, 0, 0.375, CONSTANT("ELEVATOR_SWITCH"), 2));
+
+    centerSwitchLeft_R.ourScale = CowGameData::SCALE_RIGHT;
+    centerSwitchLeft_R.ourSwitch = CowGameData::SWITCH_LEFT;
+    centerSwitchLeft_R.isDefaultMode = false;
+
+    AutoModePermutation centerSwitchLeft_L;
+    centerSwitchLeft_L.commands.push_back(RobotCommand(CMD_RIGHT_ENCODER, 0, 0, 0, 25, 0.01));
+    centerSwitchLeft_L.commands.push_back(RobotCommand(CMD_WAIT, 0, 0, .002, 25, 5));
+    centerSwitchLeft_L.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 15, 0, 0.875, 25, 2));
+    centerSwitchLeft_L.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 138, 55, 0.875, 0, 2));
+    centerSwitchLeft_L.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 209, 0, 0.875, 0, 2));
+    centerSwitchLeft_L.ourScale = CowGameData::SCALE_LEFT;
+    centerSwitchLeft_L.ourSwitch = CowGameData::SWITCH_LEFT;
+    centerSwitchLeft_L.isDefaultMode = true;
+
+    std::vector<AutoModePermutation> centerSwitches;
+    centerSwitches.push_back(centerSwitchRight_R);
+    centerSwitches.push_back(centerSwitchRight_L);
+    centerSwitches.push_back(centerSwitchLeft_R);
+    centerSwitches.push_back(centerSwitchLeft_L);
+    m_Modes["center switches"] = centerSwitches;
 
 
     AutoModePermutation test;
