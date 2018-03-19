@@ -15,6 +15,7 @@ typedef enum
     CMD_TURN,
     CMD_TURN_INTAKE,
     CMD_DRIVE_DISTANCE,
+	CMD_DRIVE_DISTANCE_INTAKE,
     CMD_HOLD_DISTANCE,
 	CMD_HOLD_DISTANCE_INTAKE,
 	CMD_ARM_UP,
@@ -72,6 +73,7 @@ private:
     RobotCommand m_CurrentCommand;
     
     void doNothing(CowRobot *bot);
+    float m_OriginalEncoder;
 
 public:
     AutoModeController();
