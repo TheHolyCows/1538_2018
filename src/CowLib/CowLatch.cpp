@@ -14,7 +14,6 @@ CowLatch::CowLatch()
         m_State(false),
         m_Latched(false)
 {
-    // TODO Auto-generated constructor stub
 }
 
 // Returns true if state has changed
@@ -39,7 +38,6 @@ void CowLatch::ResetLatch()
 
 CowLatch::~CowLatch()
 {
-    // TODO Auto-generated destructor stub
 }
 
 } /* namespace CowLib */

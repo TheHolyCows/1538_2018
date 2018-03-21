@@ -29,12 +29,10 @@ CowPID::CowPID(double Kp, double Ki, double Kd, double Kf)
         m_result(0),
         m_last_input(NAN)
 {
-    // TODO Auto-generated constructor stub
 }
 
 CowPID::~CowPID()
 {
-    // TODO Auto-generated destructor stub
 }
 
 double CowPID::Calculate(double input)

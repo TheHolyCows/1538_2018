@@ -33,7 +33,6 @@ void CowLPF::UpdateBeta(double beta)
 }
 
 CowLPF::~CowLPF() {
-    // TODO Auto-generated destructor stub
 }
 
 } /* namespace CowLib */

@@ -20,7 +20,6 @@ std::queue<std::pair<std::string, double>> CowLogger::m_BufferQueue;
 
 CowLogger::CowLogger()
 {
-    // TODO Auto-generated constructor stub
     m_Thread = new std::thread(CowLogger::Handle);
     time_t rawTime;
     struct tm *timeInfo;
@@ -34,7 +33,6 @@ CowLogger::CowLogger()
 
 CowLogger::~CowLogger()
 {
-    // TODO Auto-generated destructor stub
     m_OutputFile.close();
     m_Thread->detach();
     delete m_Thread;
