@@ -18,6 +18,7 @@ private:
         std::deque<RobotCommand> commands;
         CowGameData::CowScaleOwnership ourScale;
         CowGameData::CowSwitchOwnership ourSwitch;
+        bool ignoreSwitch;
         bool isDefaultMode;
     } AutoModePermutation;
 
