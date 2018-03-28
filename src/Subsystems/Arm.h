@@ -42,6 +42,7 @@ public:
 
 	void ScoreForward(double autoSpeed);
 	void ScoreReverse(double autoSpeed);
+	void SetCurrentLimit();
 	virtual ~Arm();
 
 private:

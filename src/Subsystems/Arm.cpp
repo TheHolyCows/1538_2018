@@ -31,6 +31,8 @@ Arm::Arm(int motorController)
 	m_StartingConfigSet = false;
 
 	m_AutoScoreSpeed = 0;
+
+	SetCurrentLimit();
 }
 
 void Arm::SetPosition(float position)
@@ -61,6 +63,7 @@ void Arm::ResetConstants()
 {
 	m_Position = CONSTANT("ARM_UP");
 	m_Motor->SetPIDGains(CONSTANT("ARM_P"), CONSTANT("ARM_I"), CONSTANT("ARM_D"), 0);
+	SetCurrentLimit();
 	std::cout << "In the arm reset constants" << std::endl;
 }
 
@@ -203,7 +206,13 @@ void Arm::ScoreReverse(double autoSpeed)
 
 	}
 }
-
+void Arm::SetCurrentLimit()
+{
+	m_Motor->GetInternalMotor()->ConfigPeakCurrentLimit(60, 10);
+	m_Motor->GetInternalMotor()->ConfigPeakCurrentDuration(300, 10);
+	m_Motor->GetInternalMotor()->ConfigContinuousCurrentLimit(CONSTANT("ARM_CURRENT_LIMIT"), 10);
+	m_Motor->GetInternalMotor()->EnableCurrentLimit(true);
+}
 
 Arm::~Arm()
 {
