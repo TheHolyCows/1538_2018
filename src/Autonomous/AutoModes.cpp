@@ -174,7 +174,7 @@ AutoModes::AutoModes()
 
     scaleSwitchLeftRight.ourScale = CowGameData::SCALE_LEFT;
     scaleSwitchLeftRight.ourSwitch = CowGameData::SWITCH_RIGHT;
-    scaleSwitchLeft.ignoreSwitch = false;
+    scaleSwitchLeftRight.ignoreSwitch = false;
     scaleSwitchLeftRight.isDefaultMode = true;
 
     centerScaleSwitches.push_back(scaleSwitchLeftRight);
@@ -206,7 +206,7 @@ AutoModes::AutoModes()
 	scaleSwitchRight.commands.push_back(RobotCommand(CMD_AUTO_FWD, 26, -178, 0.3, 0, 0.5));
     scaleSwitchRight.ourScale = CowGameData::SCALE_RIGHT;
     scaleSwitchRight.ourSwitch = CowGameData::SWITCH_RIGHT;
-    scaleSwitchLeft.ignoreSwitch = false;
+    scaleSwitchRight.ignoreSwitch = false;
     scaleSwitchRight.isDefaultMode = false;
 
     centerScaleSwitches.push_back(scaleSwitchRight);
@@ -242,7 +242,7 @@ AutoModes::AutoModes()
 	scaleSwitchRightLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 292, -260, 0.2, CONSTANT("ELEVATOR_SWITCH"), 0.5));
 	scaleSwitchRightLeft.ourScale = CowGameData::SCALE_RIGHT;
 	scaleSwitchRightLeft.ourSwitch = CowGameData::SWITCH_LEFT;
-    scaleSwitchLeft.ignoreSwitch = false;
+	scaleSwitchRightLeft.ignoreSwitch = false;
 	scaleSwitchRightLeft.isDefaultMode = false;
 
     centerScaleSwitches.push_back(scaleSwitchRightLeft);
@@ -288,7 +288,7 @@ AutoModes::AutoModes()
 //    switchScaleScaleRRR.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, -70, -200, .2, 0, .1));
     switchScaleScaleRRR.ourScale = CowGameData::SCALE_RIGHT;
     switchScaleScaleRRR.ourSwitch = CowGameData::SWITCH_RIGHT;
-    scaleSwitchLeft.ignoreSwitch = false;
+    switchScaleScaleRRR.ignoreSwitch = false;
     switchScaleScaleRRR.isDefaultMode = false;
 
     std::vector<AutoModePermutation> centerThreeCubes;
@@ -300,34 +300,36 @@ AutoModes::AutoModes()
     // Left autos
      AutoModePermutation lTripleScaleL;
      lTripleScaleL.commands.push_back(RobotCommand(CMD_LEFT_ENCODER, 0, 0, 0, 25, 0.01));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 85, 0, 0.875, 25, 2));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 85, 0, .975, 25, 2));
      lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 185, 0, 0.6, CONSTANT("ELEVATOR_SCALE"), 2));
      lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 200, 35, 0.375, CONSTANT("ELEVATOR_SCALE"), 2));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 273, 35, 0.2, CONSTANT("ELEVATOR_SCALE"), .92));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_AUTO_FWD, 273, 35, 0.1, CONSTANT("ELEVATOR_SCALE"), 0.25));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 273, 35, 0.2, CONSTANT("ELEVATOR_SCALE"), .9));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_AUTO_FWD_LOW, 273, 35, 0.1, CONSTANT("ELEVATOR_SCALE"), 0.25));
      lTripleScaleL.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 273, 35, 0.25, CONSTANT("ELEVATOR_SCALE"), .3));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 269, 35, 0.25, 0, .5));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 194, -205, 0.375, 0, .75));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 269, 35, 0.375, 0, .5));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 194, -205, 0.375, 0, .7));
      lTripleScaleL.commands.push_back(RobotCommand(CMD_ARM_DOWN, 194, -205, 0.375, 0, 0.2));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE_INTAKE, 236, -205, 0.375, 0, 2));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE_INTAKE, 194, -205, 0.65, 0, 2));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE_INTAKE, 236, -199, 0.375, 0, 2));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE_INTAKE, 194, -199, 0.65, 0, 2));
      lTripleScaleL.commands.push_back(RobotCommand(CMD_ARM_UP, 194, -205, 0.375, 0, 0.2));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 180, -155, 0.25, 0, .5));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 170, -155, 0.25, 0, 1));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 170, -155, 0.25, CONSTANT("ELEVATOR_SCALE"), .8));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_AUTO_REV, 170, -155, 0.1, CONSTANT("ELEVATOR_SCALE"), 0.25));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 170, -155, 0.25, CONSTANT("ELEVATOR_SCALE"), .3));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 180, -155, 0.3, 0, 2));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 185, -240, 0.25, 0, 3));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_ARM_DOWN, 185, -240, 0.375, 0, 0.2));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE_INTAKE, 190, -200, 0.25, 0, 5));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE_INTAKE, 185, -200, 0.25, 0, 5));
-    	 lTripleScaleL.commands.push_back(RobotCommand(CMD_ARM_UP, 185, -200, 0.375, 0, 0.2));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 160, -170, 0.25, CONSTANT("ELEVATOR_SCALE"), 3));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 170, -170, 0.25, CONSTANT("ELEVATOR_SCALE"), .3));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_AUTO_REV, 170, -170, 0.1, CONSTANT("ELEVATOR_SCALE"), 0.25));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 170, -170, 0.25, CONSTANT("ELEVATOR_SCALE"), .3));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 160, -170, 0.3, 0, 2));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 180, -133, 0.75, 0, .5));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 178, -133, 0.375, CONSTANT("ELEVATOR_SCALE"), .85));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 173, -133, 0.25, CONSTANT("ELEVATOR_SCALE"), .3));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_AUTO_REV, 173, -133, 0.1, CONSTANT("ELEVATOR_SCALE"), 0.25));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 173, -133, 0.25, CONSTANT("ELEVATOR_SCALE"), .28));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 185, -133, 0.575, 0, 2));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 186, -225, 0.75, 0, 3));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_ARM_DOWN, 186, -225, 0.45, 0, 0.2));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE_INTAKE, 240, -222, 0.375, 0, 5));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE_INTAKE, 243, -223, 0.25, 0, 5));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE_INTAKE, 240, -222, 0.65, 0, 5));
+	 lTripleScaleL.commands.push_back(RobotCommand(CMD_ARM_UP, 240, -211, 0.375, 0, 0.2));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 185, -211, 0.6, 0, 3));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 161, -130, 0.25, CONSTANT("ELEVATOR_SCALE"), 3));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 161, -130, 0.25, CONSTANT("ELEVATOR_SCALE"), .25));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_AUTO_REV, 161, -130, 0.1, CONSTANT("ELEVATOR_SCALE"), 0.25));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 161, -130, 0.25, CONSTANT("ELEVATOR_SCALE"), .3));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 190, -130, 0.3, 0, 2));
 
 
      lTripleScaleL.ourScale = CowGameData::SCALE_LEFT;
@@ -365,7 +367,7 @@ AutoModes::AutoModes()
 	rScaleSwitchRight.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 224, 180, 1, CONSTANT("ELEVATOR_SWITCH"), .5));
 	rScaleSwitchRight.ourScale = CowGameData::SCALE_RIGHT;
 	rScaleSwitchRight.ourSwitch = CowGameData::SWITCH_RIGHT;
-    scaleSwitchLeft.ignoreSwitch = false;
+	rScaleSwitchRight.ignoreSwitch = false;
 	rScaleSwitchRight.isDefaultMode = false;
 
 
@@ -397,7 +399,7 @@ AutoModes::AutoModes()
     rScaleLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 155, 0, 0.2, 0, 2));
     rScaleLeft.ourScale = CowGameData::SCALE_LEFT;
     rScaleLeft.ourSwitch = CowGameData::SWITCH_LEFT;
-    scaleSwitchLeft.ignoreSwitch = false;
+    rScaleLeft.ignoreSwitch = false;
     rScaleLeft.isDefaultMode = true;
 
 	std::vector<AutoModePermutation> rightScaleSwitches;
@@ -444,7 +446,7 @@ AutoModes::AutoModes()
     rDoubleScaleLeftSwitchLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 155, 0, 0.2, 0, 2));
     rDoubleScaleLeftSwitchLeft.ourScale = CowGameData::SCALE_LEFT;
     rDoubleScaleLeftSwitchLeft.ourSwitch = CowGameData::SWITCH_LEFT;
-    scaleSwitchLeft.ignoreSwitch = false;
+    rDoubleScaleLeftSwitchLeft.ignoreSwitch = false;
     rDoubleScaleLeftSwitchLeft.isDefaultMode = false;
 
     AutoModePermutation rSwitchRight;
@@ -454,7 +456,7 @@ AutoModes::AutoModes()
     rSwitchRight.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 155, 0, 0.2, 0, 2));
     rSwitchRight.ourScale = CowGameData::SCALE_LEFT;
     rSwitchRight.ourSwitch = CowGameData::SWITCH_RIGHT;
-    scaleSwitchLeft.ignoreSwitch = false;
+    rSwitchRight.ignoreSwitch = false;
     rSwitchRight.isDefaultMode = false;
 
 
@@ -471,7 +473,7 @@ AutoModes::AutoModes()
 
     rDoubleScaleLeftSwitchRight.ourScale = CowGameData::SCALE_LEFT;
     rDoubleScaleLeftSwitchRight.ourSwitch = CowGameData::SWITCH_RIGHT;
-    scaleSwitchLeft.ignoreSwitch = false;
+    rDoubleScaleLeftSwitchRight.ignoreSwitch = false;
     rDoubleScaleLeftSwitchRight.isDefaultMode = false;
 
     std::vector<AutoModePermutation> rightScaleScales;
@@ -496,7 +498,7 @@ AutoModes::AutoModes()
     crossLineRightDelay.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 209, 0, 0.875, 0, 2));
     crossLineRightDelay.ourScale = CowGameData::SCALE_INVALID;
     crossLineRightDelay.ourSwitch = CowGameData::SWITCH_INVALID;
-    scaleSwitchLeft.ignoreSwitch = false;
+    crossLineRightDelay.ignoreSwitch = false;
     crossLineRightDelay.isDefaultMode = true;
 
     std::vector<AutoModePermutation> centerNothingNothingRights;
