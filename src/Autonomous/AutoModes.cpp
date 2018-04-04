@@ -334,10 +334,37 @@ AutoModes::AutoModes()
      lTripleScaleL.ourScale = CowGameData::SCALE_LEFT;
      lTripleScaleL.ourSwitch = CowGameData::SWITCH_LEFT;
      lTripleScaleL.ignoreSwitch = true;
-	 lTripleScaleL.isDefaultMode = true;
+	 lTripleScaleL.isDefaultMode = false;
+
+     AutoModePermutation lswitchL;
+     lswitchL.commands.push_back(RobotCommand(CMD_LEFT_ENCODER, 0, 0, 0, 25, 0.01));
+     lswitchL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 100, 0, .75, 25, 5));
+     lswitchL.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 195, 90, .3, CONSTANT("ELEVATOR_SWITCH"), 2));
+     lswitchL.commands.push_back(RobotCommand(CMD_AUTO_FWD, 195, 90, .3, CONSTANT("ELEVATOR_SWITCH"), .25));
+     lswitchL.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 195, 90, .3, CONSTANT("ELEVATOR_SWITCH"), .5));
+     lswitchL.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 185, 90, .3, 0, .5));
+
+     lswitchL.ourScale = CowGameData::SCALE_RIGHT;
+     lswitchL.ourSwitch = CowGameData::SWITCH_LEFT;
+     lswitchL.ignoreSwitch = false;
+     lswitchL.isDefaultMode = false;
+
+     AutoModePermutation lForeward;
+     lForeward.commands.push_back(RobotCommand(CMD_LEFT_ENCODER, 0, 0, 0, 25, 0.01));
+     lForeward.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 150, 0, .5, 25, 3));
+     lForeward.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 150, 0, .5, 0, 5));
+
+     lForeward.ourScale = CowGameData::SCALE_RIGHT;
+     lForeward.ourSwitch = CowGameData::SWITCH_RIGHT;
+     lForeward.ignoreSwitch = false;
+     lForeward.isDefaultMode = true;
 
   	std::vector<AutoModePermutation> left;
   	left.push_back(lTripleScaleL);
+  	left.push_back(lswitchL);
+  	left.push_back(lForeward);
+
+
 
   	m_Modes["left"] = left;
 
