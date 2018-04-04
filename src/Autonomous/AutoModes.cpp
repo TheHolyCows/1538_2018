@@ -59,10 +59,10 @@ AutoModes::AutoModes()
 	doubleScaleRight.commands.push_back(RobotCommand(CMD_TURN, 0, -165, -0.4, 0, 0.375));
 	doubleScaleRight.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, -145, -165, 0.4, CONSTANT("ELEVATOR_SCALE"), 1));
 	doubleScaleRight.commands.push_back(RobotCommand(CMD_TURN, 0, -210, -0.4, CONSTANT("ELEVATOR_SCALE"), 0.375));
-	doubleScaleRight.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 0, -210, 0.4, CONSTANT("ELEVATOR_SCALE"), 1));
-	doubleScaleRight.commands.push_back(RobotCommand(CMD_AUTO_REV, 0, -210, 0.3, CONSTANT("ELEVATOR_SCALE"), 0.25));
-	doubleScaleRight.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 0, -210, 0.4, CONSTANT("ELEVATOR_SCALE"), 1));
-	doubleScaleRight.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 0, -210, 0.4, 0, 0.5));
+	doubleScaleRight.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, -8, -210, 0.4, CONSTANT("ELEVATOR_SCALE"), 1.25));
+	doubleScaleRight.commands.push_back(RobotCommand(CMD_AUTO_REV, -10, -210, 0.3, CONSTANT("ELEVATOR_SCALE"), 0.25));
+	doubleScaleRight.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, -8, -210, 0.4, CONSTANT("ELEVATOR_SCALE"), 1));
+	doubleScaleRight.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, -8, -210, 0.4, 0, 0.5));
 
     doubleScaleRight.ourScale = CowGameData::SCALE_RIGHT;
     doubleScaleRight.ourSwitch = CowGameData::SWITCH_INVALID;
@@ -77,30 +77,31 @@ AutoModes::AutoModes()
      * center scale scale
      */
     AutoModePermutation doubleScaleLeft;
-	doubleScaleLeft.commands.push_back(RobotCommand(CMD_LEFT_ENCODER, 0, 0, 0, 25, 0.05));
-	doubleScaleLeft.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 15, 0, 0.875, 25, 2));
-	doubleScaleLeft.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 135, -65, 0.875, 0, 2));
-	doubleScaleLeft.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 209, 0, 0.875, 0, 2));
-	doubleScaleLeft.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 250, 20, 0.5, 0, 2));
-	doubleScaleLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 365, 20, 0.3, CONSTANT("ELEVATOR_SCALE"), 2.3));
-	doubleScaleLeft.commands.push_back(RobotCommand(CMD_AUTO_FWD, 365, 20, 0.3, CONSTANT("ELEVATOR_SCALE"), 0.5));
-	doubleScaleLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 365, 20, 0.2, CONSTANT("ELEVATOR_SCALE"), 0.25));
-	doubleScaleLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 318, 20, 0.4, 0, 0.6));
-	doubleScaleLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 300, -90, 0.4, 0, 0.6));
-	doubleScaleLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 255, -180, 1, 0, 1));
-	doubleScaleLeft.commands.push_back(RobotCommand(CMD_ARM_DOWN, 255, -180, 0.4, 0, 0.7));
-	doubleScaleLeft.commands.push_back(RobotCommand(CMD_RIGHT_ENCODER, 0, -180, 0, 25, 0.05));
-	doubleScaleLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE_INTAKE, 62, -180, 0.45, 0, 0.9));
-	doubleScaleLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE_INTAKE, 20, -200, 0.5, 0, .75));
-	doubleScaleLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, -40, -200, 0.5, 0, 0.7));
-	doubleScaleLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, -60, -160, 0.2, (CONSTANT("ELEVATOR_SCALE")), 1.2));
-	doubleScaleLeft.commands.push_back(RobotCommand(CMD_ARM_UP, -60, -160, 0.4, 0, 0.7));
-	doubleScaleLeft.commands.push_back(RobotCommand(CMD_TURN, 0, -130, 0.4, 0, 0.5));
-	doubleScaleLeft.commands.push_back(RobotCommand(CMD_AUTO_REV, 0, -130, 0.2, CONSTANT("ELEVATOR_SCALE"), 0.6));
-	doubleScaleLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 0, -130, 0.2, CONSTANT("ELEVATOR_SCALE"), 0.5));
-	doubleScaleLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 0, -130, 0.2, 0, 2));
-	
-    doubleScaleLeft.ourScale = CowGameData::SCALE_LEFT;
+    	doubleScaleLeft.commands.push_back(RobotCommand(CMD_LEFT_ENCODER, 0, 0, 0, 25, 0.05));
+    	doubleScaleLeft.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 15, 0, 0.875, 25, 2));
+    	doubleScaleLeft.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 135, -65, 0.875, 0, 2));
+    	doubleScaleLeft.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 209, 0, 0.875, 0, 2));
+    	doubleScaleLeft.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 250, 20, 0.5, 0, 2));
+    	doubleScaleLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 365, 20, 0.3, 52, 2.3));
+    	doubleScaleLeft.commands.push_back(RobotCommand(CMD_AUTO_FWD_LOW, 365, 20, 0.3, 52, 0.25));
+    	doubleScaleLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 365, 20, 0.2, 52, 0.5));
+    	doubleScaleLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 318, 20, 0.4, 0, 0.6));
+    	doubleScaleLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 300, -90, 0.4, 0, 0.6));
+    	doubleScaleLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 255, -190, 0.5, 0, 1));
+    	doubleScaleLeft.commands.push_back(RobotCommand(CMD_ARM_DOWN, 255, -190, 0.4, 0, 0.7));
+    	doubleScaleLeft.commands.push_back(RobotCommand(CMD_RIGHT_ENCODER, 0, -190, 0, 25, 0.05));
+    	doubleScaleLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE_INTAKE, 68, -190, 0.37, 0, 0.9));
+    	doubleScaleLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE_INTAKE, 20, -200, 0.6, 0, .75));
+    	doubleScaleLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, -40, -200, 0.5, 0, 0.7));
+    	doubleScaleLeft.commands.push_back(RobotCommand(CMD_ARM_UP, -60, -160, 0.4, 0, 0.1));
+    	doubleScaleLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, -60, -160, 0.2, (CONSTANT("ELEVATOR_SCALE")), 1.2));
+    	doubleScaleLeft.commands.push_back(RobotCommand(CMD_TURN, 0, -130, 0.4, (CONSTANT("ELEVATOR_SCALE")), 0.5));
+    	doubleScaleLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, -4.5, -130, 0.375, CONSTANT("ELEVATOR_SCALE"), 0.8));
+    	doubleScaleLeft.commands.push_back(RobotCommand(CMD_AUTO_REV, -4.5, -130, 0.2, CONSTANT("ELEVATOR_SCALE"), 0.6));
+    	doubleScaleLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, -4.5, -130, 0.375, CONSTANT("ELEVATOR_SCALE"), 0.5));
+    	doubleScaleLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 5, -180, 0.375, 0, 2));
+
+    	doubleScaleLeft.ourScale = CowGameData::SCALE_LEFT;
     doubleScaleLeft.ourSwitch = CowGameData::SWITCH_LEFT;
     doubleScaleLeft.ignoreSwitch = true;
     doubleScaleLeft.isDefaultMode = false;
@@ -119,9 +120,9 @@ AutoModes::AutoModes()
 	scaleSwitchLeft.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 135, -65, 0.875, 0, 2));
 	scaleSwitchLeft.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 209, 0, 0.875, 0, 2));
 	scaleSwitchLeft.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 250, 20, 0.5, 0, 2));
-	scaleSwitchLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 365, 20, 0.3, CONSTANT("ELEVATOR_SCALE"), 2.3));
-	scaleSwitchLeft.commands.push_back(RobotCommand(CMD_AUTO_FWD_LOW, 365, 20, 0.3, CONSTANT("ELEVATOR_SCALE"), 0.25));
-	scaleSwitchLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 365, 20, 0.2, CONSTANT("ELEVATOR_SCALE"), 0.5));
+	scaleSwitchLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 365, 20, 0.3, 52, 2.3));
+	scaleSwitchLeft.commands.push_back(RobotCommand(CMD_AUTO_FWD_LOW, 365, 20, 0.3, 52, 0.25));
+	scaleSwitchLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 365, 20, 0.2, 52, 0.5));
 	scaleSwitchLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 318, 20, 0.4, 0, 0.6));
 	scaleSwitchLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 300, -90, 0.4, 0, 0.6));
 	scaleSwitchLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 255, -180, 1, 0, 1));
@@ -153,9 +154,9 @@ AutoModes::AutoModes()
 	scaleSwitchLeftRight.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 209, 0, 0.875, 0, 2));
 	scaleSwitchLeftRight.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 250, 20, 0.5, 0, 2));
 	// We edited the Hold Distance command below us to aim better for the AUTOSCORE, change all others if good
-	scaleSwitchLeftRight.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 365, 20, 0.4, CONSTANT("ELEVATOR_SCALE"), 1.875));
-	scaleSwitchLeftRight.commands.push_back(RobotCommand(CMD_AUTO_FWD_LOW, 365, 20, 0.4, CONSTANT("ELEVATOR_SCALE"), 0.2));
-	scaleSwitchLeftRight.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 365, 20, 0.2, CONSTANT("ELEVATOR_SCALE"), 0.5));
+	scaleSwitchLeftRight.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 365, 20, 0.4, 52, 1.875));
+	scaleSwitchLeftRight.commands.push_back(RobotCommand(CMD_AUTO_FWD_LOW, 365, 20, 0.4, 52, 0.2));
+	scaleSwitchLeftRight.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 365, 20, 0.2, 52, 0.5));
 	scaleSwitchLeftRight.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 318, 20, 0.4, 0, 0.6));
 	scaleSwitchLeftRight.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 300, -90, 0.4, 0, 0.6));
 	scaleSwitchLeftRight.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 255, -180, 1, 0, 0.75));
@@ -174,7 +175,7 @@ AutoModes::AutoModes()
 
     scaleSwitchLeftRight.ourScale = CowGameData::SCALE_LEFT;
     scaleSwitchLeftRight.ourSwitch = CowGameData::SWITCH_RIGHT;
-    scaleSwitchLeft.ignoreSwitch = false;
+    scaleSwitchLeftRight.ignoreSwitch = false;
     scaleSwitchLeftRight.isDefaultMode = true;
 
     centerScaleSwitches.push_back(scaleSwitchLeftRight);
@@ -189,9 +190,9 @@ AutoModes::AutoModes()
 	scaleSwitchRight.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 138, 55, 0.875, 0, 2));
 	scaleSwitchRight.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 209, 0, 0.875, 0, 2));
 	scaleSwitchRight.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 250, -20, 0.5, 0, 2));
-	scaleSwitchRight.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 342, -20, 0.3, CONSTANT("ELEVATOR_SCALE"), 2));
-	scaleSwitchRight.commands.push_back(RobotCommand(CMD_AUTO_FWD, 342, -20, 0.3, CONSTANT("ELEVATOR_SCALE"), 0.25));
-	scaleSwitchRight.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 342, -20, 0.2, CONSTANT("ELEVATOR_SCALE"), 0.5));
+	scaleSwitchRight.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 342, -20, 0.3, 52, 2));
+	scaleSwitchRight.commands.push_back(RobotCommand(CMD_AUTO_FWD, 342, -20, 0.3, 52, 0.25));
+	scaleSwitchRight.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 342, -20, 0.2, 52, 0.5));
 	scaleSwitchRight.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 325, -20, 0.4, 0, 0.6));
 	scaleSwitchRight.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 325, -20, 0.4, 0, 0.3));
 	scaleSwitchRight.commands.push_back(RobotCommand(CMD_TURN, 0, -90, -0.4, 0, 0.5));
@@ -206,7 +207,7 @@ AutoModes::AutoModes()
 	scaleSwitchRight.commands.push_back(RobotCommand(CMD_AUTO_FWD, 26, -178, 0.3, 0, 0.5));
     scaleSwitchRight.ourScale = CowGameData::SCALE_RIGHT;
     scaleSwitchRight.ourSwitch = CowGameData::SWITCH_RIGHT;
-    scaleSwitchLeft.ignoreSwitch = false;
+    scaleSwitchRight.ignoreSwitch = false;
     scaleSwitchRight.isDefaultMode = false;
 
     centerScaleSwitches.push_back(scaleSwitchRight);
@@ -221,9 +222,9 @@ AutoModes::AutoModes()
 	scaleSwitchRightLeft.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 138, 55, 0.875, 0, 2));
 	scaleSwitchRightLeft.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 209, 0, 0.875, 0, 2));
 	scaleSwitchRightLeft.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 250, -20, 0.5, 0, 2));
-	scaleSwitchRightLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 342, -20, 0.3, CONSTANT("ELEVATOR_SCALE"), 2));
-	scaleSwitchRightLeft.commands.push_back(RobotCommand(CMD_AUTO_FWD, 342, -20, 0.3, CONSTANT("ELEVATOR_SCALE"), 0.25));
-	scaleSwitchRightLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 342, -20, 0.2, CONSTANT("ELEVATOR_SCALE"), 0.5));
+	scaleSwitchRightLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 342, -20, 0.3, 52, 2));
+	scaleSwitchRightLeft.commands.push_back(RobotCommand(CMD_AUTO_FWD, 342, -20, 0.3, 52, 0.25));
+	scaleSwitchRightLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 342, -20, 0.2, 52, 0.5));
 	scaleSwitchRightLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 325, -20, 0.4, 0, 0.6));
 	scaleSwitchRightLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 325, -20, 0.4, 0, 0.3));
 	scaleSwitchRightLeft.commands.push_back(RobotCommand(CMD_TURN, 0, -90, -0.4, 0, 0.5));
@@ -242,7 +243,7 @@ AutoModes::AutoModes()
 	scaleSwitchRightLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 292, -260, 0.2, CONSTANT("ELEVATOR_SWITCH"), 0.5));
 	scaleSwitchRightLeft.ourScale = CowGameData::SCALE_RIGHT;
 	scaleSwitchRightLeft.ourSwitch = CowGameData::SWITCH_LEFT;
-    scaleSwitchLeft.ignoreSwitch = false;
+	scaleSwitchRightLeft.ignoreSwitch = false;
 	scaleSwitchRightLeft.isDefaultMode = false;
 
     centerScaleSwitches.push_back(scaleSwitchRightLeft);
@@ -288,7 +289,7 @@ AutoModes::AutoModes()
 //    switchScaleScaleRRR.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, -70, -200, .2, 0, .1));
     switchScaleScaleRRR.ourScale = CowGameData::SCALE_RIGHT;
     switchScaleScaleRRR.ourSwitch = CowGameData::SWITCH_RIGHT;
-    scaleSwitchLeft.ignoreSwitch = false;
+    switchScaleScaleRRR.ignoreSwitch = false;
     switchScaleScaleRRR.isDefaultMode = false;
 
     std::vector<AutoModePermutation> centerThreeCubes;
@@ -301,11 +302,11 @@ AutoModes::AutoModes()
      AutoModePermutation lTripleScaleL;
      lTripleScaleL.commands.push_back(RobotCommand(CMD_LEFT_ENCODER, 0, 0, 0, 25, 0.01));
      lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 85, 0, 0.875, 25, 2));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 185, 0, 0.6, CONSTANT("ELEVATOR_SCALE"), 2));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 200, 35, 0.375, CONSTANT("ELEVATOR_SCALE"), 2));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 273, 35, 0.2, CONSTANT("ELEVATOR_SCALE"), .92));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_AUTO_FWD, 273, 35, 0.1, CONSTANT("ELEVATOR_SCALE"), 0.25));
-     lTripleScaleL.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 273, 35, 0.25, CONSTANT("ELEVATOR_SCALE"), .3));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 185, 0, 0.6, 52, 2));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 200, 35, 0.375, 52, 2));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 273, 35, 0.2, 52, .92));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_AUTO_FWD, 273, 35, 0.1, 52, 0.25));
+     lTripleScaleL.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 273, 35, 0.25, 52, .3));
      lTripleScaleL.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 269, 35, 0.25, 0, .5));
      lTripleScaleL.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 194, -205, 0.375, 0, .75));
      lTripleScaleL.commands.push_back(RobotCommand(CMD_ARM_DOWN, 194, -205, 0.375, 0, 0.2));
@@ -365,7 +366,7 @@ AutoModes::AutoModes()
 	rScaleSwitchRight.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 224, 180, 1, CONSTANT("ELEVATOR_SWITCH"), .5));
 	rScaleSwitchRight.ourScale = CowGameData::SCALE_RIGHT;
 	rScaleSwitchRight.ourSwitch = CowGameData::SWITCH_RIGHT;
-    scaleSwitchLeft.ignoreSwitch = false;
+	rScaleSwitchRight.ignoreSwitch = false;
 	rScaleSwitchRight.isDefaultMode = false;
 
 
@@ -397,7 +398,7 @@ AutoModes::AutoModes()
     rScaleLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 155, 0, 0.2, 0, 2));
     rScaleLeft.ourScale = CowGameData::SCALE_LEFT;
     rScaleLeft.ourSwitch = CowGameData::SWITCH_LEFT;
-    scaleSwitchLeft.ignoreSwitch = false;
+    rScaleLeft.ignoreSwitch = false;
     rScaleLeft.isDefaultMode = true;
 
 	std::vector<AutoModePermutation> rightScaleSwitches;
@@ -444,7 +445,7 @@ AutoModes::AutoModes()
     rDoubleScaleLeftSwitchLeft.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 155, 0, 0.2, 0, 2));
     rDoubleScaleLeftSwitchLeft.ourScale = CowGameData::SCALE_LEFT;
     rDoubleScaleLeftSwitchLeft.ourSwitch = CowGameData::SWITCH_LEFT;
-    scaleSwitchLeft.ignoreSwitch = false;
+    rDoubleScaleLeftSwitchLeft.ignoreSwitch = false;
     rDoubleScaleLeftSwitchLeft.isDefaultMode = false;
 
     AutoModePermutation rSwitchRight;
@@ -454,7 +455,7 @@ AutoModes::AutoModes()
     rSwitchRight.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 155, 0, 0.2, 0, 2));
     rSwitchRight.ourScale = CowGameData::SCALE_LEFT;
     rSwitchRight.ourSwitch = CowGameData::SWITCH_RIGHT;
-    scaleSwitchLeft.ignoreSwitch = false;
+    rSwitchRight.ignoreSwitch = false;
     rSwitchRight.isDefaultMode = false;
 
 
@@ -471,7 +472,7 @@ AutoModes::AutoModes()
 
     rDoubleScaleLeftSwitchRight.ourScale = CowGameData::SCALE_LEFT;
     rDoubleScaleLeftSwitchRight.ourSwitch = CowGameData::SWITCH_RIGHT;
-    scaleSwitchLeft.ignoreSwitch = false;
+    rDoubleScaleLeftSwitchRight.ignoreSwitch = false;
     rDoubleScaleLeftSwitchRight.isDefaultMode = false;
 
     std::vector<AutoModePermutation> rightScaleScales;
@@ -496,7 +497,7 @@ AutoModes::AutoModes()
     crossLineRightDelay.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 209, 0, 0.875, 0, 2));
     crossLineRightDelay.ourScale = CowGameData::SCALE_INVALID;
     crossLineRightDelay.ourSwitch = CowGameData::SWITCH_INVALID;
-    scaleSwitchLeft.ignoreSwitch = false;
+    crossLineRightDelay.ignoreSwitch = false;
     crossLineRightDelay.isDefaultMode = true;
 
     std::vector<AutoModePermutation> centerNothingNothingRights;
