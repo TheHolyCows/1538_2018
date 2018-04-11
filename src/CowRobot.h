@@ -84,6 +84,7 @@ public:
     bool DriveDistanceWithHeading(double heading, double distance, double speed);
     bool DriveWithHeading(double heading, double speed);
     bool DriveWithHeading(double heading, double speed, double maxSpeed);
+    bool DriveWithHeading(double heading, double speed, double maxSpeed, double maxTurn);
     void DriveSpeedTurn(float speed, float turn, bool quickTurn);
     void DriveLeftRight(float leftDriveValue, float rightDriveValue);
     bool TurnToHeading(double heading);

@@ -295,6 +295,22 @@ bool CowRobot::DriveWithHeading(double heading, double speed, double maxSpeed)
     return (fabs(error) < 1 && CowLib::UnitsPerSecond(fabs(dError)) < 0.5);
 }
 
+bool CowRobot::DriveWithHeading(double heading, double speed, double maxSpeed, double maxTurn)
+{
+    double PID_P = CONSTANT("TURN_P");
+    double PID_D = CONSTANT("TURN_D");
+    double error = heading - m_Gyro->GetAngle();
+    double turnError = (-1.0/80.0)*maxTurn*error;
+    double dError = error - m_PreviousGyroError;
+    double output = PID_P*turnError + PID_D*dError;
+    output = CowLib::LimitMix(output, maxSpeed);
+
+    DriveLeftRight(speed-output, speed+output);
+
+    m_PreviousGyroError = error;
+
+    return (fabs(error) < 1 && CowLib::UnitsPerSecond(fabs(dError)) < 0.5);
+}
 
 // Allows skid steer robot to be driven using tank drive style inputs
 void CowRobot::DriveLeftRight(float leftDriveValue, float rightDriveValue)

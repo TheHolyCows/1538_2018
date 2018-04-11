@@ -50,6 +50,36 @@ void AutoModeController::handle(CowRobot *bot)
 		result = bot->TurnToHeading(m_CurrentCommand.m_Heading);
 		break;
 	}
+	case CMD_BOUNDED_TURN:
+	{
+		float direction = 1;
+		if(m_OriginalEncoder > m_CurrentCommand.m_EncoderCount)
+		{
+			//We want to go backward
+			direction = -1;
+		}
+
+		bot->DriveWithHeading(m_CurrentCommand.m_Heading, m_CurrentCommand.m_Speed * direction, m_CurrentCommand.m_Speed, CONSTANT("BOUNDED_TURN"));
+		bot->GetElevator()->SetPosition(m_CurrentCommand.m_ElevatorPos);
+		bot->GetArm()->SetIntakeSpeed(-0.2);
+
+		if(direction == 1) //Going forward
+		{
+			if(bot->GetDriveDistance()  > m_CurrentCommand.m_EncoderCount)
+			{
+				result = true;
+			}
+		}
+		else //Going backward
+		{
+			if(bot->GetDriveDistance()  < m_CurrentCommand.m_EncoderCount)
+			{
+				result = true;
+			}
+		}
+
+		break;
+	}
 	case CMD_TURN_INTAKE:
 	{
 		result = bot->TurnToHeading(m_CurrentCommand.m_Heading);
