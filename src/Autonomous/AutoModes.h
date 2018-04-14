@@ -19,6 +19,7 @@ private:
         CowGameData::CowScaleOwnership ourScale;
         CowGameData::CowSwitchOwnership ourSwitch;
         bool ignoreSwitch;
+        bool ignoreScale;
         bool isDefaultMode;
     } AutoModePermutation;
 
