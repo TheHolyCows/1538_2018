@@ -353,23 +353,39 @@ AutoModes::AutoModes()
 	 lScaleR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 440, 90, 0.3, 0, 1.2));
 	 lScaleR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 450, 20, 0.3, CONSTANT("ELEVATOR_SCALE"), 5));
 	 lScaleR.commands.push_back(RobotCommand(CMD_BOUNDED_TURN, 470, -37, 0.3, CONSTANT("ELEVATOR_SCALE"), 5));
-	 lScaleR.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 515, -37, 0.3, CONSTANT("ELEVATOR_SCALE"), 2.4));
-	 lScaleR.commands.push_back(RobotCommand(CMD_AUTO_FWD_LOW, 516, -37, 0.1, CONSTANT("ELEVATOR_SCALE"), .25));
-	 lScaleR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 515, -37, 0.3, CONSTANT("ELEVATOR_SCALE"), 5));
-	 lScaleR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 512, -37, 0.45, CONSTANT("ELEVATOR_SCALE"), 5));
-	 lScaleR.commands.push_back(RobotCommand(CMD_BOUNDED_TURN, 484, -140, 0.375, 0, 5));
-	 lScaleR.commands.push_back(RobotCommand(CMD_ARM_DOWN, 480, -140, 0.3, 0, 0.2));
-	 lScaleR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE_INTAKE, 510, -140, 0.35, 0, 3));
-	 lScaleR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE_INTAKE, 500, -140, 0.675, 0, 3));
-	 lScaleR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 490, -140, 0.675, 0, 5));
-	 lScaleR.commands.push_back(RobotCommand(CMD_ARM_UP, 490, -140, 0.3, 0, 0.2));
-	 lScaleR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 460, -140, 0.45, 0, 3));
-	 lScaleR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 394, -204, 0.45, 0, 3));
-	 lScaleR.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 394, -204, 0.3, CONSTANT("ELEVATOR_SCALE"), 1));
-	 lScaleR.commands.push_back(RobotCommand(CMD_AUTO_REV, 394, -204, 0.3, CONSTANT("ELEVATOR_SCALE"), .25));
-	 lScaleR.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 394, -204, 0.3, CONSTANT("ELEVATOR_SCALE"), .5));
-	 lScaleR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 400, -204, 0.3, CONSTANT("ELEVATOR_SCALE"), .7));
-	 lScaleR.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 400, -204, 0.3, 0, .7));
+	 lScaleR.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 495, -37, 0.3, CONSTANT("ELEVATOR_SCALE"), 2));
+	 lScaleR.commands.push_back(RobotCommand(CMD_AUTO_FWD, 495, -37, 0.1, CONSTANT("ELEVATOR_SCALE"), .25));
+	 lScaleR.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 490, -37, 0.3, CONSTANT("ELEVATOR_SCALE"), 0.75));
+	 lScaleR.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 490, -37, 0.3, 0, 0.75));
+	 lScaleR.commands.push_back(RobotCommand(CMD_TURN, 0, -164, 0.375, 0, 1.2));
+	 lScaleR.commands.push_back(RobotCommand(CMD_ARM_DOWN, 0, -164, 0.3, 0, 0.2));
+
+	 lScaleR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE_INTAKE, 75, -164, 0.35, 0, 1.5));
+	 lScaleR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE_INTAKE, 30, -164, 0.5, 0, 1.5));
+	 lScaleR.commands.push_back(RobotCommand(CMD_BOUNDED_TURN, -20, -215, 0.3, CONSTANT("ELEVATOR_SCALE"), 5));
+	 lScaleR.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, -20, -215, 0.3, CONSTANT("ELEVATOR_SCALE"), 2));
+	 lScaleR.commands.push_back(RobotCommand(CMD_AUTO_REV, -20, -215, 0.3, CONSTANT("ELEVATOR_SCALE"), .5));
+	 lScaleR.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, -20, -215, 0.3, CONSTANT("ELEVATOR_SCALE"), 0.5));
+	 lScaleR.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, -15, -215, 0.3, 0, 0.5));
+
+//	 lScaleR.commands.push_back(RobotCommand(CMD_ARM_DOWN, 480, -160, 0.3, 0, 0.2));
+//	 lScaleR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE_INTAKE, 499, -160, 0.35, 0, 1.5));
+//	 lScaleR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE_INTAKE, 495, -160, 0.675, 0, 0.5));
+//	 lScaleR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 490, -160, 0.675, 0, 5));
+//	 lScaleR.commands.push_back(RobotCommand(CMD_ARM_UP, 490, -160, 0.3, 0, 0.2));
+//	 lScaleR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 460, -160, 0.45, 0, 3));
+//	 lScaleR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 370, -204, 0.45, 0, 3));
+//	 lScaleR.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 370, -204, 0.3, CONSTANT("ELEVATOR_SCALE"), 1));
+//	 lScaleR.commands.push_back(RobotCommand(CMD_AUTO_REV, 355, -204, 0.3, CONSTANT("ELEVATOR_SCALE"), .5));
+//	 lScaleR.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 370, -204, 0.3, CONSTANT("ELEVATOR_SCALE"), .5));
+//	 lScaleR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 370, -204, 0.3, CONSTANT("ELEVATOR_SCALE"), .7));
+//	 lScaleR.commands.push_back(RobotCommand(CMD_HOLD_DISTANCE, 370, -204, 0.3, 0, .5));
+//	 lScaleR.commands.push_back(RobotCommand(CMD_ARM_DOWN, 370, -204, 0.3, 0, 0.2));
+//	 lScaleR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE, 456, -160, 0.675, 0, 1.5));
+//	 lScaleR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE_INTAKE, 464, -160, 0.2, 0, 1.5));
+//	 lScaleR.commands.push_back(RobotCommand(CMD_DRIVE_DISTANCE_INTAKE, 457, -160, 0.675, 0, 0.5));
+
+
 
 
 	 lScaleR.ourScale = CowGameData::SCALE_RIGHT;
@@ -402,7 +418,7 @@ AutoModes::AutoModes()
 
 
 
-  	m_Modes["left"] = left;
+  	m_Modes["none pizza left beef"] = left;
 
 
     /*
